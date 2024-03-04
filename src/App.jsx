@@ -8,6 +8,7 @@ import AddAmbassadors from './screens/Dashboard/AddAmbassadors'
 import SubAmbassadorDetails from './screens/Dashboard/SubAmbassadorDetails'
 import UserPersonalDetails from './screens/Dashboard/UserPersonalDetails'
 import AmbassadorsPersonalDetails from './screens/Dashboard/AmbassadorsPersonalDetails'
+import AmbassadorForm from './components/AmbassadorForm'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,10 +19,11 @@ function App() {
       {/* <Overview/> */}
       {/* <List /> */}
       {/* <AddAmbassadors /> */}
-      <AmbassadorsPersonalDetails />
+      {/* <AmbassadorsPersonalDetails /> */}
       {/* <UserPersonalDetails /> */}
       {/* <SubAmbassadorDetails /> */}
       {/* <PersonalDetails /> */}
+      <AmbassadorForm />
     </>
   )
 }
