@@ -2,31 +2,57 @@ import React, { useState } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import LeadIcon from '../../assets/images/lead.png';
-import BarChart from '../../assets/images/bar-chart.png';
-import { MdKeyboardArrowDown } from "react-icons/md";
-import { TiArrowUp } from "react-icons/ti"
-import { TiArrowDown } from "react-icons/ti";
+import { useNavigate } from 'react-router-dom';
+
 import Navbar from '../../assets/images/navbar.png';
 import UserPersonalDetailsSub from '../../components/UserPersonalDetailsSub';
+import MobileSideBar from '../../components/MobileSideBar';
 
 const UserPersonalDetails = () => {
-    const [activeSection, setActiveSection] = useState('Overview');
+    const [activeSection, setActiveSection] = useState('Users');
+    const [navbar, setNavbar] = useState(false)
+    const navigate = useNavigate();
 
     const handleClick = (section) => {
         setActiveSection(section);
+
+        switch (section) {
+            case 'Overview':
+                navigate('/dashboard/overview');
+                break;
+            case 'Users':
+                navigate('/dashboard/personal/user');
+                break;
+            case 'Ambassadors':
+                navigate('/dashboard/personal/ambassadors');
+                break;
+            case 'SendMessage':
+                navigate('/dashboard/personal/ambassadors/chat');
+                break;
+            default:
+                break;
+        }
     };
+
 
     return (
         <div className='min-h-screen bg-white flex relative'>
             <div className='w-1/5 max-lg:hidden'>
                 <Sidebar />
             </div>
+            {navbar &&
+                <div className='w-1/2 fixed'>
+                    <MobileSideBar />
+                </div>}
+
             <div className='w-4/5 max-lg:w-full'>
                 <div className='max-lg:hidden'>
                     <Header />
                 </div>
-                <div className='flex justify-start mx-10 max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4 items-center gap-2'>
-                    <img src={Navbar} />
+                <div className='flex justify-start lg:mx-0 mx-10 max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4 items-center gap-2'>
+                    <div className='lg:hidden' onClick={() => setNavbar(!navbar)}>
+                        <img src={Navbar} />
+                    </div>
                     <p className='text-[26px] max-lg:text-xl max-md:text-lg max-sm:text-base  font-[600] text-[#000000] font-[Poppins] mx-10 max-lg:mx-8 max-md:mx-5 my-5'>Viewing Lead Ambassador</p>
                 </div>
                 <div className='flex justify-start items-center gap-4 mx-10  max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4'>

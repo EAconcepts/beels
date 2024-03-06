@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import LeadIcon from '../../assets/images/lead.png';
-import PersonalOverview from '../../components/PersonalOverview';
 import Navbar from '../../assets/images/navbar.png';
+import Attach from '../../assets/images/attach.png';
 
-const PersonalDetails = () => {
+const Chat = () => {
     const [activeSection, setActiveSection] = useState('Overview');
 
     const handleClick = (section) => {
@@ -45,10 +45,23 @@ const PersonalDetails = () => {
                         </div>
                     ))}
                 </div>
-                <PersonalOverview />
+                <div className='mx-10 max-lg:mx-8 max-md:mx-6 max-sm:mx-4 mt-5 h-[500px] flex flex-col justify-end '>
+                    <div className='justify-between flex items-center bg-[#E9E9E9] px-2 rounded-md py-2 '>
+                        <div className='justify-start flex items-center gap-4 w-[70%]'>
+                            <img src={Attach} />
+                            <input type="text" className='bg-[#C1C1C1] w-[80%] px-1 py-2 rounded-md' placeholder='Type your message here' />
+                        </div>
+                        <div className='justify-end flex items-center gap-4 w-[30%]'>
+                            <button className='justify-center  flex items-center bg-[#082C25]  rounded-md py-2 px-2'>
+                                <p className='text-[#FFFFFF] text-center text-[14px] max-md:text-xs max-sm:text-[10px] font-[400] font-[Rockwell] '>send</p>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default PersonalDetails;
+export default Chat
