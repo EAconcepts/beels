@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import LeadIcon from '../../assets/images/lead.png';
@@ -10,11 +10,30 @@ import SubAmbassador from '../../components/SubAmbassador'
 import { IoIosArrowUp } from "react-icons/io"
 import { IoIosArrowDown } from "react-icons/io"
 import Navbar from '../../assets/images/navbar.png';
+import { useNavigate } from 'react-router-dom';
 import AmbassadorsPersonalDetailsSub from '../../components/AmbassadorsPersonalDetailsSub';
+import MobileSideBar from '../../components/MobileSideBar';
 
 const AmbassadorsPersonalDetails = () => {
-    const [activeSection, setActiveSection] = useState('Overview');
+    const [activeSection, setActiveSection] = useState('Ambassadors');
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const navigate = useNavigate();
+    const [navbar, setNavbar] = useState(false)
+    const sidebarRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                setNavbar(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [sidebarRef]);
+
 
     useEffect(() => {
         const handleResize = () => {
@@ -27,9 +46,28 @@ const AmbassadorsPersonalDetails = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
     const handleClick = (section) => {
         setActiveSection(section);
+
+        switch (section) {
+            case 'Overview':
+                navigate('/dashboard/personal/overview');
+                break;
+            case 'Users':
+                navigate('/dashboard/personal/user');
+                break;
+            case 'Ambassadors':
+                navigate('/dashboard/personal/ambassadors');
+                break;
+            case 'SendMessage':
+                navigate('/dashboard/personal/ambassadors/chat');
+                break;
+            default:
+                break;
+        }
     };
+
 
     const Content = () => {
         if (screenWidth >= 1024) {
@@ -190,12 +228,18 @@ const AmbassadorsPersonalDetails = () => {
             <div className='w-1/5 max-lg:hidden'>
                 <Sidebar />
             </div>
+            {navbar &&
+                <div className='w-1/2 fixed' ref={sidebarRef}>
+                    <MobileSideBar setNavbar={setNavbar} />
+                </div>}
             <div className='w-4/5 max-lg:w-full'>
                 <div className='max-lg:hidden'>
                     <Header />
                 </div>
-                <div className='flex justify-start mx-10 max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4 items-center gap-2'>
-                    <img src={Navbar} />
+                <div className='flex justify-start lg:mx-0 mx-10 max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4 items-center gap-2'>
+                    <div className='lg:hidden' onClick={() => setNavbar(!navbar)}>
+                        <img src={Navbar} />
+                    </div>
                     <p className='text-[26px] max-lg:text-xl max-md:text-lg max-sm:text-base font-[600] text-[#000000] font-[Poppins] mx-10 my-5'>Viewing Lead Ambassador</p>
                 </div>
                 <div className='flex justify-start items-center gap-4 mx-10  max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4'>
@@ -208,7 +252,7 @@ const AmbassadorsPersonalDetails = () => {
                     </div>
                 </div>
                 <div className='flex justify-start items-center mx-10 max-lg:mx-8 max-md:mx-6 max-sm:mx-4 gap-12 max-lg:gap-10 max-md:gap-8 max-sm:gap-4 border-b border-[#E4E7EC] mt-5'>
-                    {['Overview', 'Users', 'Ambassadors', 'Send Message'].map(section => (
+                    {['Overview', 'Users', 'Ambassadors', 'SendMessage'].map(section => (
                         <div
                             key={section}
                             onClick={() => handleClick(section)}
@@ -218,7 +262,7 @@ const AmbassadorsPersonalDetails = () => {
                         </div>
                     ))}
                 </div>
-             {Content()}
+                {Content()}
             </div>
         </div>
     )

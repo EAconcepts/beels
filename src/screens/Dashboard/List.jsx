@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Sidebar from '../../components/Sidebar'
 import Header from '../../components/Header'
 import { FaPlus } from "react-icons/fa6";
@@ -6,9 +6,25 @@ import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import LeadAmbassador from '../../components/LeadAmbassador';
 import Navbar from '../../assets/images/navbar.png';
+import MobileSideBar from '../../components/MobileSideBar';
 
 
 const List = () => {
+    const [navbar, setNavbar] = useState(false)
+    const sidebarRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                setNavbar(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [sidebarRef]);
 
 
     return (
@@ -16,12 +32,18 @@ const List = () => {
             <div className='w-1/5 max-lg:hidden'>
                 <Sidebar />
             </div>
+            {navbar &&
+                <div className='w-1/2 fixed' ref={sidebarRef}>
+                    <MobileSideBar setNavbar={setNavbar} />
+                </div>}
             <div className='w-4/5 max-lg:w-full'>
                 <div className='max-lg:hidden'>
                     <Header />
                 </div>
-                <div className='flex justify-between max-lg:justify-start mx-10 items-center max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4 max-lg:gap-4'>
-                    <img src={Navbar} className='lg:hidden ' />
+                <div className='flex justify-between lg:mx-0 max-lg:justify-start mx-10 items-center max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4 max-lg:gap-4'>
+                    <div className='lg:hidden' onClick={() => setNavbar(!navbar)}>
+                        <img src={Navbar} />
+                    </div>
                     <p className='text-[26px]  max-lg:text-xl max-md:text-lg max-sm:text-base font-[600] text-[#000000] font-[Poppins] my-5'> View all Lead Ambassadors</p>
                     <button className='bg-[#082C25] px-3 py-2 flex justify-center items-center rounded-md gap-2 max-lg:hidden'>
                         <FaPlus className='text-white' />

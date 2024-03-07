@@ -1,21 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import LeadIcon from '../../assets/images/lead.png';
 import SubAmbassadorOverview from '../../components/SubAmbassadorOverview';
 import Navbar from '../../assets/images/navbar.png';
+import MobileSideBar from '../../components/MobileSideBar';
+
 
 const SubAmbassadorDetails = () => {
-    const [activeSection, setActiveSection] = useState('Overview');
+    const [navbar, setNavbar] = useState(false)
+    const sidebarRef = useRef(null); 
 
-    const handleClick = (section) => {
-        setActiveSection(section);
-    };
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                setNavbar(false); 
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [sidebarRef]);
+
+   
     return (
         <div className='min-h-screen bg-white flex relative'>
             <div className='w-1/5 max-lg:hidden'>
                 <Sidebar />
             </div>
+            {navbar &&
+                <div className='w-1/2 fixed' ref={sidebarRef}>
+                    <MobileSideBar setNavbar={setNavbar}/>
+                </div>}
             <div className='w-4/5 max-lg:w-full'>
                 <div className='max-lg:hidden'>
                     <Header />
@@ -24,8 +42,10 @@ const SubAmbassadorDetails = () => {
                     <img src={Navbar} />
                     <p className='text-[26px] max-lg:text-xl max-md:text-lg max-sm:text-base  font-[600] text-[#000000] font-[Poppins] mx-10 my-5'>Viewing Sub Ambassador</p>
                 </div> */}
-                <div className='flex justify-between max-lg:justify-start mx-10 items-center max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4 max-lg:gap-4'>
-                    <img src={Navbar} className='lg:hidden ' />
+                <div className='flex justify-between max-lg:justify-start lg:mx-0 mx-10 items-center max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4 max-lg:gap-4'>
+                    <div className='lg:hidden' onClick={() => setNavbar(!navbar)}>
+                        <img src={Navbar} />
+                    </div>
                     <p className='text-[26px]  max-lg:text-xl max-md:text-lg max-sm:text-base font-[600] text-[#000000] font-[Poppins] my-5'> Viewing Sub Ambassadors</p>
                     <button className='bg-[#082C25] px-3 py-2 flex justify-center items-center rounded-md gap-2 max-lg:hidden'>
 

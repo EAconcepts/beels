@@ -1,14 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Sidebar from '../../components/Sidebar'
 import Header from '../../components/Header'
 import AmbassadorsIcon from '../../assets/images/ambassadorsIcon.png';
 import AmbassadorForm from '../../components/AmbassadorForm';
 import DashboardImage from '../../assets/images/dashboardimg.png';
 import Navbar from '../../assets/images/navbar.png';
+import MobileSideBar from '../../components/MobileSideBar';
 
 const Overview = () => {
   const [showAmbassadorsIcon, setShowAmbassadorsIcon] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [navbar, setNavbar] = useState(false)
+  const sidebarRef = useRef(null);
+
+  useEffect(() => {
+      const handleClickOutside = (event) => {
+          if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+              setNavbar(false);
+          }
+      };
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+      };
+  }, [sidebarRef]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -68,7 +84,7 @@ const Overview = () => {
             </div>
           </div>
         </>
-        )
+      )
     } else {
       return (
         <>
@@ -133,12 +149,18 @@ const Overview = () => {
       <div className='w-1/5 max-lg:hidden'>
         <Sidebar />
       </div>
+      {navbar &&
+        <div className='w-1/2 fixed' ref={sidebarRef}>
+          <MobileSideBar setNavbar={setNavbar} />
+        </div>}
       <div className='w-4/5 max-lg:w-full'>
         <div className='max-lg:hidden'>
           <Header />
         </div>
-        <div className='flex justify-start mx-10 max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4 items-center gap-4'>
-          <img src={Navbar} />
+        <div className='flex justify-start lg:mx-0 mx-10 max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4 items-center gap-4'>
+          <div className='lg:hidden' onClick={() => setNavbar(!navbar)}>
+            <img src={Navbar} />
+          </div>
           <p className='text-[32px] max-lg:text-2xl max-md:text-xl max-sm:text-lg font-[600] text-[#000000] font-[Poppins]  '> Admin Dashboard Overview</p>
         </div>
 

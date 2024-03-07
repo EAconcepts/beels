@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import LeadIcon from '../../assets/images/lead.png';
 import { useNavigate } from 'react-router-dom';
-
 import Navbar from '../../assets/images/navbar.png';
 import UserPersonalDetailsSub from '../../components/UserPersonalDetailsSub';
 import MobileSideBar from '../../components/MobileSideBar';
@@ -13,12 +12,27 @@ const UserPersonalDetails = () => {
     const [navbar, setNavbar] = useState(false)
     const navigate = useNavigate();
 
+    const sidebarRef = useRef(null); 
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                setNavbar(false); 
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [sidebarRef]);
+
     const handleClick = (section) => {
         setActiveSection(section);
 
         switch (section) {
             case 'Overview':
-                navigate('/dashboard/overview');
+                navigate('/dashboard/personal/overview');
                 break;
             case 'Users':
                 navigate('/dashboard/personal/user');
@@ -41,8 +55,8 @@ const UserPersonalDetails = () => {
                 <Sidebar />
             </div>
             {navbar &&
-                <div className='w-1/2 fixed'>
-                    <MobileSideBar />
+                <div className='w-1/2 fixed' ref={sidebarRef}>
+                    <MobileSideBar setNavbar={setNavbar}/>
                 </div>}
 
             <div className='w-4/5 max-lg:w-full'>
@@ -65,7 +79,7 @@ const UserPersonalDetails = () => {
                     </div>
                 </div>
                 <div className='flex w-[60%] max-lg:w-[98%] justify-start items-center mx-10 max-lg:mx-8 max-md:mx-6 max-sm:mx-4 gap-12 max-lg:gap-10 max-md:gap-8 max-sm:gap-4  border-b border-[#E4E7EC] mt-5'>
-                    {['Overview', 'Users', 'Ambassadors', 'Send Message'].map(section => (
+                    {['Overview', 'Users', 'Ambassadors', 'SendMessage'].map(section => (
                         <div
                             key={section}
                             onClick={() => handleClick(section)}
