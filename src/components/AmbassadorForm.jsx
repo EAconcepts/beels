@@ -15,7 +15,7 @@ const AmbassadorForm = ({ close }) => {
                     <p className='text-[16px] font-[600] text-[#242731] font-[Poppins] max-lg:text-center'> Lead Ambassador Info </p>
                     <p className='text-[8px] pt-2 font-[300] text-[#575F6E] font-[Roboto] max-lg:text-center'> Please fill in the required details </p>
                     <div className='pt-2'>
-                        <p className='text-[10px] pt-2  font-[400] text-[#5a5a9a] font-[Poppins]'> Lead Ambassador Email Address </p>
+                        <p className='text-[10px] pt-2  font-[400] text-[#242426] font-[Poppins]'> Lead Ambassador Email Address </p>
                         <input type="text" className=' w-full  email-input text-black border-b-[1px] border-[#E2E4E5]    text-xl max-lg:text-base max-md:text-sm max-sm:text-[10px]' />
                     </div>
                     <div>

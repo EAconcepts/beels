@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import Sidebar from '../../components/Sidebar'
 import Header from '../../components/Header'
 import AmbassadorsIcon from '../../assets/images/ambassadorsIcon.png';
@@ -6,12 +6,33 @@ import AmbassadorForm from '../../components/AmbassadorForm';
 import DashboardImage from '../../assets/images/dashboardimg.png';
 import Navbar from '../../assets/images/navbar.png';
 import MobileSideBar from '../../components/MobileSideBar';
+import { getDashboardDetail} from '../../actions/AmbassadorActions'
+import { AuthContext } from '../../context/AuthContext';
 
 const Overview = () => {
   const [showAmbassadorsIcon, setShowAmbassadorsIcon] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [navbar, setNavbar] = useState(false)
   const sidebarRef = useRef(null);
+  const { token } = useContext(AuthContext);
+  const [userdetail, setUserdetail] = useState(null);
+  const [error, setError] = useState(null)
+  
+
+  useEffect(() => {
+    getDashboardDetail(token, setUserdetail, setError);
+  }, [token]);
+  console.log(token)
+  console.log(userdetail);
+  // useEffect(() => {
+  //   if(localStorage.getItem('logged_in')){
+  //      const userData = JSON.parse(localStorage.getItem('logged_in'));
+  //      console.log('userData', userData); // Debug: Check if userData is correctly structured
+  //      console.log(userData?.token);
+  //      console.log(userData?.user);
+  //   }
+  //  }, []);
+   
 
   useEffect(() => {
       const handleClickOutside = (event) => {
@@ -161,7 +182,7 @@ const Overview = () => {
           <div className='lg:hidden' onClick={() => setNavbar(!navbar)}>
             <img src={Navbar} />
           </div>
-          <p className='text-[32px] max-lg:text-2xl max-md:text-xl max-sm:text-lg font-[600] text-[#000000] font-[Poppins]  '> Admin Dashboard Overview</p>
+          <p className='text-[32px] mx-10 max-lg:text-2xl max-md:text-xl max-sm:text-lg font-[600] text-[#000000] font-[Poppins]  '> Admin Dashboard Overview</p>
         </div>
 
         {Content()}

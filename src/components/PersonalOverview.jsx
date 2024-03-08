@@ -12,7 +12,7 @@ import { IoIosArrowUp } from "react-icons/io"
 import { IoIosArrowDown } from "react-icons/io"
 
 
-const PersonalOverview = () => {
+const PersonalOverview = ( {fname, lname, email, accountNumber, dateCreated, pnumber,  school, refLink}) => {
     return (
         <div className='flex justify-between max-lg:flex-col  mt-5 px-10 max-lg:px-8 max-md:px-6 max-sm:px-4'>
             <div className='w-[45%] max-lg:w-[100%]'>
@@ -24,7 +24,7 @@ const PersonalOverview = () => {
 
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> Beels Account Number </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> 9057365756 </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {accountNumber} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -35,7 +35,7 @@ const PersonalOverview = () => {
 
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> Emails </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Sandy04@gmail.com </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {email} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -46,7 +46,7 @@ const PersonalOverview = () => {
 
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> First Name </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Amarachi </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '>{fname} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -56,7 +56,7 @@ const PersonalOverview = () => {
                         </div>
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> Last Name </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Okoro </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {lname}</p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -66,7 +66,7 @@ const PersonalOverview = () => {
                         </div>
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> Phone Number </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> 08168141116 </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {pnumber} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -76,7 +76,7 @@ const PersonalOverview = () => {
                         </div>
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> School </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> UNILAG </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {school} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -86,7 +86,7 @@ const PersonalOverview = () => {
                         </div>
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> Ambassador ref link </p>
-                            <p className='text-[#AD3307] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Beels/Sandy-38ndl </p>
+                            <p className='text-[#AD3307] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {refLink} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -96,7 +96,7 @@ const PersonalOverview = () => {
                         </div>
                         <div  className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> Date Created </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Friday, Jan 06, 2024 </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {dateCreated} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>

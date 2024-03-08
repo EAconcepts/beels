@@ -175,12 +175,12 @@ const SubAmbassadorOverview = () => {
                     </div>
                 </div>
                 <p className='text-[#000000] text-[22px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[600] font-[Inter] mt-7 '> Tasks </p>
-                <div className='px-2 mt-2 max-sm:px-1 max-sm:mt-1'>
+                <div className='px-2 mt-2 '>
                     <div className='flex justify-between items-center '>
                         <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> Onboard 20 Users </p>
                         <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 20/20</p>
                     </div>
-                    <div className='h-5 rounded-lg bg-[#3AB54A] w-full mt-1'>
+                    <div className='h-5 rounded-lg bg-[#3AB54A] max-lg:bg-[#082C25] w-full mt-1'>
 
                     </div>
                 </div>
@@ -189,7 +189,7 @@ const SubAmbassadorOverview = () => {
                         <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> Users with Virtual Cards </p>
                         <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 20/20</p>
                     </div>
-                    <div className='h-5 rounded-lg bg-[#3AB54A] w-full mt-1'>
+                    <div className='h-5 rounded-lg bg-[#3AB54A] max-lg:bg-[#082C25] w-full mt-1'>
 
                     </div>
                 </div>
@@ -198,7 +198,7 @@ const SubAmbassadorOverview = () => {
                         <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> Refer 50 users </p>
                         <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 20/20</p>
                     </div>
-                    <div className='h-5 rounded-lg bg-[#3AB54A] w-full mt-1'>
+                    <div className='h-5 rounded-lg bg-[#3AB54A] max-lg:bg-[#082C25] w-full mt-1'>
 
                     </div>
                 </div>
@@ -207,17 +207,17 @@ const SubAmbassadorOverview = () => {
                         <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> User to collect loans </p>
                         <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 20/20</p>
                     </div>
-                    <div className='h-5 rounded-lg bg-[#3AB54A] w-full mt-1'>
+                    <div className='h-5 rounded-lg bg-[#3AB54A] max-lg:bg-[#082C25] w-full mt-1'>
 
                     </div>
                 </div>
                 <div className='flex justify-between items-center mt-10 px-2'>
                     <p className='text-[#000000] text-[16px] max-lg:text-sm max-md:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> Leaderboard Position </p>
-                    <p className='text-[#3AB54A] text-[20px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] font-[Poppins]  '> 1st </p>
+                    <p className='text-[#3AB54A] max-lg:text-[#082C25]  text-[20px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] font-[Poppins]  '> 1st </p>
                 </div>
                 <div className='flex justify-between items-center mt-3 px-2'>
                     <p className='text-[#000000] text-[16px] max-lg:text-sm max-md:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> Points Earned </p>
-                    <p className='text-[#3AB54A] text-[20px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] font-[Poppins]  '> 200points </p>
+                    <p className='text-[#3AB54A] max-lg:text-[#082C25]  text-[20px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] font-[Poppins]  '> 200points </p>
                 </div>
             </div>
         </div>

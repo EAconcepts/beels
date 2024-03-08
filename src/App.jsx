@@ -14,6 +14,11 @@ import SuccessModal from './components/modal/SuccessModal'
 import DeleteModal from './components/modal/DeleteModal'
 import Chat from './screens/Dashboard/Chat'
 import MobileSideBar from './components/MobileSideBar'
+import Account from './screens/Profile/Account'
+import Security from './screens/Profile/Security';
+import PersonalTasks from './screens/Profile/PersonalTasks';
+import  AuthContextProvider  from './context/AuthContext';
+import ProtectedRoute from './context/ProtectedRoute';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,21 +26,25 @@ function App() {
   return (
     <>
 
+      <AuthContextProvider >
+        
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+          
+            <Route path="/dashboard/overview" element={<Overview />} />
+            <Route path="/dashboard/add-ambassador" element={<AddAmbassadors />} />
+            <Route path="/dashboard/all" element={<List />} />
+            <Route path="/dashboard/personal/overview" element={<PersonalDetails />} />
+            <Route path="/dashboard/personal/user" element={<UserPersonalDetails />} />
+            <Route path="/dashboard/personal/ambassadors" element={<AmbassadorsPersonalDetails />} />
+            <Route path="/dashboard/personal/ambassadors/chat" element={<Chat />} />
+            <Route path="/dashboard/subambassadors/details" element={<SubAmbassadorDetails />} />
 
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard/overview" element={<Overview />} />
-          <Route path="/dashboard/add-ambassador" element={<AddAmbassadors />} />
-          <Route path="/dashboard/all" element={<List />} />
-          <Route path="/dashboard/personal/overview" element={<PersonalDetails />} />
-          <Route path="/dashboard/personal/user" element={<UserPersonalDetails />} />
-          <Route path="/dashboard/personal/ambassadors" element={<AmbassadorsPersonalDetails />} />
-          <Route path="/dashboard/personal/ambassadors/chat" element={<Chat />} />
-          <Route path="/dashboard/subambassadors/details" element={<SubAmbassadorDetails />} />
-         
-        </Routes>
-      </Router>
+          </Routes>
+        </Router>
+      </AuthContextProvider>
+
       {/* <Login /> */}
       {/* <Overview/> */}
       {/* <List /> */}
@@ -49,6 +58,9 @@ function App() {
       {/* <Chat /> */}
       {/* <MobileSideBar /> */}
       {/* <AmbassadorForm /> */}
+      {/* <Account /> */}
+      {/* <Security /> */}
+      {/* <PersonalTasks /> */}
     </>
   )
 }

@@ -1,20 +1,44 @@
-import React from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Sidebar from '../../components/Sidebar'
 import Header from '../../components/Header'
 import { FaPlus } from "react-icons/fa6";
+import MobileSideBar from '../../components/MobileSideBar';
+import Navbar from '../../assets/images/navbar.png';
 
 const AddAmbassadors = () => {
+    const [navbar, setNavbar] = useState(false)
+    const sidebarRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                setNavbar(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [sidebarRef]);
     return (
         <div className='min-h-screen bg-white flex relative'>
             <div className='w-1/5 max-lg:hidden'>
                 <Sidebar />
             </div>
+            {navbar &&
+                <div className='w-1/2 fixed' ref={sidebarRef}>
+                    <MobileSideBar setNavbar={setNavbar} />
+                </div>}
             <div className='w-4/5 max-lg:w-full'>
                 <div className='max-lg:hidden'>
                     <Header />
                 </div>
                 <form className='px-10 pb-5'>
-                    <div className='flex justify-between items-center'>
+                    <div className='flex justify-between max-lg:justify-start max-lg:gap-8 items-center'>
+                        <div className='lg:hidden' onClick={() => setNavbar(!navbar)}>
+                            <img src={Navbar} />
+                        </div>
                         <p className='text-[26px] max-lg:text-xl max-md:text-lg max-sm:text-base  font-[600] text-[#000000] font-[Poppins] my-5'> Add Lead Ambassadors</p>
                         <button className='bg-[#082C25] px-3 py-2 flex justify-center items-center rounded-md gap-2 max-lg:hidden'>
                             <FaPlus className='text-white' />

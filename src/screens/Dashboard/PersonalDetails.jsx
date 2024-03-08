@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import LeadIcon from '../../assets/images/lead.png';
@@ -6,6 +6,8 @@ import PersonalOverview from '../../components/PersonalOverview';
 import Navbar from '../../assets/images/navbar.png';
 import { useNavigate } from 'react-router-dom';
 import MobileSideBar from '../../components/MobileSideBar';
+import { AuthContext } from '../../context/AuthContext';
+import { getPersonalDetail} from '../../actions/AmbassadorActions'
 
 const PersonalDetails = () => {
     const [activeSection, setActiveSection] = useState('Overview');
@@ -13,6 +15,16 @@ const PersonalDetails = () => {
     const [navbar, setNavbar] = useState(false)
 
     const sidebarRef = useRef(null);
+    const { token, user } = useContext(AuthContext);
+    const [userdetail, setUserdetail] = useState(null);
+    const [error, setError] = useState(null)
+    
+  
+    useEffect(() => {
+      getPersonalDetail(token, setUserdetail, setError, user?.email);
+    }, [token]);
+    console.log(token, user?.email)
+    console.log(userdetail?.user.email);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -72,8 +84,8 @@ const PersonalDetails = () => {
                         <img src={LeadIcon} />
                     </div>
                     <div>
-                        <p className='text-[#101928] text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm  font-[600] font-[Inter] '> Sandra Akpotu </p>
-                        <p className='text-[#475367] text-[12px] max-md:text-[10px] font-[400] font-[Inter] '> Sandy04@gmail.com </p>
+                        <p className='text-[#101928] text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm  font-[600] font-[Inter] '> {userdetail?.user.first_name} {userdetail?.user.last_name}   </p>
+                        <p className='text-[#475367] text-[12px] max-md:text-[10px] font-[400] font-[Inter] '> {userdetail?.user.email}</p>
                     </div>
                 </div>
                 <div className='flex justify-start items-center mx-10 max-lg:mx-8 max-md:mx-6 max-sm:mx-4 gap-12 max-lg:gap-10 max-md:gap-8 max-sm:gap-4 border-b border-[#E4E7EC] mt-5'>
@@ -87,7 +99,7 @@ const PersonalDetails = () => {
                         </div>
                     ))}
                 </div>
-                <PersonalOverview />
+                <PersonalOverview fname={userdetail?.user.first_name} lname={userdetail?.user.last_name} email={userdetail?.user.email} accountNumber={userdetail?.user.business.rc_number} dateCreated={userdetail?.user.created_at} pnumber={userdetail?.user.phone} school={userdetail?.user.school} refLink={userdetail?.user.business.acc_number}/>
             </div>
         </div>
     );
