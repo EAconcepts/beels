@@ -6,18 +6,41 @@ import AmbassadorForm from '../../components/AmbassadorForm';
 import DashboardImage from '../../assets/images/dashboardimg.png';
 import Navbar from '../../assets/images/navbar.png';
 import MobileSideBar from '../../components/MobileSideBar';
-import { getDashboardDetail} from '../../actions/AmbassadorActions'
+import { getDashboardDetail } from '../../actions/AmbassadorActions'
 import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { allAmbassadors } from '../../actions/AmbassadorActions';
+import { allSubAmbassadors } from '../../actions/AmbassadorActions';
 
 const Overview = () => {
   const [showAmbassadorsIcon, setShowAmbassadorsIcon] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [navbar, setNavbar] = useState(false)
   const sidebarRef = useRef(null);
+  const formRef = useRef(null);
   const { token } = useContext(AuthContext);
   const [userdetail, setUserdetail] = useState(null);
   const [error, setError] = useState(null)
-  
+  const [userthirddetail, setThirdUserdetail] = useState(null);
+  const [thirderror, setThirdError] = useState(null)
+  const [userseconddetail, setSecondUserdetail] = useState(null);
+  const [seconderror, setSecondError] = useState(null)
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('logged_in');
+    if (!loggedInUser) {
+
+      navigate('/login');
+    }
+  }, []);
+
+  useEffect(() => {
+    allAmbassadors(token, setSecondUserdetail, setSecondError);
+    allSubAmbassadors(token, setThirdUserdetail, setThirdError);
+  }, [token]);
+  console.log(userseconddetail?.all.length);
+  console.log(userthirddetail?.sub.length);
 
   useEffect(() => {
     getDashboardDetail(token, setUserdetail, setError);
@@ -32,20 +55,33 @@ const Overview = () => {
   //      console.log(userData?.user);
   //   }
   //  }, []);
-   
+
 
   useEffect(() => {
-      const handleClickOutside = (event) => {
-          if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-              setNavbar(false);
-          }
-      };
+    const handleClickOutside = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setNavbar(false);
+      }
+    };
 
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
-      };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [sidebarRef]);
+
+  useEffect(() => {
+    const handleSecondClickOutside = (event) => {
+      if (formRef.current && !formRef.current.contains(event.target)) {
+        setShowAmbassadorsIcon(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleSecondClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleSecondClickOutside);
+    };
+  }, [formRef]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -69,7 +105,7 @@ const Overview = () => {
               </div>
               <div className=' flex flex-col justify-around'>
                 <p className='text-[17px] max-lg:text-sm max-md:text-xs max-sm:text-[10px] font-[500] text-[#667185] font-[Inter]'> Total of Ambassadors </p>
-                <p className='text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] text-[#000000] font-[Inter]'>0 </p>
+                <p className='text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] text-[#000000] font-[Inter]'> {userthirddetail?.sub?.length + userseconddetail?.all?.length}</p>
               </div>
             </div>
             <div className='flex w-[30%] justify-center px-2 py-4 items-center border rounded-md gap-8'>
@@ -78,7 +114,7 @@ const Overview = () => {
               </div>
               <div className=' flex flex-col justify-around'>
                 <p className='text-[17px] max-lg:text-sm max-md:text-xs max-sm:text-[10px] font-[500] text-[#667185] font-[Inter]'> Lead Ambassador</p>
-                <p className='text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] text-[#000000] font-[Inter]'>0 </p>
+                <p className='text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] text-[#000000] font-[Inter]'> {userseconddetail?.all?.length}</p>
               </div>
             </div>
             <div className='flex w-[30%] justify-center px-2 py-4 items-center border rounded-md gap-8'>
@@ -87,7 +123,7 @@ const Overview = () => {
               </div>
               <div className=' flex flex-col justify-around'>
                 <p className='text-[17px] max-lg:text-sm max-md:text-xs max-sm:text-[10px] font-[500] text-[#667185] font-[Inter]'> Sub Ambassador </p>
-                <p className='text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] text-[#000000] font-[Inter]'>0 </p>
+                <p className='text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] text-[#000000] font-[Inter]'> {userthirddetail?.sub?.length}</p>
               </div>
             </div>
           </div>
@@ -131,7 +167,7 @@ const Overview = () => {
               </div>
               <div className='w-1/2  flex flex-col justify-around'>
                 <p className='text-[17px] max-lg:text-sm max-md:text-xs max-sm:text-[10px] font-[500] text-[#667185] font-[Inter]'> Total of Ambassadors </p>
-                <p className='text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] text-[#000000] font-[Inter]'>0 </p>
+                <p className='text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] text-[#000000] font-[Inter]'> {userthirddetail?.sub?.length + userseconddetail?.all?.length} </p>
               </div>
             </div>
             <div className='flex w-[30%] max-lg:w-[70%] max-sm:w-3/4 justify-center px-2 py-4 items-center border rounded-md gap-8'>
@@ -142,7 +178,7 @@ const Overview = () => {
               </div>
               <div className='w-1/2  flex flex-col justify-around'>
                 <p className='text-[17px] max-lg:text-sm max-md:text-xs max-sm:text-[10px] font-[500] text-[#667185] font-[Inter]'> Lead Ambassador</p>
-                <p className='text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] text-[#000000] font-[Inter]'>0 </p>
+                <p className='text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] text-[#000000] font-[Inter]'> {userseconddetail?.all?.length} </p>
               </div>
             </div>
             <div className='flex w-[30%] max-lg:w-[70%] max-sm:w-3/4 justify-center px-2 py-4 items-center border rounded-md gap-8'>
@@ -153,7 +189,7 @@ const Overview = () => {
               </div>
               <div className='w-1/2  flex flex-col justify-around'>
                 <p className='text-[17px] max-lg:text-sm max-md:text-xs max-sm:text-[10px] font-[500] text-[#667185] font-[Inter]'> Sub Ambassador </p>
-                <p className='text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] text-[#000000] font-[Inter]'>0 </p>
+                <p className='text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] text-[#000000] font-[Inter]'> {userthirddetail?.sub?.length } </p>
               </div>
             </div>
           </div>
@@ -164,7 +200,7 @@ const Overview = () => {
 
   return (
     <div className='min-h-screen bg-white flex relative'>
-      <div className='fixed top-0 right-0 w-2/5'>
+      <div className='fixed top-0 right-0 w-2/5 max-sm:w-[70%] h-full' ref={formRef}>
         {showAmbassadorsIcon && <AmbassadorForm close={setShowAmbassadorsIcon} />}
       </div>
       <div className='w-1/5 max-lg:hidden'>

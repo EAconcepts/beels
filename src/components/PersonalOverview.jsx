@@ -12,7 +12,11 @@ import { IoIosArrowUp } from "react-icons/io"
 import { IoIosArrowDown } from "react-icons/io"
 
 
-const PersonalOverview = ( {fname, lname, email, accountNumber, dateCreated, pnumber,  school, refLink}) => {
+const PersonalOverview = ({ fname, lname, email, accountNumber, dateCreated, pnumber, school, refLink, sub, user }) => {
+    const createdDate = new Date(dateCreated);
+
+    const formatDate = createdDate.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+
     return (
         <div className='flex justify-between max-lg:flex-col  mt-5 px-10 max-lg:px-8 max-md:px-6 max-sm:px-4'>
             <div className='w-[45%] max-lg:w-[100%]'>
@@ -94,9 +98,9 @@ const PersonalOverview = ( {fname, lname, email, accountNumber, dateCreated, pnu
                         <div className='w-[30%]'>
                             <img src={ThirdIcon} />
                         </div>
-                        <div  className='w-[50%]'>
+                        <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> Date Created </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {dateCreated} </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {formatDate} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -104,7 +108,7 @@ const PersonalOverview = ( {fname, lname, email, accountNumber, dateCreated, pnu
                 <div className='flex justify-between items-center my-3  max-xsm:flex-wrap '>
                     <div className='border border-[#E4E7EC] bg-[#FAF9F6] w-[30%] max-sm:w-[32%] max-xsm:w-[45%] mt-2 rounded-md px-3 max-lg:px-2 max-xsm:px-1 py-2'>
                         <p className='text-[#667185] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Transaction </p>
-                        <div className='flex justify-start gap-4 items-center' >
+                        <div className='flex justify-start gap-4 items-center flex-wrap' >
                             <p className='text-[#101928] text-[20px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[600] font-[Inter] '> 5,647 </p>
                             <div className='flex justify-center lg:gap-2 px-2  items-center bg-[#E7F6EC] rounded-md'>
                                 <TiArrowUp />
@@ -115,7 +119,7 @@ const PersonalOverview = ( {fname, lname, email, accountNumber, dateCreated, pnu
                     </div>
                     <div className='border border-[#E4E7EC] bg-[#FAF9F6] w-[30%] max-sm:w-[32%] max-xsm:w-[45%] mt-2 rounded-md px-3 max-lg:px-2 max-xsm:px-1 py-2'>
                         <p className='text-[#667185] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Revenue </p>
-                        <div className='flex justify-start gap-4 items-center' >
+                        <div className='flex justify-start gap-4 items-center flex-wrap' >
                             <p className='text-[#101928] text-[20px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[600] font-[Inter] '> 8,000 </p>
                             <div className='flex justify-center lg:gap-2 px-2 items-center bg-[#E7F6EC] rounded-md'>
                                 <TiArrowUp />
@@ -126,7 +130,7 @@ const PersonalOverview = ( {fname, lname, email, accountNumber, dateCreated, pnu
                     </div>
                     <div className='border border-[#E4E7EC] bg-[#FAF9F6] w-[30%] max-sm:w-[32%] max-xsm:w-[45%] mt-2 rounded-md px-3 max-lg:px-2 max-xsm:px-1 py-2'>
                         <p className='text-[#667185] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Clicks </p>
-                        <div className='flex justify-start gap-4 items-center' >
+                        <div className='flex justify-start gap-4 items-center flex-wrap' >
                             <p className='text-[#101928] text-[20px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[600] font-[Inter] '> 300 </p>
                             <div className='flex justify-center lg:gap-2 px-2 items-center bg-[#E7F6EC] rounded-md'>
                                 <TiArrowUp />
@@ -165,16 +169,35 @@ const PersonalOverview = ( {fname, lname, email, accountNumber, dateCreated, pnu
                         <div className='flex justify-end items-center gap-2 w-[15%]'>
                             <p className='text-[#D0D5DD] text-[8px] font-[500] font-[Inter] '> Status </p>
                         </div>
+
+
                     </div>
-                    <SubAmbassador border={true}/>
-                    <SubAmbassador border={true}/>
-                    <SubAmbassador border={false}/>
+                    {sub?.map((item, index) => {
+                        const createdAtDate = new Date(item.created_at);
+                        const formattedDate = createdAtDate.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+
+                        // Determine if the current item is the last in the array
+                        const isLastItem = index === sub.length - 1;
+
+                        return (
+                            <SubAmbassador
+                                border={!isLastItem} 
+                                key={index}
+                                icons={true}
+                                name={item.first_name + ' ' + item.last_name}
+                                email={item.email}
+                                date={formattedDate}
+                            />
+                        );
+                    })}
+
+
                 </div>
                 <div className='flex justify-between items-center mt-3 max-xsm:flex-wrap  '>
                     <div className='border border-[#5572a5] bg-[#FAF9F6] w-[30%] max-lg:w-[32%] max-xsm:w-[45%] mt-2 rounded-md px-3 max-lg:px-2 max-xsm:px-1 py-2 flex flex-col gap-16'>
                         <p className='text-[#667185] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Users </p>
-                        <div className='flex justify-start gap-4 items-center' >
-                            <p className='text-[#101928] text-[20px] max-lg:text-base max-md:text-sm max-sm:text-xs  font-[600] font-[Inter] '> 5,000 </p>
+                        <div className='flex justify-start gap-4 items-center flex-wrap' >
+                            <p className='text-[#101928] text-[20px] max-lg:text-base max-md:text-sm max-sm:text-xs  font-[600] font-[Inter] '> {user?.length} </p>
                             <div className='flex justify-center gap-2 items-center bg-[#E7F6EC] rounded-md'>
                                 <TiArrowUp />
                                 <p className='text-[#036B26] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[500] font-[Inter] '> 2% </p>
@@ -184,7 +207,7 @@ const PersonalOverview = ( {fname, lname, email, accountNumber, dateCreated, pnu
                     </div>
                     <div className='border border-[#E4E7EC] bg-[#FAF9F6] w-[30%] max-lg:w-[32%] max-xsm:w-[45%] mt-2 rounded-md px-3 max-lg:px-2 max-xsm:px-1 py-2 flex flex-col gap-16'>
                         <p className='text-[#667185] text-[14px]  max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Referrals </p>
-                        <div className='flex justify-start gap-4 items-center' >
+                        <div className='flex justify-start gap-4 items-center flex-wrap' >
                             <p className='text-[#101928] text-[20px] max-lg:text-base max-md:text-sm max-sm:text-xs  font-[600] font-[Inter] '> 1,000 </p>
                             <div className='flex justify-center gap-2 items-center bg-[#E7F6EC] rounded-md'>
                                 <TiArrowUp />
@@ -195,7 +218,7 @@ const PersonalOverview = ( {fname, lname, email, accountNumber, dateCreated, pnu
                     </div>
                     <div className='border border-[#E4E7EC] bg-[#FAF9F6] w-[30%] max-lg:w-[32%] max-xsm:w-[45%] mt-2 rounded-md px-3 max-lg:px-2 max-xsm:px-1 py-2 flex flex-col gap-16'>
                         <p className='text-[#667185] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Ambassadors </p>
-                        <div className='flex justify-start gap-4 items-center' >
+                        <div className='flex justify-start gap-4 items-center flex-wrap' >
                             <p className='text-[#101928] text-[20px] max-lg:text-base max-md:text-sm max-sm:text-xs font-[600] font-[Inter] '> 300 </p>
                             <div className='flex justify-center gap-2 items-center bg-[#E7F6EC] rounded-md'>
                                 <TiArrowUp />

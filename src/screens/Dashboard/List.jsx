@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useContext } from 'react'
 import Sidebar from '../../components/Sidebar'
 import Header from '../../components/Header'
 import { FaPlus } from "react-icons/fa6";
@@ -7,12 +7,26 @@ import { IoIosArrowDown } from "react-icons/io";
 import LeadAmbassador from '../../components/LeadAmbassador';
 import Navbar from '../../assets/images/navbar.png';
 import MobileSideBar from '../../components/MobileSideBar';
+import { allAmbassadors } from '../../actions/AmbassadorActions';
+import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const List = () => {
     const [navbar, setNavbar] = useState(false)
     const sidebarRef = useRef(null);
+    const { token, user } = useContext(AuthContext);
+    const [userdetail, setUserdetail] = useState(null);
+    const [error, setError] = useState(null)
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('logged_in');
+        if (!loggedInUser) {
+        
+          navigate('/login');
+        }
+     }, []);
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -26,7 +40,11 @@ const List = () => {
         };
     }, [sidebarRef]);
 
+    useEffect(() => {
+        allAmbassadors(token, setUserdetail, setError);
+    }, [token]);
 
+    console.log(userdetail?.all);
     return (
         <div className='min-h-screen bg-white flex relative'>
             <div className='w-1/5 max-lg:hidden'>
@@ -44,7 +62,7 @@ const List = () => {
                     <div className='lg:hidden' onClick={() => setNavbar(!navbar)}>
                         <img src={Navbar} />
                     </div>
-                    <p className='text-[26px]  max-lg:text-xl max-md:text-lg max-sm:text-base font-[600] text-[#000000] font-[Poppins] my-5'> View all Lead Ambassadors</p>
+                    <p className='text-[26px] mx-10  max-lg:text-xl max-md:text-lg max-sm:text-base font-[600] text-[#000000] font-[Poppins] my-5'> View all Lead Ambassadors</p>
                     <button className='bg-[#082C25] px-3 py-2 flex justify-center items-center rounded-md gap-2 max-lg:hidden'>
                         <FaPlus className='text-white' />
                         <p className='text-white text-[14px]  font-[400] font-[Rockwell] '> Send Invite </p>
@@ -78,9 +96,22 @@ const List = () => {
                             <p className='text-[#D0D5DD] text-[11px] font-[500] font-[Inter] '> Status </p>
                         </div>
                     </div>
-                    <LeadAmbassador icons={false} />
-                    <LeadAmbassador icons={true} />
-                    <LeadAmbassador icons={true} />
+                    {userdetail?.all?.map((item, index) => {
+                        const createdAtDate = new Date(item.created_at);
+                      
+                        const formattedDate = createdAtDate.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+
+
+                        return (
+                            <LeadAmbassador
+                                key={index}
+                                icons={true}
+                                name={item.first_name + ' ' + item.last_name}
+                                email={item.email}
+                                date={formattedDate}
+                            />
+                        );
+                    })}
 
                 </div>
 

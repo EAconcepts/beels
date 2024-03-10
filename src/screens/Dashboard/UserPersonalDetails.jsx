@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import LeadIcon from '../../assets/images/lead.png';
@@ -6,18 +6,31 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../assets/images/navbar.png';
 import UserPersonalDetailsSub from '../../components/UserPersonalDetailsSub';
 import MobileSideBar from '../../components/MobileSideBar';
+import { AuthContext } from '../../context/AuthContext';
+import { getDashboardDetail } from '../../actions/AmbassadorActions';
 
 const UserPersonalDetails = () => {
     const [activeSection, setActiveSection] = useState('Users');
     const [navbar, setNavbar] = useState(false)
+    const { token, user } = useContext(AuthContext);
+    const [userdetail, setUserdetail] = useState(null);
+    const [error, setError] = useState(null)
     const navigate = useNavigate();
 
-    const sidebarRef = useRef(null); 
+    const sidebarRef = useRef(null);
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('logged_in');
+        if (!loggedInUser) {
+
+            navigate('/login');
+        }
+    }, []);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-                setNavbar(false); 
+                setNavbar(false);
             }
         };
 
@@ -26,6 +39,17 @@ const UserPersonalDetails = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [sidebarRef]);
+
+    useEffect(() => {
+
+        getDashboardDetail(token, setUserdetail, setError);
+
+
+
+    }, [token]);
+
+    console.log(userdetail?.users);
+
 
     const handleClick = (section) => {
         setActiveSection(section);
@@ -56,7 +80,7 @@ const UserPersonalDetails = () => {
             </div>
             {navbar &&
                 <div className='w-1/2 fixed' ref={sidebarRef}>
-                    <MobileSideBar setNavbar={setNavbar}/>
+                    <MobileSideBar setNavbar={setNavbar} />
                 </div>}
 
             <div className='w-4/5 max-lg:w-full'>
@@ -78,29 +102,51 @@ const UserPersonalDetails = () => {
                         <p className='text-[#475367] text-[12px] max-md:text-[10px] font-[400] font-[Inter] '> Sandy04@gmail.com </p>
                     </div>
                 </div>
-                <div className='flex w-[60%] max-lg:w-[98%] justify-start items-center mx-10 max-lg:mx-8 max-md:mx-6 max-sm:mx-4 gap-12 max-lg:gap-10 max-md:gap-8 max-sm:gap-4  border-b border-[#E4E7EC] mt-5'>
-                    {['Overview', 'Users', 'Ambassadors', 'SendMessage'].map(section => (
-                        <div
-                            key={section}
-                            onClick={() => handleClick(section)}
-                            className={`text-[#344054] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] ${activeSection === section ? 'text-red-500 border-b-2 border-red-500' : ''}`}
-                        >
-                            {section}
-                        </div>
-                    ))}
+                <div className='flex justify-start items-center mx-10 max-lg:mx-8 max-md:mx-6 max-sm:mx-4 gap-12 max-lg:gap-10 max-md:gap-8 max-sm:gap-4 border-b border-[#E4E7EC] mt-5'>
+                    {['Overview', 'Users', 'Ambassadors', 'SendMessage'].map(section => {
+                        // Check if the user type is not Admin or Lead
+                        if ((user?.type !== "Admin" && user?.type !== "Lead") && (section === 'Ambassadors' || section === 'SendMessage')) {
+                            // If the user is not Admin or Lead, do not render Ambassadors and SendMessage links
+                            return null;
+                        }
+
+                        // If the user is not Admin or Lead, change the Users link to direct to /dashboard/subambassadors/details
+                        if (user?.type !== "Admin" && user?.type !== "Lead" && section === 'Users') {
+                            return (
+                                <div
+                                    key={section}
+                                    onClick={() => handleClick(section)}
+                                    className={`text-[#344054] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] ${activeSection === section ? 'text-red-500 border-b-2 border-red-500' : ''}`}
+                                >
+                                    {section === 'Users' ? 'Sub Ambassadors' : section}
+                                </div>
+                            );
+                        }
+
+                        return (
+                            <div
+                                key={section}
+                                onClick={() => handleClick(section)}
+                                className={`text-[#344054] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] ${activeSection === section ? 'text-red-500 border-b-2 border-red-500' : ''}`}
+                            >
+                                {section}
+                            </div>
+                        );
+                    })}
                 </div>
-                <div className=' w-[60%] max-lg:w-[98%] max-lg:mx-8 max-md:mx-6 max-sm:mx-4 mx-10 my-5'>
+
+                <div className=' w-[60%] max-lg:w-[80%] max-lg:mx-8 max-md:mx-6 max-sm:mx-4 mx-10 my-5'>
                     <div className='flex justify-between items-center mt-3 w-full'>
-                        <UserPersonalDetailsSub />
-                        <UserPersonalDetailsSub />
+                        <UserPersonalDetailsSub time='This week' users='Total Users' number={userdetail?.users?.length} percent='15%' textColor='text-[#036B26]' bgColor='bg-[#E7F6EC]' />
+                        <UserPersonalDetailsSub time='This week' users='Active Users' number={userdetail?.users?.length} percent='6%' textColor='text-[#9E0A05]' bgColor='bg-[#FBEAE9]' />
                     </div>
                     <div className='flex justify-between items-center mt-3 w-full'>
-                        <UserPersonalDetailsSub />
-                        <UserPersonalDetailsSub />
+                        <UserPersonalDetailsSub time='This week' users='Retained Users' number={userdetail?.users?.length} percent='15%' textColor='text-[#036B26]' bgColor='bg-[#E7F6EC]' />
+                        <UserPersonalDetailsSub time='This week' users='Inactive Users' number={userdetail?.users?.length} percent='6%' textColor='text-[#9E0A05]' bgColor='bg-[#FBEAE9]' />
                     </div>
                     <div className='flex justify-between items-center mt-3 w-full'>
-                        <UserPersonalDetailsSub />
-                        <UserPersonalDetailsSub />
+                        <UserPersonalDetailsSub time='Last 30 days' users='Users that have fully Onboarded' number={userdetail?.users?.length} percent='15%' textColor='text-[#036B26]' bgColor='bg-[#E7F6EC]' />
+                        <UserPersonalDetailsSub time='Last 30 days' users='Users with Security Token' number={userdetail?.users?.length} percent='9%' textColor='text-[#036B26]' bgColor='bg-[#E7F6EC]' />
 
                     </div>
 

@@ -16,6 +16,9 @@ const MobileSideBar = () => {
     const [activeLink, setActiveLink] = useState('');
     const [secondActiveLink, setSecondActiveLink] = useState('');
     const [thirdActiveLink, setThirdActiveLink] = useState('');
+    const [fourthActiveLink, setFourthActiveLink] = useState('')
+    const [fifthActiveLink, setFifthActiveLink] = useState('')
+
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -35,17 +38,38 @@ const MobileSideBar = () => {
             '/dashboard/all',
             '/dashboard/personal/overview',
             '/dashboard/personal/ambassadors/chat',
+            '/dashboard/subambassadors/details',
             '/dashboard/personal/user',
             '/dashboard/personal/ambassadors',
         ];
 
         const secondPaths = [
-            '/dashboard/overview'
+            '/'
         ];
         const thirdPaths = [
             '/dashboard/add-ambassador',
-            "/dashboard/subambassadors/details"
+          
         ]
+        const fourthPaths = [
+            '/tasks/all'
+        ]
+
+        const fifthPaths = [
+            '/task/create'
+        ]
+
+        if (fourthPaths.includes(path)) {
+            setFourthActiveLink('viewTask');
+        } else {
+            setFourthActiveLink('');
+        }
+
+        if (fifthPaths.includes(path)) {
+            setFifthActiveLink('createTask');
+        } else {
+            setFifthActiveLink('');
+        }
+
         if (thirdPaths.includes(path)) {
             setThirdActiveLink('AddAmbassadors');
         } else {
@@ -67,10 +91,18 @@ const MobileSideBar = () => {
 
 
     const handleDashboardClick = () => {
-        navigate('/dashboard/overview');
+        navigate('/');
         setActiveLink('dashboard');
     };
 
+    const handleCreateTaskClick = () => {
+        navigate('/task/create');
+        setFifthActiveLink('createTask');
+    };
+    const handleViewTaskClick = () => {
+        navigate('/tasks/all');
+        setFourthActiveLink('viewTask');
+    };
 
     return (
         <div className='bg-[#001A04] w-full min-h-screen pt-10 '>
@@ -120,11 +152,11 @@ const MobileSideBar = () => {
             </div>
             {tasks && (
                 <div>
-                    <div className='flex justify-start gap-4 items-center px-3 my-3 py-2'>
+                    <div className={`flex justify-start gap-4 items-center px-3 my-3 py-2 ${fourthActiveLink === 'viewTask' ? 'bg-[#3AB54A]' : ''}`} onClick={handleViewTaskClick}>
                         <div className='w-4 h-4 rounded-full border border-[#FFFFFF]'></div>
                         <p className='text-sm font-[700] text-[#FFFFFF] font-[Rockwell]'>View all tasks</p>
                     </div>
-                    <div className='flex justify-start gap-4 items-center px-3 py-2 my-3'>
+                    <div className={`flex justify-start gap-4 items-center px-3 py-2 my-3 ${fifthActiveLink === 'createTask' ? 'bg-[#3AB54A]' : ''}`} onClick={handleCreateTaskClick}>
                         <div className='w-4 h-4 rounded-full border border-[#FFFFFF]'></div>
                         <p className='text-sm font-[700] text-[#FFFFFF] font-[Rockwell]'>Create Tasks</p>
                     </div>

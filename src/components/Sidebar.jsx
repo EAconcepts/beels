@@ -25,15 +25,15 @@ const Sidebar = () => {
       '/dashboard/personal/overview',
       '/dashboard/personal/ambassadors/chat',
       '/dashboard/personal/user',
+      '/dashboard/subambassadors/details',
       '/dashboard/personal/ambassadors',
     ];
 
     const secondPaths = [
-      '/dashboard/overview'
+      '/'
     ];
     const thirdPaths = [
       '/dashboard/add-ambassador',
-      "/dashboard/subambassadors/details"
     ]
     if (thirdPaths.includes(path)) {
       setThirdActiveLink('AddAmbassadors');
@@ -56,7 +56,7 @@ const Sidebar = () => {
 
 
   const handleDashboardClick = () => {
-    navigate('/dashboard/overview');
+    navigate('/');
     setActiveLink('dashboard');
   };
 

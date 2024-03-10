@@ -1,15 +1,49 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import LeadIcon from '../../assets/images/lead.png';
 import SubAmbassadorOverview from '../../components/SubAmbassadorOverview';
 import Navbar from '../../assets/images/navbar.png';
 import MobileSideBar from '../../components/MobileSideBar';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import { getPersonalDetail } from '../../actions/AmbassadorActions'
+import { allSubAmbassadors } from '../../actions/AmbassadorActions';
+import { getDashboardDetail } from '../../actions/AmbassadorActions';
 
 
 const SubAmbassadorDetails = () => {
     const [navbar, setNavbar] = useState(false)
     const sidebarRef = useRef(null); 
+    const navigate = useNavigate();
+    const { token, user } = useContext(AuthContext);
+    const [userdetail, setUserdetail] = useState(null);
+    const [error, setError] = useState(null)
+    const [seconduserdetail, setSecondUserdetail] = useState(null);
+    const [seconderror, setSecondError] = useState(null)
+    const [thirduserdetail, setThirdUserdetail] = useState(null);
+    const [thirderror, setThirdError] = useState(null)
+
+    useEffect(() => {
+        getPersonalDetail(token, setUserdetail, setError, user?.email);
+        getDashboardDetail(token, setThirdUserdetail, setThirdError);
+        allSubAmbassadors(token, setSecondUserdetail, setSecondError);
+
+
+    }, [token]);
+    console.log(token, user?.email)
+    console.log(userdetail?.user.email);
+    console.log(seconduserdetail?.sub);
+    console.log(thirduserdetail?.users);
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('logged_in');
+        if (!loggedInUser) {
+        
+          navigate('/login');
+        }
+     }, []);
+
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -68,7 +102,7 @@ const SubAmbassadorDetails = () => {
                     </div>
 
                 </div>
-                <SubAmbassadorOverview />
+                <SubAmbassadorOverview fname={userdetail?.user.first_name} lname={userdetail?.user.last_name} email={userdetail?.user.email} accountNumber={userdetail?.user.business.rc_number} dateCreated={userdetail?.user.created_at} pnumber={userdetail?.user.phone} school={userdetail?.user.school} refLink={userdetail?.user.business.acc_number} sub={seconduserdetail?.sub} user={thirduserdetail?.users} />
                 <div className='flex justify-center items-center  py-5 lg:hidden'>
                     <button className='bg-[#082C25]  flex justify-center px-3 py-2 items-center rounded-md gap-2 '>
 

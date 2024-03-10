@@ -3,7 +3,7 @@ import LeadIcon from '../assets/images/lead.png';
 import EditIcon from '../assets/images/edit.png';
 import ThreeDotIcon from '../assets/images/three-dot.png';
 
-const SubAmbassador = ({ border, icons }) => {
+const SubAmbassador = ({ border, icons , name, email, date}) => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     useEffect(() => {
@@ -28,12 +28,12 @@ const SubAmbassador = ({ border, icons }) => {
                             <img src={LeadIcon} />
                         </div>
                         <div>
-                            <p className='text-[#101928] text-[8px] font-[500] font-[Inter] '> Sandra Akpotu </p>
+                            <p className='text-[#101928] text-[8px] font-[500] font-[Inter] '> {name} </p>
                             <p className='text-[#475367] text-[8px] font-[400] font-[Inter] '> Lead Ambassador </p>
                         </div>
                     </div>
                     <div className='flex justify-center items-center gap-2 w-[20%]'>
-                        <p className='text-[#475367] text-[8px] font-[400] font-[Inter] '> Sandy04@gmail.com </p>
+                        <p className='text-[#475367] text-[8px] font-[400] font-[Inter] '> {email} </p>
                     </div>
                     <div className='flex justify-center items-center gap-2 w-[20%]'>
                         <div className='bg-[#22612A] p-1 rounded-2xl flex justify-center items-center'>
@@ -41,7 +41,7 @@ const SubAmbassador = ({ border, icons }) => {
                         </div>
                     </div>
                     <div className='flex justify-center items-center gap-1 w-[15%]'>
-                        <p className='text-[#475367] text-[8px] font-[400] font-[Inter] '> 03/01/2024 </p>
+                        <p className='text-[#475367] text-[8px] font-[400] font-[Inter] '> {date} </p>
                     </div>
                     <div className='flex justify-end items-center gap-2 w-[15%]'>
                         <div className='bg-[#E7F6EC] p-2 rounded-2xl flex justify-center items-center'>

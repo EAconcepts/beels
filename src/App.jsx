@@ -19,6 +19,8 @@ import Security from './screens/Profile/Security';
 import PersonalTasks from './screens/Profile/PersonalTasks';
 import  AuthContextProvider  from './context/AuthContext';
 import ProtectedRoute from './context/ProtectedRoute';
+import CreateTask from './screens/Dashboard/CreateTask';
+import ViewTasks from './screens/Dashboard/ViewTasks'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,8 +33,8 @@ function App() {
         <Router>
           <Routes>
             <Route path="/login" element={<Login />} />
-          
-            <Route path="/dashboard/overview" element={<Overview />} />
+            <Route path="/task/create" element={<CreateTask />} />
+            <Route path="/" element={<Overview />} />
             <Route path="/dashboard/add-ambassador" element={<AddAmbassadors />} />
             <Route path="/dashboard/all" element={<List />} />
             <Route path="/dashboard/personal/overview" element={<PersonalDetails />} />
@@ -40,7 +42,7 @@ function App() {
             <Route path="/dashboard/personal/ambassadors" element={<AmbassadorsPersonalDetails />} />
             <Route path="/dashboard/personal/ambassadors/chat" element={<Chat />} />
             <Route path="/dashboard/subambassadors/details" element={<SubAmbassadorDetails />} />
-
+            <Route path="/tasks/all" element={<ViewTasks />} />
           </Routes>
         </Router>
       </AuthContextProvider>

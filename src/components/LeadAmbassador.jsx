@@ -5,7 +5,7 @@ import EditIcon from '../assets/images/edit.png';
 import ThreeDotIcon from '../assets/images/three-dot.png';
 
 
-const LeadAmbassador = ({ icons }) => {
+const LeadAmbassador = ({ icons, name, email, date }) => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     useEffect(() => {
@@ -30,14 +30,14 @@ const LeadAmbassador = ({ icons }) => {
                             <img src={LeadIcon} />
                         </div>
                         <div>
-                            <p className='text-[#101928] text-[10px] font-[500] font-[Inter] '> Sandra Akpotu </p>
+                            <p className='text-[#101928] text-[10px] font-[500] font-[Inter] '> {name} </p>
                             <p className='text-[#475367] text-[10px] font-[400] font-[Inter] '> Lead Ambassador </p>
                         </div>
 
 
                     </div>
                     <div className='flex justify-center items-center gap-2 w-[20%]'>
-                        <p className='text-[#475367] text-[11px] font-[400] font-[Inter] '> Sandy04@gmail.com </p>
+                        <p className='text-[#475367] text-[11px] font-[400] font-[Inter] '> {email}</p>
                     </div>
                     <div className='flex justify-center items-center gap-2 w-[20%]'>
                         <div className='bg-[#1671D9] px-3 py-2 rounded-2xl flex justify-center items-center'>
@@ -45,7 +45,7 @@ const LeadAmbassador = ({ icons }) => {
                         </div>
                     </div>
                     <div className='flex justify-center items-center gap-2 w-[20%]'>
-                        <p className='text-[#475367] text-[11px] font-[400] font-[Inter] '> 03/01/2024 </p>
+                        <p className='text-[#475367] text-[11px] font-[400] font-[Inter] '> {date} </p>
                     </div>
                     <div className={`flex  ${icons === true ? 'justify-between' : 'justify-start'}  items-center gap-2 w-[20%]`}>
                         <div className='bg-[#E7F6EC] px-3 py-2 rounded-2xl flex justify-center items-center'>
@@ -66,7 +66,7 @@ const LeadAmbassador = ({ icons }) => {
                 <>
                 
                     <div className='flex justify-between items-center gap-2 sm:w-3/4 mt-7 '>
-                        <p className='text-[#101928] text-[11px] font-[400] font-[Inter] '> Sandy04@gmail.com </p>
+                        <p className='text-[#101928] text-[11px] font-[400] font-[Inter] '> {email} </p>
                         <img src={ThreeDotIcon} />
                     </div>
                     <div className='px-5 sm:w-3/4  max-md:px-4 max-sm:px-3 flex flex-col justify-between h-20 border rounded-md border-[#D0D5DD] my-3 py-2'>
@@ -76,7 +76,7 @@ const LeadAmbassador = ({ icons }) => {
                                     <img src={LeadIcon} />
                                 </div>
                                 <div>
-                                    <p className='text-[#101928] text-[10px] font-[500] font-[Inter] '> Sandra Akpotu </p>
+                                    <p className='text-[#101928] text-[10px] font-[500] font-[Inter] '> {name} </p>
                                     <p className='text-[#475367] text-[10px] font-[400] font-[Inter] '> Lead Ambassador </p>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@ const LeadAmbassador = ({ icons }) => {
                         <div className='flex justify-between items-center gap-2'>
                             <p className='text-[#475367] text-[11px] font-[400] font-[Inter] '> Date Added </p>
                             <div className='flex justify-between items-center gap-2'>
-                                <p className='text-[#475367] text-[11px] font-[700] font-[Inter] '> 03/01/2024 </p>
+                                <p className='text-[#475367] text-[11px] font-[700] font-[Inter] '> {date} </p>
                                 {icons === true && (<div className='flex justify-center items-center gap-1'>
                                     <img src={EditIcon} />
                                 </div>)}

@@ -11,8 +11,14 @@ import SubAmbassador from './SubAmbassador'
 import { IoIosArrowUp } from "react-icons/io"
 import { IoIosArrowDown } from "react-icons/io"
 
-const SubAmbassadorOverview = () => {
+const SubAmbassadorOverview = ({ fname, lname, email, accountNumber, dateCreated, pnumber, school, refLink, sub, user }) => {
+    const createdDate = new Date(dateCreated);
+
+    const formatDate = createdDate.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+
+
     return (
+        
         <div className='flex justify-between  mt-5 px-10 max-lg:flex-col max-lg:px-8 max-md:px-6 max-sm:px-4'>
             <div className='w-[45%] max-lg:w-[98%]'>
                 <div className=' border border-[#E4E7EC] rounded-md pb-3'>
@@ -23,7 +29,7 @@ const SubAmbassadorOverview = () => {
 
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> Beels Account Number </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> 9057365756 </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {accountNumber} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -34,7 +40,7 @@ const SubAmbassadorOverview = () => {
 
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> Emails </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Sandy04@gmail.com </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {email} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -45,7 +51,7 @@ const SubAmbassadorOverview = () => {
 
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> First Name </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Amarachi </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {fname} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -55,7 +61,7 @@ const SubAmbassadorOverview = () => {
                         </div>
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> Last Name </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Okoro </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {lname} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -65,7 +71,7 @@ const SubAmbassadorOverview = () => {
                         </div>
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> Phone Number </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> 08168141116 </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {pnumber} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -75,7 +81,7 @@ const SubAmbassadorOverview = () => {
                         </div>
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> School </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> UNILAG </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {school} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -85,7 +91,7 @@ const SubAmbassadorOverview = () => {
                         </div>
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> Ambassador ref link </p>
-                            <p className='text-[#AD3307] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Beels/Sandy-38ndl </p>
+                            <p className='text-[#AD3307] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {refLink} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -95,7 +101,7 @@ const SubAmbassadorOverview = () => {
                         </div>
                         <div className='w-[50%]'>
                             <p className='text-[#667185] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[400] font-[Inter] '> Date Created </p>
-                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Friday, Jan 06, 2024 </p>
+                            <p className='text-[#101928] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> {formatDate} </p>
                         </div>
                         <img src={CopyIcon} />
                     </div>
@@ -143,7 +149,7 @@ const SubAmbassadorOverview = () => {
                     <div className='border border-[#5572a5] bg-[#FAF9F6] w-[30%] max-lg:w-[32%] max-xsm:w-[45%] mt-2 rounded-md px-3 max-lg:px-2 max-xsm:px-1 py-2 flex flex-col gap-16'>
                         <p className='text-[#667185] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] '> Users </p>
                         <div className='flex justify-start gap-4 items-center flex-wrap' >
-                            <p className='text-[#101928] text-[20px] max-lg:text-base max-md:text-sm max-sm:text-xs  font-[600] font-[Inter] '> 5,000 </p>
+                            <p className='text-[#101928] text-[20px] max-lg:text-base max-md:text-sm max-sm:text-xs  font-[600] font-[Inter] '> {user?.length} </p>
                             <div className='flex justify-center gap-2 items-center bg-[#E7F6EC] rounded-md'>
                                 <TiArrowUp />
                                 <p className='text-[#036B26] text-[12px] max-lg:text-[10px] max-sm:text-[8px] font-[500] font-[Inter] '> 2% </p>
@@ -178,46 +184,47 @@ const SubAmbassadorOverview = () => {
                 <div className='px-2 mt-2 '>
                     <div className='flex justify-between items-center '>
                         <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> Onboard 20 Users </p>
-                        <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 20/20</p>
+                        <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 0/20</p>
                     </div>
-                    <div className='h-5 rounded-lg bg-[#3AB54A] max-lg:bg-[#082C25] w-full mt-1'>
+                    {/* bg-[#3AB54A] max-lg:bg-[#082C25] */}
+                    <div className='h-5 rounded-lg bg-[#DADFDE] w-full mt-1'>
 
                     </div>
                 </div>
                 <div className='px-2 mt-2'>
                     <div className='flex justify-between items-center '>
                         <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> Users with Virtual Cards </p>
-                        <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 20/20</p>
+                        <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 0/20</p>
                     </div>
-                    <div className='h-5 rounded-lg bg-[#3AB54A] max-lg:bg-[#082C25] w-full mt-1'>
+                    <div className='h-5 rounded-lg bg-[#DADFDE] w-full mt-1'>
 
                     </div>
                 </div>
                 <div className='px-2 mt-2'>
                     <div className='flex justify-between items-center '>
                         <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> Refer 50 users </p>
-                        <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 20/20</p>
+                        <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 0/20</p>
                     </div>
-                    <div className='h-5 rounded-lg bg-[#3AB54A] max-lg:bg-[#082C25] w-full mt-1'>
+                    <div className='h-5 rounded-lg bg-[#DADFDE]  w-full mt-1'>
 
                     </div>
                 </div>
                 <div className='px-2 mt-2'>
                     <div className='flex justify-between items-center '>
                         <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> User to collect loans </p>
-                        <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 20/20</p>
+                        <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 0/20</p>
                     </div>
-                    <div className='h-5 rounded-lg bg-[#3AB54A] max-lg:bg-[#082C25] w-full mt-1'>
+                    <div className='h-5 rounded-lg bg-[#DADFDE]  w-full mt-1'>
 
                     </div>
                 </div>
                 <div className='flex justify-between items-center mt-10 px-2'>
                     <p className='text-[#000000] text-[16px] max-lg:text-sm max-md:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> Leaderboard Position </p>
-                    <p className='text-[#3AB54A] max-lg:text-[#082C25]  text-[20px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] font-[Poppins]  '> 1st </p>
+                    <p className='text-[#3AB54A] max-lg:text-[#082C25]  text-[20px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] font-[Poppins]  '> None </p>
                 </div>
                 <div className='flex justify-between items-center mt-3 px-2'>
                     <p className='text-[#000000] text-[16px] max-lg:text-sm max-md:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> Points Earned </p>
-                    <p className='text-[#3AB54A] max-lg:text-[#082C25]  text-[20px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] font-[Poppins]  '> 200points </p>
+                    <p className='text-[#3AB54A] max-lg:text-[#082C25]  text-[20px] max-lg:text-lg max-md:text-base max-sm:text-sm font-[700] font-[Poppins]  '> 0points </p>
                 </div>
             </div>
         </div>
