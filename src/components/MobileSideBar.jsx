@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Logo from '../assets/images/BeelsLogo.png'
 import Profile from '../assets/images/Secondprofile.png'
@@ -8,16 +8,20 @@ import TaskIcon from '../assets/images/tasks.png'
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { FaHouseDamage } from "react-icons/fa";
 import LogoutIcon from '../assets/images/logout.png'
+import { AuthContext } from '../context/AuthContext';
 
 
 const MobileSideBar = () => {
     const [showAmbassadors, setShowAmbassadors] = useState(true);
     const [tasks, setTasks] = useState(true);
+    const { token, user } = useContext(AuthContext);
     const [activeLink, setActiveLink] = useState('');
     const [secondActiveLink, setSecondActiveLink] = useState('');
     const [thirdActiveLink, setThirdActiveLink] = useState('');
     const [fourthActiveLink, setFourthActiveLink] = useState('')
     const [fifthActiveLink, setFifthActiveLink] = useState('')
+
+    console.log(user?.type)
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -51,7 +55,8 @@ const MobileSideBar = () => {
           
         ]
         const fourthPaths = [
-            '/tasks/all'
+            '/tasks/all',
+            '/tasks/personal/all'
         ]
 
         const fifthPaths = [
@@ -100,9 +105,18 @@ const MobileSideBar = () => {
         setFifthActiveLink('createTask');
     };
     const handleViewTaskClick = () => {
-        navigate('/tasks/all');
+ 
+        if (user?.type === "Admin") {
+     
+            navigate('/tasks/all');
+        } else {
+  
+            navigate('/tasks/personal/all');
+        }
+    
         setFourthActiveLink('viewTask');
     };
+    
 
     return (
         <div className='bg-[#001A04] w-full min-h-screen pt-10 '>

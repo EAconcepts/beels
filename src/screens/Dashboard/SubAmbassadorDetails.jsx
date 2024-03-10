@@ -23,6 +23,7 @@ const SubAmbassadorDetails = () => {
     const [seconderror, setSecondError] = useState(null)
     const [thirduserdetail, setThirdUserdetail] = useState(null);
     const [thirderror, setThirdError] = useState(null)
+    const profileImageSrc = user?.business?.image || LeadIcon;
 
     useEffect(() => {
         getPersonalDetail(token, setUserdetail, setError, user?.email);
@@ -89,11 +90,11 @@ const SubAmbassadorDetails = () => {
                 </div>
                 <div className='flex justify-start items-center gap-4 mx-10 max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4'>
                     <div className='w-17 h-17 rounded-full'>
-                        <img src={LeadIcon} />
+                        <img src={profileImageSrc} />
                     </div>
                     <div>
-                        <p className='text-[#101928] text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm  font-[600] font-[Inter] '> Sandra Akpotu </p>
-                        <p className='text-[#475367] text-[12px] max-md:text-[10px] font-[400] font-[Inter] '> Sandy04@gmail.com </p>
+                        <p className='text-[#101928] text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm  font-[600] font-[Inter] '> {user.first_name} {userdetail?.user.last_name}  </p>
+                        <p className='text-[#475367] text-[12px] max-md:text-[10px] font-[400] font-[Inter] '> {user.email} </p>
                     </div>
                 </div>
                 <div className='flex justify-start items-center mx-10 max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4 gap-12 border-b border-[#E4E7EC] mt-5'>

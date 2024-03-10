@@ -52,38 +52,38 @@ const PersonalTasks = () => {
             <div className='mx-5 w-[95%] px-2 mt-2  '>
                 <div className='flex justify-between items-center '>
                     <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> Onboard 20 Ambassadors </p>
-                    <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 10/20</p>
+                    <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 0/20</p>
                 </div>
                 <div className='h-5 rounded-lg bg-[#DADFDE] w-full mt-1'>
-                    <div className='h-5 rounded-lg bg-[#082C25] mt-1 w-[70%]'></div>
+                    <div className='h-5 rounded-lg bg-[#082C25] mt-1 w-[0%]'></div>
                 </div>
             </div>
             <div className='mx-5 w-[95%] px-2 mt-2 '>
                 <div className='flex justify-between items-center '>
                     <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> Users with Virtual Cards </p>
-                    <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 20/40</p>
+                    <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 0/40</p>
                 </div>
                 <div className='h-5 rounded-lg bg-[#DADFDE] w-full mt-1'>
-                    <div className='h-5 rounded-lg bg-[#082C25] mt-1 w-[50%]'></div>
+                    <div className='h-5 rounded-lg bg-[#082C25] mt-1 w-[0%]'></div>
                 </div>
             </div>
             <div className='mx-5 w-[95%] px-2 mt-2 '>
                 <div className='flex justify-between items-center '>
                     <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> Refer 50 users </p>
-                    <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 45/50</p>
+                    <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 0/50</p>
                 </div>
 
                 <div className='h-5 rounded-lg  bg-[#DADFDE] w-full mt-1'>
-                    <div className='h-5 rounded-lg bg-[#082C25] mt-1 w-[70%]'></div>
+                    <div className='h-5 rounded-lg bg-[#082C25] mt-1 w-[0%]'></div>
                 </div>
             </div>
             <div className='mx-5 w-[95%] px-2 mt-2 '>
                 <div className='flex justify-between items-center '>
                     <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 60 User to collect loans </p>
-                    <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 54/60</p>
+                    <p className='text-[#000000] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[400] font-[Poppins]  '> 0/60</p>
                 </div>
                 <div className='h-5 rounded-lg  bg-[#DADFDE] w-full mt-1'>
-                    <div className='h-5 rounded-lg bg-[#082C25] mt-1 w-[85%]'></div>
+                    <div className='h-5 rounded-lg bg-[#082C25] mt-1 w-[0%]'></div>
                 </div>
             </div>
 

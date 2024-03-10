@@ -102,7 +102,7 @@ const AmbassadorForm = ({ close }) => {
                         <img src={imageUrl || placeholder} alt="Uploaded" className='w-20 rounded-full'/>
                     </div>
                 )}
-                <p className='text-[20px] max-lg:text-[16px] font-[600] text-[#000000] font-[Poppins]'> Mary Sokoh </p>
+                <p className='text-[20px] max-lg:text-[16px] font-[600] text-[#000000] font-[Poppins]'> {userdetail?.user.first_name} {userdetail?.user.last_name}  </p>
                 <input
                     type="file"
                     onChange={handleChange}

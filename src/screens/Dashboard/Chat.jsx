@@ -15,6 +15,8 @@ const Chat = () => {
     const { token, user } = useContext(AuthContext);
     const [navbar, setNavbar] = useState(false)
     const sidebarRef = useRef(null);
+    const profileImageSrc = user?.business?.image || LeadIcon;
+
     useEffect(() => {
         const loggedInUser = localStorage.getItem('logged_in');
         if (!loggedInUser) {
@@ -78,33 +80,22 @@ const Chat = () => {
                 </div>
                 <div className='flex justify-start items-center gap-4 mx-10 max-lg:mx-8 max-md:mx-5 my-5 max-lg:my-4'>
                     <div className='w-17 h-17 rounded-full'>
-                        <img src={LeadIcon} />
+                        <img src={profileImageSrc} />
                     </div>
                     <div>
-                        <p className='text-[#101928] text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm  font-[600] font-[Inter] '> Sandra Akpotu </p>
-                        <p className='text-[#475367] text-[12px] max-md:text-[10px] font-[400] font-[Inter] '> Sandy04@gmail.com </p>
+                        <p className='text-[#101928] text-[24px] max-lg:text-lg max-md:text-base max-sm:text-sm  font-[600] font-[Inter] '> {user.first_name} {user.last_name}  </p>
+                        <p className='text-[#475367] text-[12px] max-md:text-[10px] font-[400] font-[Inter] '> {user.email} </p>
                     </div>
                 </div>
                 <div className='flex justify-start items-center mx-10 max-lg:mx-8 max-md:mx-6 max-sm:mx-4 gap-12 max-lg:gap-10 max-md:gap-8 max-sm:gap-4 border-b border-[#E4E7EC] mt-5'>
                     {['Overview', 'Users', 'Ambassadors', 'SendMessage'].map(section => {
-                        // Check if the user type is not Admin or Lead
+                      
                         if ((user?.type !== "Admin" && user?.type !== "Lead") && (section === 'Ambassadors' || section === 'SendMessage')) {
-                            // If the user is not Admin or Lead, do not render Ambassadors and SendMessage links
+                       
                             return null;
                         }
 
-                        // If the user is not Admin or Lead, change the Users link to direct to /dashboard/subambassadors/details
-                        if (user?.type !== "Admin" && user?.type !== "Lead" && section === 'Users') {
-                            return (
-                                <div
-                                    key={section}
-                                    onClick={() => handleClick(section)}
-                                    className={`text-[#344054] text-[14px] max-lg:text-xs max-sm:text-[10px] font-[500] font-[Inter] ${activeSection === section ? 'text-red-500 border-b-2 border-red-500' : ''}`}
-                                >
-                                    {section === 'Users' ? 'Sub Ambassadors' : section}
-                                </div>
-                            );
-                        }
+              
 
                         return (
                             <div

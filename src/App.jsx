@@ -43,6 +43,7 @@ function App() {
             <Route path="/dashboard/personal/ambassadors/chat" element={<Chat />} />
             <Route path="/dashboard/subambassadors/details" element={<SubAmbassadorDetails />} />
             <Route path="/tasks/all" element={<ViewTasks />} />
+            <Route path="/tasks/personal/all" element={<PersonalTasks />} />
           </Routes>
         </Router>
       </AuthContextProvider>
