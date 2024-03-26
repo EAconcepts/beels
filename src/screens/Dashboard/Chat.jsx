@@ -17,13 +17,13 @@ const Chat = () => {
     const sidebarRef = useRef(null);
     const profileImageSrc = user?.business?.image || LeadIcon;
 
-    useEffect(() => {
-        const loggedInUser = localStorage.getItem('logged_in');
-        if (!loggedInUser) {
+    // useEffect(() => {
+    //     const loggedInUser = localStorage.getItem('logged_in');
+    //     if (!loggedInUser) {
 
-            navigate('/login');
-        }
-    }, []);
+    //         navigate('/login');
+    //     }
+    // }, []);
 
     useEffect(() => {
         const handleClickOutside = (event) => {

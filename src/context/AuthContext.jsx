@@ -4,13 +4,12 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
 
-    const userData = JSON.parse(localStorage.getItem('logged_in'));
+    const userData = localStorage.getItem('logged_in') && JSON.parse(localStorage.getItem('logged_in'));
     //const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null;
     
     const [token, setToken] = useState(userData ? userData?.token : '');
     const [user, setUser] = useState(userData ? userData?.user : null);
     
-
     const logout = () => {
         setToken('');
         setUser(null);
