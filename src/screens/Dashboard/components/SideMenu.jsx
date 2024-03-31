@@ -33,7 +33,7 @@ const SideMenu = ({
       iconImg: dashboardIcon,
     },
     // Ambassador
-    user.type !== "Sub" && {
+    user?.type !== "Sub" && {
       name: "Ambassador",
       path: "#",
       // pathname: "/dashboard/tasks",
@@ -54,14 +54,14 @@ const SideMenu = ({
       iconImg: circleIcon,
     },
     // Tasks
-    user.type === "Admin" && {
+    user?.type === "Admin" && {
       name: "Tasks",
       path: "#",
       pathname: "/dashboard/ambassadors",
       iconImg: ambassadorIcon,
       dropdownIcon: !showTasksMenu ? MdKeyboardArrowRight : MdKeyboardArrowDown,
     },
-    user.type === "Admin" &&
+    user?.type === "Admin" &&
       showTasksMenu && {
         name: "View all tasks",
         path: "tasks",
@@ -69,7 +69,7 @@ const SideMenu = ({
         iconImg: circleIcon,
       },
 
-    user.type !== "Admin" && {
+    user?.type !== "Admin" && {
       name: "My tasks",
       path: "tasks",
       pathname: "/dashboard/tasks",
@@ -103,7 +103,7 @@ const SideMenu = ({
             onClick={() => setShowSidebar(false)}
             className=" relative rounded-full items-center flex justify-center border-[2.34px] border-white size-[50px]"
           >
-            {user.image ? (
+            {user?.image ? (
               <img
                 src={avatar}
                 className="object-cover object-center size-full rounded-full"
@@ -135,8 +135,8 @@ const SideMenu = ({
       {/* Nav Menu */}
       <nav className="flex flex-col gap-y-[15px] mt-[24px] lg:mt-[90.7px]">
         {dashboardMenu
-          .filter((menu) => menu !== false)
-          .map((menu, index) => (
+          ?.filter((menu) => menu !== false)
+          ?.map((menu, index) => (
             <NavLink
               to={menu.path}
               onClick={() => {

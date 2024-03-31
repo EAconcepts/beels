@@ -8,6 +8,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { CiBellOn } from "react-icons/ci";
 import { FaUser } from "react-icons/fa";
 import avatar from "../../../assets/images/avatarImg.png";
+import { useNavigate } from "react-router-dom";
 
 // import Header from "../../components/Header";
 
@@ -16,7 +17,14 @@ const DashboardLayout = () => {
   const [showAddLeads, setShowAddLeads] = useState(false);
 
   const menuRef = useRef(null);
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
+  const navigateTo = useNavigate();
+
+  useEffect(() => {
+    if (!token || token == undefined) {
+      navigateTo("/sub-ambassador/login");
+    }
+  }, []);
 
   // Closes Side menu on outside click
   const handlOutsideClick = (e) => {
@@ -96,7 +104,7 @@ const DashboardLayout = () => {
                   to="profile"
                   className=" relative rounded-full items-center flex justify- border-[2.34px] border-white size-[50px]"
                 >
-                  {user.image ? (
+                  {user?.image ? (
                     <img
                       src={avatar}
                       className="object-cover object-center size-full rounded-full"
@@ -113,21 +121,23 @@ const DashboardLayout = () => {
                 >
                   <div className="flex gap-x-[37px]">
                     <h5 className=" text-[16px] font-inter font-[700] leading-[19.83px]">
-                      {user.first_name} {user.last_name}
+                      {user?.first_name} {user?.last_name}
                     </h5>
                     {/* <MdKeyboardArrowDown /> */}
                   </div>
                   <p className="font-[400] leading-[14.52px] text-[12px] uppercase">
-                    {user.type} {user.type !== "Admin" && "Ambassador"}
+                    {user?.type} {user?.type !== "Admin" && "Ambassador"}
                   </p>
                 </Link>
               </div>
             </div>
           </div>
         </div>
-        <div className="lg:overflow-y-scroll lg:h-[calc(100vh-138px)]">
-          <Outlet context={[setShowAddLeads]} />
-        </div>
+        {token && (
+          <div className="lg:overflow-y-scroll lg:h-[calc(100vh-138px)]">
+            <Outlet context={[setShowAddLeads]} />
+          </div>
+        )}
       </div>
     </div>
   );

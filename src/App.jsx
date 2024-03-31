@@ -14,7 +14,6 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import Profile from "./screens/Profile/Profile";
 import { Toaster } from "sonner";
 import AmbForm from "./screens/Auth/AmbForm"; 
-import { useEffect } from "react";
 
 function App() {
   const queryClient = new QueryClient();
