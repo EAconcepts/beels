@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import Login from "./screens/Auth/Login";
 import Chat from "./screens/Dashboard/Chat";
 // import PersonalTasks from "./screens/Profile/PersonalTasks";
-import AuthContextProvider from "./context/AuthContext";
+import AuthContextProvider, { AuthContext } from "./context/AuthContext";
 import Dashboard from "./screens/Dashboard/Dashboard";
 import Ambassadors from "./screens/Dashboard/Ambassadors";
 import DashboardLayout from "./screens/Dashboard/components/DashboardLayout";
@@ -13,7 +13,8 @@ import AllTasks from "./screens/Dashboard/AllTasks";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import Profile from "./screens/Profile/Profile";
 import { Toaster } from "sonner";
-import AmbForm from "./screens/Auth/AmbForm";
+import AmbForm from "./screens/Auth/AmbForm"; 
+import { useEffect } from "react";
 
 function App() {
   const queryClient = new QueryClient();

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import DashboardHero from "./components/Hero";
 import OverviewData from "./components/OverviewData";
 import { AuthContext } from "../../context/AuthContext";
@@ -10,6 +10,7 @@ import SubOverview from "./components/SubOverview";
 import taskIcon from "../../assets/images/tasks.svg";
 import TaskProgress from "./components/tasks/TaskProgress";
 import { useOutletContext } from "react-router-dom";
+import {useNavigate} from 'react-router-dom'
 
 const Dashboard = () => {
   const [setShowAddLeads] = useOutletContext();
@@ -20,6 +21,12 @@ const Dashboard = () => {
     { title: "Refer 50 uses", max: 50, value: 45 },
     { title: "60 Users to collect loans", max: 60, value: 54 },
   ];
+  const navigateTo = useNavigate()
+  useEffect(()=>{
+    if(!token || token == undefined){
+      navigateTo('/sub-ambassador/login')
+    }
+  },[])
   const { user, token } = useContext(AuthContext);
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const headers = {
