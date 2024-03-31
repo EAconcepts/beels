@@ -31,7 +31,7 @@ const AmbassadorDetails = () => {
     queryFn: () =>
       axios.get(`${baseUrl}/ambassador/details/${email}`, { headers }),
   });
- 
+
   const statistics = [
     { name: "Users", value: "5,000", percent: "2%" },
     { name: "Referrals", value: "1,000", percent: "2%" },
@@ -106,11 +106,15 @@ const AmbassadorDetails = () => {
       );
       break;
     case "Users":
-      content = <UserStats userStats={userStats}  />;
+      content = <UserStats userStats={userStats} />;
       break;
     case "Ambassadors":
       content = (
-        <Ambassadors subAmbassador={allAmbassadors} userStats={userStats} user= {user} />
+        <Ambassadors
+          subAmbassador={allAmbassadors}
+          userStats={userStats}
+          user={user}
+        />
       );
       break;
     case "Send message":
@@ -148,7 +152,7 @@ const AmbassadorDetails = () => {
       {/* Details */}
       <div className="flex flex-col mt-[32.4px]">
         {/* Tabs */}
-        <div className="flex lg:gap-x-[32px] max-lg:justify-between border-b border-b-[#E4E7EC]">
+        <div className=" flex lg:gap-x-[32px] max-lg:justify-between border-b border-b-[#E4E7EC]">
           {tabs.map((item, index) => (
             <button
               onClick={() => setActiveTab(item.tab)}

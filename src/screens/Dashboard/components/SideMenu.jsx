@@ -122,12 +122,12 @@ const SideMenu = ({
           >
             <div className="flex gap-x-[37px]">
               <h5 className=" text-[16px] font-inter font-[700] leading-[19.83px]">
-                Mac Roger
+                {user?.first_name} {user?.last_name}
               </h5>
               {/* <MdKeyboardArrowDown /> */}
             </div>
             <p className="font-[400] leading-[14.52px] text-[12px] uppercase">
-              Admin
+              {user.type}
             </p>
           </Link>
         </div>

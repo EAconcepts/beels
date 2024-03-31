@@ -274,6 +274,7 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
         {/* Tasks & Leaderboard */}
         {user.type !== "Admin" && (
           <>
+          {/*  Tasks*/}
             <div className={``}>
               <h3 className="max-lg:mt-[64px] max-lg:text-[20px] lg:mt-[40px] font-poppins font-[600] lg:text-[24px] leading-[34.8px] text-black">
                 Tasks
