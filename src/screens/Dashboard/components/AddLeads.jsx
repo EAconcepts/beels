@@ -54,7 +54,7 @@ const AddLeads = ({ setShowAddLeads }) => {
     <div>
       <div className="left-0 w-full top-0 bottom-0 h-screen fixed bg-black/40 z-[999] "></div>
 
-      <div className="w-full lg:w-[50%] max-lg:left-0 lg:right-0 lg:pl-[44px] pr-[164px] bg-white z-[999] fixed top-0 bottom-0 overflow-y-scroll">
+      <div className="w-full lg:w-[50%] max-lg:left-0 lg:right-0 lg:pl-[44px] lg:pr-[164px] bg-white z-[999] fixed top-0 bottom-0 overflow-y-scroll">
         <div className="max-lg:flex max-lg:flex-col max-lg:justify-cente  px-[32px] pb-[100px]">
           {/* Close Icon */}
           <div className="flex justify-end items-center pt-[37px] ">
