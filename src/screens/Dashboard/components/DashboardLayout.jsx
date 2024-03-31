@@ -18,13 +18,14 @@ const DashboardLayout = () => {
 
   const menuRef = useRef(null);
   const { user, token } = useContext(AuthContext);
+  console.log(token);
   const navigateTo = useNavigate();
 
-  useEffect(() => {
-    if (!token || token == undefined) {
-      navigateTo("/sub-ambassador/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!token || token == undefined) {
+  //     navigateTo("/sub-ambassador/login");
+  //   }
+  // }, []);
 
   // Closes Side menu on outside click
   const handlOutsideClick = (e) => {
@@ -133,11 +134,9 @@ const DashboardLayout = () => {
             </div>
           </div>
         </div>
-        {token && (
-          <div className="lg:overflow-y-scroll lg:h-[calc(100vh-138px)]">
-            <Outlet context={[setShowAddLeads]} />
-          </div>
-        )}
+        <div className="lg:overflow-y-scroll lg:h-[calc(100vh-138px)]">
+          <Outlet context={[setShowAddLeads]} />
+        </div>
       </div>
     </div>
   );
