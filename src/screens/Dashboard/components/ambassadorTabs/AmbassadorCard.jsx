@@ -49,7 +49,7 @@ const AmbassadorCard = ({ ambassador, roleColor }) => {
           </p>
           <div className="flex justify-between items-center gap-x-[8px]">
             <p className="text-[#475367] text-[14.6px] font-[700] font-Inter leading-[12.17px] ">
-              {formatDate(ambassador.created_at)}
+              {ambassador?.created_at && formatDate(ambassador?.created_at)}
             </p>
             {ambassador && (
               <div className="flex justify-center items-center gap-1">

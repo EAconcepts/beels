@@ -13,6 +13,7 @@ import AllTasks from "./screens/Dashboard/AllTasks";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import Profile from "./screens/Profile/Profile";
 import { Toaster } from "sonner";
+import AmbForm from "./screens/Auth/AmbForm";
 
 function App() {
   const queryClient = new QueryClient();
@@ -31,6 +32,10 @@ function App() {
               <Route
                 path="/sub-ambassador/login"
                 element={<Login role={"Sub"} />}
+              />
+              <Route
+                path="/sub-ambassador/onboarding"
+                element={<AmbForm role={"Sub"} />}
               />
               <Route path="/dashboard" element={<DashboardLayout />}>
                 <Route path="" element={<Dashboard />} />

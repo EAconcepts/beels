@@ -4,7 +4,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const SubOverview = () => {
   return (
-    <div className="w-full flex flex-col bg-[#F1F1F1] pt-[37px]">
+    <div className="w-full flex flex-col lg:bg-[#FAFAFA] bg-[#F1F1F1] pt-[37px]">
       <h1 className="px-[12px] text-black text-[24px] font-[600] leading-[36px] font-poppins">
         Start Sharing Now- It’s Easy!
       </h1>

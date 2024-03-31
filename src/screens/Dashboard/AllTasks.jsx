@@ -1,4 +1,4 @@
-import  { useContext } from "react";
+import { useContext } from "react";
 import TaskCard from "./components/TaskCard";
 import { AuthContext } from "../../context/AuthContext";
 import LeadTasks from "./components/tasks/LeadTasks";
@@ -54,8 +54,8 @@ const AllTasks = () => {
     { title: "60 Users to collect loans", max: 60, value: 54 },
   ];
   return (
-    <div className="flex flex-col w-full px-[32px] mt-[14px] pb-[100px  ]">
-      <h2 className="font-poppins font-[600] text-[24px] leading-[34.8px] text-black">
+    <div className="flex flex-col w-full lg:pt-[57px] px-[32px] mt-[14px] pb-[100px  ]">
+      <h2 className="lg:hidden font-poppins font-[600] text-[24px] leading-[34.8px] text-black">
         View all Tasks
       </h2>
       {user.type === "Admin" ? (

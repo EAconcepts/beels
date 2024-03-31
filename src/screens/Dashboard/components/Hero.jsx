@@ -9,20 +9,21 @@ const DashboardHero = ({ setShowAddLeads }) => {
         <div className="flex px-[56px] pt-[24px] justify-center items-center">
           <img src={DashboardImage} className="" />
         </div>
-        <div className="flex flex-col gap-y-[8px] mt-[64px] font-poppins">
-          <p className="text-[24px] max-md:text-[24px]  leading-[34.8px] font-[600] text-[#000000] text-center">
+        <div className="flex flex-col lg:px-[105px] font- max-lg:gap-y-[8px] mt-[64px] lg:mt-[24.99px] font-poppins">
+          <p className="text-[24px]  lg:text-[32px] lg:font-inter max-md:text-[24px]  leading-[34.8px] lg:leading-[46.4px] font-[600] text-[#000000] text-center">
             Beels Ambassador Portal
           </p>
-          <p className="text-[16px] leading-[23.2px] font-[400] text-[#000000] text-center m">
+          <p className="text-[16px] lg:mt-[33px] lg:text-[24px] lg:leading-[34.8px] lg:font-inter leading-[23.2px] font-[400] text-[#000000] text-center m">
             Welcome to Beels Portal! As a company admin,you have the ability to
             add new ambassadors to our program.
           </p>
-          <div className="px-[46px] w-full">
+          {/* Add Ambassador Button */}
+          <div className="px-[46px] lg:mt-[35px] w-full">
             <button
               onClick={() => setShowAddLeads(true)}
-              className="w-full bg-[#001A04] py-[15px] text-[20px] font-inter font-[400] text-white flex justify-center items-center rounded-md"
+              className="w-full lg:mx-auto lg:w-fit bg-[#001A04] py-[15px] lg:px-[55.5px] text-[20px] font-inter font-[400] text-white flex justify-center items-center rounded-md"
             >
-              Add Leads
+              Add Ambassador
             </button>
           </div>
         </div>

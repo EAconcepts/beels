@@ -11,6 +11,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { CiUser } from "react-icons/ci";
 import { FaUser } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 const SideMenu = ({
   setShowSidebar,
@@ -21,13 +22,21 @@ const SideMenu = ({
   const [showAmbassadorMenu, setShowAmbassadorMenu] = useState(false);
   const [showTasksMenu, setShowTasksMenu] = useState(false);
   const { user } = useContext(AuthContext);
+  const activePath = useLocation();
+  console.log(activePath.pathname, activePath.pathname.endsWith("dashboard"));
   // console.log(user)
   const dashboardMenu = [
-    { name: "Dashboard", path: "", iconImg: dashboardIcon },
+    {
+      name: "Dashboard",
+      path: "",
+      pathname: "/dashboard",
+      iconImg: dashboardIcon,
+    },
     // Ambassador
     user.type !== "Sub" && {
       name: "Ambassador",
       path: "#",
+      // pathname: "/dashboard/tasks",
       iconImg: ambassadorIcon,
       dropdownIcon: !showAmbassadorMenu
         ? MdKeyboardArrowRight
@@ -36,6 +45,7 @@ const SideMenu = ({
     showAmbassadorMenu && {
       name: "View Ambassador",
       path: "ambassadors",
+      pathname: "/dashboard/ambassadors",
       iconImg: circleIcon,
     },
     showAmbassadorMenu && {
@@ -43,9 +53,11 @@ const SideMenu = ({
       path: "#",
       iconImg: circleIcon,
     },
+    // Tasks
     user.type === "Admin" && {
       name: "Tasks",
       path: "#",
+      pathname: "/dashboard/ambassadors",
       iconImg: ambassadorIcon,
       dropdownIcon: !showTasksMenu ? MdKeyboardArrowRight : MdKeyboardArrowDown,
     },
@@ -53,12 +65,14 @@ const SideMenu = ({
       showTasksMenu && {
         name: "View all tasks",
         path: "tasks",
+        pathname: "/dashboard/tasks",
         iconImg: circleIcon,
       },
 
     user.type !== "Admin" && {
       name: "My tasks",
-      path: "my-tasks",
+      path: "tasks",
+      pathname: "/dashboard/tasks",
       iconImg: ambassadorIcon,
     },
   ];
@@ -66,7 +80,7 @@ const SideMenu = ({
   return (
     <aside
       ref={menuRef}
-      className={`${
+      className={`lg:translate-x-0 lg:relative lg:w-[316px] lg:shrink-0 lg:h-screen lg:overflow-x-hidden lg:flex lg:flex-col lg:items-center lg:bg-[#F5F5F5] ${
         showSidebar
           ? "translate-x-0 transition-all duration-300 w-[256px] h-screen z-[99] overflow-hidden bg-primaryGreen fixed top-0 bottom-0 pt-[44px]"
           : "translate-x-[-100%] duration-300 transition-all w-[256px] h-screen z-[99] overflow-hidden bg-primaryGreen fixed top-0 bottom-0 pt-[44px]"
@@ -79,10 +93,10 @@ const SideMenu = ({
       >
         {/* Logo */}
         <div className="">
-          <Logo logoImg={logo} className={"text-white"} />
+          <Logo logoImg={logo} className={"text-white lg:text-[#082C25]"} />
         </div>
         {/* Profile details */}
-        <div className="flex flex-col">
+        <div className="flex flex-col lg:hidden">
           {/* Avatar Image */}
           <Link
             to="profile"
@@ -119,7 +133,7 @@ const SideMenu = ({
         </div>
       </div>
       {/* Nav Menu */}
-      <nav className="flex flex-col gap-y-[15px] mt-[24px]">
+      <nav className="flex flex-col gap-y-[15px] mt-[24px] lg:mt-[90.7px]">
         {dashboardMenu
           .filter((menu) => menu !== false)
           .map((menu, index) => (
@@ -140,9 +154,15 @@ const SideMenu = ({
                 setShowSidebar(false);
               }}
               key={index}
-              className={"pl-[16px] pr-[36px] text-white flex justify-between"}
+              className={` 
+              pl-[16px] pr-[36px] lg:text-[#667185] text-white flex gap-x-[18px] justify-between lg:items-center ${
+                menu.path === "tasks" && "lg:hidden"
+              } ${menu.name == "Tasks" && menu.path == "#" && "lg:hidden"} ${
+                activePath.pathname == menu.pathname &&
+                "pl-[16px] pr-[36px] lg:text-white flex justify-between lg:bg-[#3AB54A] lg:rounded-[8px]"
+              }`}
             >
-              <div className=" flex gap-x-[16px]">
+              <div className="w-full flex gap-x-[16px] lg:items-center">
                 <img src={menu.iconImg} className="" />
                 <span>{menu.name}</span>
               </div>

@@ -8,12 +8,20 @@ import TelephoneIcon from "../../../../assets/images/telephone.png";
 import SecondIcon from "../../../../assets/images/secondicon.png";
 import ThirdIcon from "../../../../assets/images/thirdicon.png";
 import AmbassadorCard from "./AmbassadorCard";
-import barChart from "../../../../assets/images/barChart.svg";
+import barChart from "../../../../assets/images/bar-chart.png";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-// import { allAmbassadors } from "../../NewAmbassadors";
-import { toast } from "sonner";
 import { formatDate } from "../../../../utils/formatDate";
+import { handleCopy } from "../../../../utils/copyText";
+import TaskProgress from "../tasks/TaskProgress";
+import LeadTasks from "../tasks/LeadTasks";
+import ViewAmb from "../ViewAmb";
 
+const leadTasks = [
+  { title: "Onboard 20 Ambassadors", max: 20, value: 10 },
+  { title: "Users with Virtual Cards   ", max: 20, value: 20 },
+  { title: "Refer 50 uses", max: 50, value: 45 },
+  { title: "60 Users to collect loans", max: 60, value: 54 },
+];
 export const Transactions = (
   <div className="w-full flex justify-between gap-x-[6px]">
     {/* Transactions */}
@@ -70,27 +78,30 @@ export const Transactions = (
   </div>
 );
 
-export const Overview = ({ ambDetails, allAmbassadors, statistics }) => {
+export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
+  // console.log(subAmb)
   // Sub Ambassador & Statistics jSX
   const Statistics = (
     <>
       {/* Sub Ambassadors */}
-      <div className="mt-[22px] border-[1px] border-[#EDEDF2] rounded-[8px] pt-[33px] pb-[31px] pl-[21px] pr-[10px]">
-        <h1 className="font-poppins text-[20px] font-[600] leading-[29px] text-black">
-          Sub Ambassadors
-        </h1>
-        <div className="flex flex-col mt-[13px] gap-y-[16px]">
-          {allAmbassadors.map((ambassador, index) => (
-            <AmbassadorCard
-              key={index}
-              ambassador={ambassador}
-              roleColor={"bg-[#22612A] text-white"}
-            />
-          ))}
+      {subAmb && subAmb.length > 0 && (
+        <div className="lg:hidden mt-[22px] border-[1px] border-[#EDEDF2] rounded-[8px] pt-[33px] pb-[31px] pl-[21px] pr-[10px]">
+          <h1 className="font-poppins text-[20px] font-[600] leading-[29px] text-black">
+            Sub Ambassadors
+          </h1>
+          <div className="flex flex-col mt-[13px] gap-y-[16px]">
+            {subAmb?.map((ambassador, index) => (
+              <AmbassadorCard
+                key={index}
+                ambassador={ambassador}
+                roleColor={"bg-[#22612A] text-white"}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
       {/* Statistics */}
-      <div className="w-full flex flex-wrap justify-between mt-[28px] gapx-[20px] gap-y-[37px]">
+      <div className="w-full flex flex-wrap justify-between max-lg:mt-[28px] gapx-[20px] gap-y-[37px] lg:gap-x-[16px]">
         {statistics?.map((item, index) => (
           <div
             key={index}
@@ -114,19 +125,9 @@ export const Overview = ({ ambDetails, allAmbassadors, statistics }) => {
     </>
   );
 
-  // Copy text to clipboard
-  const handleCopy = async (title, text) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      toast.success(`${title} copied to the clipboard`);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <div className="w-full">
-      <div className="w-full">
+    <div className="w-full lg:flex max-lg:flex-col lg:gap-x-[16px]">
+      <div className="w-full ">
         {/* Ambassador Details */}
         <div className=" border border-[#E4E7EC] rounded-md pb-3">
           {/* Beels Account Number */}
@@ -264,10 +265,56 @@ export const Overview = ({ ambDetails, allAmbassadors, statistics }) => {
             <img src={CopyIcon} />
           </div>
         </div>
-
         {/* Transactions Earning & Clicks */}
         <div className="mt-[22px]">{Transactions}</div>
+      </div>
+      {/* Statistics, Tasks & Leaderboard */}
+      <div className="flex-shrink-0">
         {Statistics}
+        {/* Tasks & Leaderboard */}
+        {user.type !== "Admin" && (
+          <>
+            <div className={``}>
+              <h3 className="max-lg:mt-[64px] max-lg:text-[20px] lg:mt-[40px] font-poppins font-[600] lg:text-[24px] leading-[34.8px] text-black">
+                Tasks
+              </h3>
+              <div className="max-lg:mt-[11px] lg:mt-[5px] flex flex-col gap-y-[19px]">
+                {leadTasks?.map((task, index) => (
+                  <TaskProgress key={index} task={task} />
+                ))}
+              </div>
+            </div>
+            {/* Leaderboard */}
+            <div className="w-full flex flex-col">
+              <div className="lg flex flex-col mt-[64px] gap-y-[21px]">
+                <div className="flex justify-between">
+                  <p className="font-poppins text-black leading-[23.2px] text-[16px] font-[400]">
+                    Leaderboard Position
+                  </p>
+                  <h2 className="text-[20px] leading-[29px] lg:text-[#3AB54A] text-[#082C25] font-[700] font-poppins">
+                    1st
+                  </h2>
+                </div>
+                <div className="flex justify-between">
+                  <p className="font-poppins text-black leading-[23.2px] text-[16px] font-[400]">
+                    Points Earned
+                  </p>
+                  <h2 className="text-[20px] leading-[29px] lg:text-[#3AB54A] text-[#082C25] font-[700] font-poppins">
+                    200points
+                  </h2>
+                </div>
+              </div>
+              <button className="lg:hidden self-center bg-[#082C25] px-[97px] mt-[144px] text-center text-[20px] leading-[29px] font-[400] font-inter text-white py-[15px]">
+                Promote
+              </button>
+            </div>
+          </>
+        )}
+        <>
+          {subAmb && subAmb.length > 0 && (
+            <ViewAmb ambassadorQuery={subAmb && subAmb} />
+          )}
+        </>
       </div>
     </div>
   );
@@ -275,11 +322,11 @@ export const Overview = ({ ambDetails, allAmbassadors, statistics }) => {
 
 export const UserStats = ({ userStats }) => {
   return (
-    <div className="w-full grid grid-cols-2 gap-x-[16px] gap-y-[23.5px]">
+    <div className="w-full lg:w-max grid grid-cols-2 gap-x-[16px] gap-y-[23.5px]">
       {userStats?.map((item, index) => (
         <div
           key={index}
-          className="w-full rounded-[10px] border-[1px] border-[#E4E7EC] py-[11px] px-[15px] bg-[#FAF9F6] flex flex-col gap-y-[17.5px] justify-between"
+          className="w-full lg:w-[346px] lg:h-[137px] rounded-[10px] border-[1px] border-[#E4E7EC] py-[11px] px-[15px] bg-[#FAF9F6] flex flex-col gap-y-[17.5px] justify-between"
         >
           {/* This week */}
           <div className="w-full flex justify-between">
@@ -313,25 +360,45 @@ export const UserStats = ({ userStats }) => {
   );
 };
 
-export const Ambassadors = ({ subAmbassador, userStats }) => {
+export const Ambassadors = ({ subAmbassador, userStats, user }) => {
+  console.log(subAmbassador);
   return (
-    <div className="py-[33px] px-[10px] bg-white flex flex-col border-[1px] border-[#EDEDF2]">
-      <h1 className="text-[20px] font-poppins font-[600] leading-[29px] text-black">
-        {" "}
-        Sub Ambassadors
-      </h1>
+    <div
+      className={`py-[33px] px-[10px] bg-white flex flex-col border-[1px] border-[#EDEDF2] ${
+        user.type == "Admin" && "lg:flex-row-reverse lg:border-none lg:w-full"
+      }`}
+    >
       {/* Sub Ambassadors */}
-      <div className="flex flex-col gap-y-[16px] mt-[13px]">
-        {subAmbassador?.map((sub, index) => (
-          <AmbassadorCard
-            key={index}
-            ambassador={sub}
-            roleColor={"bg-[#082C25] text-[#FAF9F6]"}
-          />
-        ))}
+      <div className={` ${user.type == "Admin" && "shrink0 lg:w-ful"}`}>
+        <h1 className="text-[20px] font-poppins font-[600] leading-[29px] text-black">
+          {" "}
+          Sub Ambassadors
+        </h1>
+        {/* Sub Ambassadors */}
+        <div className="lg:hidden flex flex-col gap-y-[16px] mt-[13px]">
+          {subAmbassador?.map((sub, index) => (
+            <AmbassadorCard
+              key={index}
+              ambassador={sub}
+              roleColor={"bg-[#082C25] text-[#FAF9F6]"}
+            />
+          ))}
+        </div>
+        {/* Desktop Sub Ambassadors */}
+        <div
+          className={`hidden lg:bloc lg:transform lg:scale-75 lg:w-ful translate-x-[-45px lgtranslate-y-[-45px] `}
+        >
+          {subAmbassador && subAmbassador.length > 0 && (
+            <ViewAmb ambassadorQuery={subAmbassador} />
+          )}
+        </div>
       </div>
       {/* Stats */}
-      <div className="w-full grid-cols-2 mt-[44px]">
+      <div
+        className={`w-full grid-cols-2 mt-[44px] ${
+          user.type == "Admin" && ""
+        } `}
+      >
         {/* {userStats.map((item, index)=>( */}
         <UserStats userStats={userStats} />
         {/* ))} */}
@@ -339,4 +406,5 @@ export const Ambassadors = ({ subAmbassador, userStats }) => {
     </div>
   );
 };
+
 export const SendMessage = <div>SendMessage</div>;

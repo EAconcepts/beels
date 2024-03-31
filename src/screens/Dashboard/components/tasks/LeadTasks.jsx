@@ -1,23 +1,63 @@
-import  { useContext } from "react";
+import { useContext } from "react";
 ("@ramonak/react-progress-bar");
 import "./task.css";
 import { AuthContext } from "../../../../context/AuthContext";
 import TaskProgress from "./TaskProgress";
+import OverviewData from "../OverviewData";
+import { useQuery } from "@tanstack/react-query";
+import AmbassadorsIcon from "../../../../assets/images/ambassadorsIcon.png";
+import taskIcon from "../../../../assets/images/tasks.svg";
+import award from '../../../../assets/images/Award.png'
+
+import axios from "axios";
 
 const LeadTasks = ({ tasks }) => {
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const ambassadorQuery = useQuery({
+    queryKey: ["ambassador"],
+    queryFn: () => axios.get(`${baseUrl}/ambassador/dashboard`, { headers }),
+  });
+
+  let props = [];
+  if (user.type === "Sub") {
+    let data = ambassadorQuery.data?.data?.data;
+    let obj1 = {
+      title: "Total Users",
+      iconImg: AmbassadorsIcon,
+      value: data?.users?.length,
+    };
+    props.push(obj1);
+    const totalLead = data?.tasks?.length;
+    let obj2 = {
+      title: "Tasks",
+      iconImg: taskIcon,
+      value: totalLead,
+    };
+    props.push(obj2);
+    const totalSub = data?.users?.length;
+    let obj3 = {
+      title: "Onboarded User",
+      iconImg: AmbassadorsIcon,
+      value: totalSub,
+    };
+    props.push(obj3);
+  }
   return (
     <div className="w-full flex flex-col px-[32px">
-      <h3 className="text-[20px] mt-[44px] leading-[29px] text-black font-poppins font-[600]">
+      <h3 className="text-[20px] lg:hidden mt-[44px] leading-[29px] text-black font-poppins font-[600]">
         In progress Tasks
       </h3>
       {/* Tasks */}
-      <div className="flex flex-col mt-[11px] gap-y-[19px]">
+      <div className="lg:hidden flex flex-col mt-[11px] gap-y-[19px]">
         {tasks?.map((task, index) => (
           <TaskProgress key={index} task={task} />
         ))}
       </div>
-      <div className="mt-[40px] flex flex-col  ">
+      <div className="lg:hidden mt-[40px] flex flex-col  ">
         <h2 className="text-[20px] font-[600] leading-[29px] font-poppins">
           To-Do-Tasks
         </h2>
@@ -47,6 +87,20 @@ const LeadTasks = ({ tasks }) => {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Deskktop View */}
+      <div className="lg:flex-col lg:flex hidden">
+        <div className="flex justify-between mb-[35px]">
+          <h2 className="font-poppins font-[600] text-[32px] leading-[46.4px] text-black">
+            My tasks
+          </h2>
+          <div className="flex gap-x-[8px]">
+            <span className="font-poppins font-[700] text-[20px] leading-[29px] text-[#3AB54A]">200points</span>
+            <img src={award} className="size-[32px] object-cover" />
+          </div>
+        </div>
+        <OverviewData props={props} />
       </div>
     </div>
   );

@@ -49,7 +49,7 @@ const Account = () => {
       axios.post(`${baseUrl}/ambassador/profile/update`, values, { headers }),
     onSuccess: (data) => {
       console.log(data);
-      toast.success(data?.data?.data?.data?.message);
+      toast.success(data?.data?.message);
     },
     onError: (error) => {
       console.log(error);

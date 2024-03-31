@@ -38,25 +38,25 @@ const Dashboard = () => {
   let props = [];
   // If user is Admin
   if (user.type === "Admin") {
-    let data = ambassadorQuery.data?.data?.data.all;
+    let data = ambassadorQuery.data?.data?.data;
     let obj1 = {
       title: "Total of Ambassadors",
       iconImg: AmbassadorsIcon,
-      value: data?.length,
+      value: data?.all_amb,
     };
     props.push(obj1);
-    const totalLead = data?.filter((amb) => amb.type === "Lead");
+    const totalLead =data?.lead_amb;
     let obj2 = {
       title: "Lead Ambassadors",
       iconImg: AmbassadorsIcon,
-      value: totalLead?.length,
+      value: totalLead,
     };
     props.push(obj2);
-    const totalSub = data?.filter((amb) => amb.type === "Sub");
+    const totalSub = data?.sub_amb;
     let obj3 = {
       title: "Sub Ambassadors",
       iconImg: AmbassadorsIcon,
-      value: totalSub?.length,
+      value: totalSub,
     };
     props.push(obj3);
   }
@@ -93,9 +93,9 @@ const Dashboard = () => {
       value: data?.sub_amb,
     };
     props.push(obj1);
-    const totalUsers = data?.users.length;
+    const totalUsers = data?.users?.length;
     let obj2 = {
-      title: "Total USers",
+      title: "Total Users",
       iconImg: AmbassadorsIcon,
       value: totalUsers,
     };
@@ -111,32 +111,41 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div className="min-h-screen bg-white flex flex-col relative pb-[100px]">
+      <div className=" bg-white lg:flex-col-reverse flex flex-col relative pb-[100px]">
         {/* Hero */}
-        <div className="mt-[44px] px-[32px]">
+        <div className="lg:mt-[69px] lg:px-[65px] mt-[44px] px-[32px]">
           {user.type !== "Sub" ? (
             <DashboardHero setShowAddLeads={setShowAddLeads} />
           ) : (
-            <SubOverview />
+            // Sub Amb
+            <div className="flex w-full">
+              <div className="hidden lg:flex w-full flex-col mt-[40px] pl-[32px] pr-[27px] gap-y-[19px]">
+                {subAmbTasks?.map((tasks, index) => (
+                  <TaskProgress key={index} task={tasks} />
+                ))}
+              </div>
+              <SubOverview />
+            </div>
           )}
         </div>
-        {/* Overview */}
+        {/* Overview Data */}
         <div className="mt-[48px]">
           <OverviewData
             props={props}
             IconClass={user.type === "Sub" && "bg-[#B6F485]"}
           />
         </div>
+        {/* Tasks Progress and Leaderboard */}
         {user.type === "Sub" && (
           <>
             {/* Tasks */}
-            <div className="flex flex-col mt-[40px] pl-[32px] pr-[27px] gap-y-[19px]">
+            <div className="lg:hidden flex flex-col mt-[40px] pl-[32px] pr-[27px] gap-y-[19px]">
               {subAmbTasks?.map((tasks, index) => (
                 <TaskProgress key={index} task={tasks} />
               ))}
             </div>
             {/*leaderboard  */}
-            <div className="flex flex-col px-[32px] mt-[64px] gap-y-[21px]">
+            <div className="lg:hidden flex flex-col px-[32px] mt-[64px] gap-y-[21px]">
               <div className="flex justify-between">
                 <p className="font-poppins text-black leading-[23.2px] text-[16px] font-[400]">
                   Leaderboard Position

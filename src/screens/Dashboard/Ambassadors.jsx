@@ -4,6 +4,7 @@ import AmbassadorCard from "./components/ambassadorTabs/AmbassadorCard";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import ViewAmb from "./components/ViewAmb";
 
 export const allAmbassadors = [
   {
@@ -65,7 +66,7 @@ const Ambassadors = () => {
   if (ambassadorQuery.error) {
     console.log(ambassadorQuery.error);
   } else {
-    console.log(ambassadorQuery.data);
+    // console.log(ambassadorQuery.data);
   }
   return (
     <div className="flex flex-col px-[32px] gap-y-[16px] pt-[24px]">
@@ -73,12 +74,22 @@ const Ambassadors = () => {
         <div
           onClick={() => navigateTo(`${ambassador.email}`)}
           key={index}
-          className=" flex flex-col gap-y-[8px]"
+          className="lg:hidden flex flex-col gap-y-[8px]"
         >
           {/* Card */}
           <AmbassadorCard ambassador={ambassador} />
         </div>
       ))}
+      <div className="hidden overflow-y-scroll lg:block">
+        {ambassadorQuery?.data?.data && (
+          <ViewAmb
+            ambassadorQuery={
+              ambassadorQuery?.data?.data &&
+              ambassadorQuery?.data?.data?.data?.all
+            }
+          />
+        )}
+      </div>
     </div>
   );
 };

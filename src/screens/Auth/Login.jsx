@@ -1,6 +1,6 @@
 // /* eslint-disable */
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MailIcon from "../../assets/images/mail.png";
 import LockIcon from "../../assets/images/lock.png";
 import Image from "../../assets/images/speaker.png";
@@ -42,6 +42,7 @@ const Login = ({ role }) => {
       if (data.data.status == "Success") {
         const userDetails = data.data.data;
         localStorage.setItem("logged_in", JSON.stringify(userDetails));
+        navigate("/dashboard");
       }
       toast.success(data.data.message);
     },
@@ -100,7 +101,9 @@ const Login = ({ role }) => {
           className={`bg-[#082C25] lg:pl-[104px] lg: pr-[97px] w-full h-ful rounded-2xl  maxlg:w-3/4 maxmd:w-[80%] max-sm:w[90% py-[167px] px12 max-lg:px-10 max-md:px-8 max-sm:px6 px-0 `}
         >
           <p className="text-2xl leading-[28.18px] max-lg:text-xl max-md:text-lg max-sm:text-base font-[700] text-white font-[Rockwell] my-4 max-lg:text-center lg:text-[32px]">
-            Login to {role === "Admin" && role} Account
+            Login to{" "}
+            {role === "Admin" ? role : role === "Lead" && role + " Ambassador"}{" "}
+            Account
           </p>
           <form onSubmit={handleLogin} className="mt-[20px] lg:-[24px]">
             <div className="flex flex-col gap-y-[16px] lg:gap-y-[24px]">

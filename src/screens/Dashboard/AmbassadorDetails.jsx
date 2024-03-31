@@ -19,12 +19,19 @@ const AmbassadorDetails = () => {
   const [activeTab, setActiveTab] = useState("Overview");
   const { user, token } = useContext(AuthContext);
 
+  const { email } = useParams();
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  // Ambassador Details query
   const ambDetailsQuery = useQuery({
     queryKey: ["ambDetails"],
     queryFn: () =>
       axios.get(`${baseUrl}/ambassador/details/${email}`, { headers }),
   });
-
+ 
   const statistics = [
     { name: "Users", value: "5,000", percent: "2%" },
     { name: "Referrals", value: "1,000", percent: "2%" },
@@ -62,8 +69,7 @@ const AmbassadorDetails = () => {
       percent: "9%",
     },
   ];
-  const { email } = useParams();
-  console.log(email);
+  // console.log(email);
   const tabs = [
     {
       tab: "Overview",
@@ -82,25 +88,29 @@ const AmbassadorDetails = () => {
       // content: overview,
     },
   ];
+  // Switch Active tabs
   let content;
   switch (activeTab) {
     case "Overview":
       content = (
         <Overview
           ambDetails={
-            ambDetailsQuery.data && ambDetailsQuery.data?.data?.data?.user
+            ambDetailsQuery?.data && ambDetailsQuery?.data?.data?.data?.user
           }
-          allAmbassadors={allAmbassadors}
+          subAmb={
+            ambDetailsQuery?.data && ambDetailsQuery?.data?.data?.data?.sub
+          }
           statistics={statistics}
+          user={user}
         />
       );
       break;
     case "Users":
-      content = <UserStats userStats={userStats} />;
+      content = <UserStats userStats={userStats}  />;
       break;
     case "Ambassadors":
       content = (
-        <Ambassadors subAmbassador={allAmbassadors} userStats={userStats} />
+        <Ambassadors subAmbassador={allAmbassadors} userStats={userStats} user= {user} />
       );
       break;
     case "Send message":
@@ -110,16 +120,10 @@ const AmbassadorDetails = () => {
       content = "";
   }
 
-  const baseUrl = import.meta.env.VITE_BASE_URL;
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
-  // Ambassador Details query
-
   if (ambDetailsQuery.error) {
-    console.log(ambDetailsQuery.error);
+    console.log(ambDetailsQuery?.error);
   } else {
-    console.log(ambDetailsQuery.data);
+    // console.log(ambDetailsQuery?.data);
   }
   return (
     <div className="w-full flex flex-col px-[32px] pt-[22.6px]">
@@ -144,7 +148,7 @@ const AmbassadorDetails = () => {
       {/* Details */}
       <div className="flex flex-col mt-[32.4px]">
         {/* Tabs */}
-        <div className="flex justify-between border-b border-b-[#E4E7EC]">
+        <div className="flex lg:gap-x-[32px] max-lg:justify-between border-b border-b-[#E4E7EC]">
           {tabs.map((item, index) => (
             <button
               onClick={() => setActiveTab(item.tab)}
@@ -155,7 +159,11 @@ const AmbassadorDetails = () => {
                   : activeTab === item.tab && user.type !== "Admin"
                   ? "border-b border-b-[#F56630] text-[#F56630]"
                   : "border-b-[#E4E7EC"
-              } ${item.tab === "Ambassadors" && "invisible"}`}
+              } ${
+                user.type !== "Admin" &&
+                item.tab === "Ambassadors" &&
+                "invisible lg:hidden"
+              }`}
             >
               {item.tab}
             </button>
