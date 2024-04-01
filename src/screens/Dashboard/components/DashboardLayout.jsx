@@ -10,8 +10,6 @@ import { FaUser } from "react-icons/fa";
 import avatar from "../../../assets/images/avatarImg.png";
 import { useNavigate } from "react-router-dom";
 
-// import Header from "../../components/Header";
-
 const DashboardLayout = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showAddLeads, setShowAddLeads] = useState(false);
@@ -46,14 +44,12 @@ const DashboardLayout = () => {
   return (
     <div className="w-full flex max-lg:flex-col lg:h-screen lg:overflow-hidden">
       {/* Side menu */}
-      {/* {showSidebar && ( */}
       <SideMenu
         setShowSidebar={setShowSidebar}
         showSidebar={showSidebar}
         menuRef={menuRef}
         setShowAddLeads={setShowAddLeads}
       />
-      {/* )} */}
       <div className="w-full">
         {/* Show Add new Leads Modal */}
         {showAddLeads && <AddLeads setShowAddLeads={setShowAddLeads} />}

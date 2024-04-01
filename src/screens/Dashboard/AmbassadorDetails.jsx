@@ -157,7 +157,7 @@ const AmbassadorDetails = () => {
             <button
               onClick={() => setActiveTab(item.tab)}
               key={index}
-              className={`py-[16px] px-[8px] text-[14px] font-[500] leading-[20.3px] font-inter text-[#344054] border-  ${
+              className={`py-[16px] px-[8px]  text-[14px] font-[500] leading-[20.3px] font-inter text-[#344054] border-  ${
                 activeTab === item.tab && user.type === "Admin"
                   ? "border-b border-b-[#082C25]"
                   : activeTab === item.tab && user.type !== "Admin"
@@ -166,7 +166,7 @@ const AmbassadorDetails = () => {
               } ${
                 user.type !== "Admin" &&
                 item.tab === "Ambassadors" &&
-                "invisible lg:hidden"
+                "invisible max-xsm:hidden lg:hidden"
               }`}
             >
               {item.tab}

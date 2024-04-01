@@ -23,9 +23,9 @@ const leadTasks = [
   { title: "60 Users to collect loans", max: 60, value: 54 },
 ];
 export const Transactions = (
-  <div className="w-full flex justify-between gap-x-[6px]">
+  <div className="w-full flex max-xsm:flex-wrap max-sm:gap-y-[8px] sm:justify-between max-xsm:gap-x-[12px] gap-x-[6px] ">
     {/* Transactions */}
-    <div className="w-full bg-[#FAF9F6] rounded-[10px] flex flex-col p-[12px] border-[1px] border-[#E4E7EC] ">
+    <div className="sm:w-full max-xsm:w-[121px] bg-[#FAF9F6] rounded-[10px] flex flex-col p-[12px]  border-[1px] border-[#E4E7EC]  ">
       <p className="text-[14px] font-[500] font-inter leading-[20.3px] text-[#667185]">
         Transaction
       </p>
@@ -42,7 +42,7 @@ export const Transactions = (
       </div>
     </div>
     {/* Earnings */}
-    <div className="w-full bg-[#FAF9F6] flex flex-col p-[12px] border-[1px] border-[#E4E7EC] rounded-[10px]">
+    <div className="sm:w-full max-xsm:w-[121px] bg-[#FAF9F6] flex flex-col p-[12px] border-[1px] border-[#E4E7EC] rounded-[10px]">
       <p className="text-[14px] font-[500] font-inter leading-[20.3px] text-[#667185]">
         Earnings
       </p>
@@ -59,7 +59,7 @@ export const Transactions = (
       </div>
     </div>
     {/* Clicks */}
-    <div className="w-full bg-[#FAF9F6] rounded-[10px] flex flex-col p-[12px] border-[1px] border-[#E4E7EC] ">
+    <div className="sm:w-full max-xsm:w-[121px] bg-[#FAF9F6] rounded-[10px] flex flex-col p-[12px] border-[1px] border-[#E4E7EC] ">
       <p className="text-[14px] font-[500] font-inter leading-[20.3px] text-[#667185]">
         Clicks
       </p>
@@ -151,11 +151,11 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
             />
           </div>
           {/* Email Address */}
-          <div className="flex justify-between items-center px-5 py-2 border-b border-[#E4E7EC]">
-            <div className="flex gap-x-[24px]">
+          <div className="flex max-lg:w-full justify-between items-center px-5 py-2 border-b border-[#E4E7EC]">
+            <div className="flex gap-x-[24px] max-lg:w-full">
               <img src={MailIcon} className="size-[20px]" />
-              <div className="">
-                <p className="text-[#667185] text-[12px] leading-[17.4px] font-[400] font-inter">
+              <div className="max-lg:w-full max-lg:overflow-hidden max-lg:">
+                <p className="text-ellipsis max-lg:overflow-hidden text-[#667185] text-[12px] leading-[17.4px] font-[400] font-inter">
                   {" "}
                   Email{" "}
                 </p>
@@ -165,7 +165,7 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
                 </p>
               </div>
             </div>
-            <img src={CopyIcon} />
+            <img src={CopyIcon} className="" />
           </div>
           {/* First name */}
           <div className="flex justify-between items-center px-5 py-2 border-b border-[#E4E7EC]">
@@ -274,7 +274,7 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
         {/* Tasks & Leaderboard */}
         {user.type !== "Admin" && (
           <>
-          {/*  Tasks*/}
+            {/*  Tasks*/}
             <div className={``}>
               <h3 className="max-lg:mt-[64px] max-lg:text-[20px] lg:mt-[40px] font-poppins font-[600] lg:text-[24px] leading-[34.8px] text-black">
                 Tasks
