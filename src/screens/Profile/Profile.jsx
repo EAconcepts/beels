@@ -1,14 +1,14 @@
-import  { useState } from "react";
+import { useState } from "react";
 import Account from "./components/Account";
 import Security from "./components/Security";
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("account");
   return (
-    <div className="flex flex-col px-[32px]">
+    <div className="flex flex-col px-[32px] lg: ">
       {/* Profile Tabs */}
-      <div className="w-full flex bg-[#EDEDED] px-[32px] rounded-[50px] py-[8px]">
-        <div className="w-full flex justify-between  ">
+      <div className="w-full flex lg:mt-[24px] lg:w-[50%] lg:mx-auto lg:justify-center bg-[#EDEDED] px-[32px] rounded-[50px] py-[8px]">
+        <div className="w-full flex justify-between lg:justify-around  ">
           <button
             onClick={() => setActiveTab("account")}
             className={`text-[16px] leading-[23.2px] text-black font-[400] font-poppins py-[8px] px-[24px] ${
@@ -30,11 +30,7 @@ const Profile = () => {
         </div>
       </div>
       {/* Personalize account */}
-      {activeTab == 'account' ?
-     <Account/>
-     :
-     <Security/>
-        }
+      {activeTab == "account" ? <Account /> : <Security />}
     </div>
   );
 };

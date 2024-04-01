@@ -12,6 +12,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import { CiUser } from "react-icons/ci";
 import { FaUser } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
+import beelsLogo from "../../../assets/images/Beels-logo.png";
 
 const SideMenu = ({
   setShowSidebar,
@@ -93,7 +94,8 @@ const SideMenu = ({
       >
         {/* Logo */}
         <div className="">
-          <Logo logoImg={logo} className={"text-white lg:text-[#082C25]"} />
+          <img src={beelsLogo} />
+          {/* <Logo logoImg={logo} className={"text-white lg:text-[#082C25]"} /> */}
         </div>
         {/* Profile details */}
         <div className="flex flex-col lg:hidden">
