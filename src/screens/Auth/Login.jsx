@@ -12,6 +12,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../context/AuthContext";
+import beelsLogo from "../../assets/images/Beels-logo.png";
 
 const Login = ({ role }) => {
   const [loginValues, setLoginValues] = useState({
@@ -26,7 +27,7 @@ const Login = ({ role }) => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const {setToken, setUser} = useContext(AuthContext)
+  const { setToken, setUser } = useContext(AuthContext);
 
   const apiUrl = import.meta.env.VITE_BASE_URL;
   //  input  onChange fn
@@ -44,9 +45,9 @@ const Login = ({ role }) => {
       console.log(data);
       if (data.data.status == "Success") {
         const userDetails = data.data.data;
-        console.log(userDetails)
-        setToken(userDetails.token)
-        setUser(userDetails.user)
+        console.log(userDetails);
+        setToken(userDetails.token);
+        setUser(userDetails.user);
         localStorage.setItem("logged_in", JSON.stringify(userDetails));
         navigate("/dashboard");
       }
@@ -81,32 +82,34 @@ const Login = ({ role }) => {
   //   }
   // });
   return (
-    <div className="min-h-screen relative lg:h-screen bg-[#B6F485] pt-[43px] px-[32px] max-lg:px8 max-md:px5 max-sm:px2">
+    <div className="h-screen relative lg:h-screen bg-[#B6F485] max-lg:pt-[43px] px-[32px]  ">
       {/* logo */}
-      <div className="flex absolute top-[54px] left-[64px] gap-x-[8.94px] items-center">
+      {/* <div className=" hidden fle absolute top-[54px] left-[64px] gap-x-[8.94px] items-center">
         <img src={logo} className="" />
         <div className="flex items-baseline gap-x-[2px]">
           <span className="text-[28px] font-[700]">Beels</span>
-          {/* Registered Trademark */}
+          Registered Trademark
           <div className=" bg-[#082C25] size-[10.43px] flex items-center justify-center">
             <div className="rounded-full size-[9.32px] border-[0.98px] border-[#ffffff] flex items-center justify-center">
               <span className="text-white text-[8px]">R</span>
             </div>
           </div>
         </div>
-      </div>
-      {/* <img src={BeelsIcon} className="" /> */}
-      <div className="lg:h-[calc(100%-43px)] flex max-lg:flex-col justify-between items-center max-lg:justify-center w-full max-lg:mt-24 max-md:mt-20 max-sm:mt-[52.7px] ">
-        <img
-          src={Image}
-          className="w-[480px] h-[calc(100%-100px)] self-end object-cover lg:absolut max-lg:hidden"
-        />
-
+      </div> */}
+      <img
+        src={beelsLogo}
+        className="max-lg:flex absolute top-[54px] max-lg:left-[32px] max-lg:top-[43px] left-[64px] gap-x-[8.94px] items-center"
+      />
+      <img
+        src={Image}
+        className="w-[480px] h-full items-end self-end object-cover lg:absolute left-0 bottom-0 max-lg:hidden"
+      />
+      <div className="lgh-[calc(100%-43px)] h-full flex max-lg:flex-col  items-center max-lg:justify-center w-full max-lg:mt24 max-md:mt20 maxsm:mt-[52.7px] lg:justify-end ">
         {/* Login Form */}
         <div
-          className={`bg-[#082C25] lg:pl-[104px] lg: pr-[97px] w-full h-ful rounded-2xl  maxlg:w-3/4 maxmd:w-[80%] max-sm:w[90% py-[167px] px12 max-lg:px-10 max-md:px-8 max-sm:px6 px-0 `}
+          className={`bg-[#082C25] lg:pl-[104px] pr-[97px] w-full lg:w-[65%] rounded-[16px] max-lg:py-[50px] lg:py-[90px] max-md:px-8 px-0 `}
         >
-          <p className="text-2xl leading-[28.18px] max-lg:text-xl max-md:text-lg max-sm:text-base font-[700] text-white font-[Rockwell] my-4 max-lg:text-center lg:text-[32px]">
+          <p className="text-2xl leading-[28.18px] max-lg:text-xl max-md:text-lg max-sm:text-base font-[700] text-white font-[Rockwell] max-lg:text-center lg:text-[32px]">
             Login to{" "}
             {role === "Admin" ? role : role === "Lead" && role + " Ambassador"}{" "}
             Account
@@ -114,7 +117,7 @@ const Login = ({ role }) => {
           <form onSubmit={handleLogin} className="mt-[20px] lg:-[24px]">
             <div className="flex flex-col gap-y-[16px] lg:gap-y-[24px]">
               {/* Email */}
-              <div className="flex items-center justify-start gap-2 px-[35px] max-sm:px-2 py-[15px] bg-white rounded-lg">
+              <div className="flex items-center justify-start gap-2 lg:px-[16px] max-lg:px-2 py-[15px] bg-white rounded-lg">
                 <img src={MailIcon} className=" " />
                 <input
                   type="email"
@@ -126,13 +129,11 @@ const Login = ({ role }) => {
                   onChange={handleInputChange}
                 />
               </div>
-              {emailError && <p className="text-red-500">{emailError}</p>}
-
               {/* Password */}
               <div
                 className={`flex ${
                   emailError || (passwordError && "my-2")
-                }  items-center justify-start gap-2 px-4 max-sm:px-2 bg-white rounded-lg py-[15px]`}
+                }  items-center justify-start gap-2 lg:px-[16px] max-lg:px-2 py-[15px] bg-white rounded-lg`}
               >
                 <img src={LockIcon} className="" />
                 <input
@@ -145,7 +146,6 @@ const Login = ({ role }) => {
                   onChange={handleInputChange}
                 />
               </div>
-              {passwordError && <p className="text-red-500">{passwordError}</p>}
             </div>
             <button
               className={`flex w-full mt-[32px] ${
