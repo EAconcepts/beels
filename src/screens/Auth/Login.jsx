@@ -1,6 +1,6 @@
 // /* eslint-disable */
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MailIcon from "../../assets/images/mail.png";
 import LockIcon from "../../assets/images/lock.png";
 import Image from "../../assets/images/speaker.png";
@@ -11,6 +11,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = ({ role }) => {
   const [loginValues, setLoginValues] = useState({
@@ -24,6 +25,8 @@ const Login = ({ role }) => {
   const [isErrorVisible, setIsErrorVisible] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const {setToken, setUser} = useContext(AuthContext)
 
   const apiUrl = import.meta.env.VITE_BASE_URL;
   //  input  onChange fn
@@ -41,6 +44,9 @@ const Login = ({ role }) => {
       console.log(data);
       if (data.data.status == "Success") {
         const userDetails = data.data.data;
+        console.log(userDetails)
+        setToken(userDetails.token)
+        setUser(userDetails.user)
         localStorage.setItem("logged_in", JSON.stringify(userDetails));
         navigate("/dashboard");
       }
@@ -114,7 +120,7 @@ const Login = ({ role }) => {
                   type="email"
                   name="email"
                   required
-                  placeholder="Admin Email"
+                  placeholder={`${role} Email`}
                   className="input max-lg:w-[100%] text-[14px] leading-[16.96px] flex-1 border-none font-inter font-[500] placeholder:text-[#A6A6A6] "
                   value={loginValues.email}
                   onChange={handleInputChange}

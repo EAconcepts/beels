@@ -8,7 +8,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { CiBellOn } from "react-icons/ci";
 import { FaUser } from "react-icons/fa";
 import avatar from "../../../assets/images/avatarImg.png";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // import Header from "../../components/Header";
 
@@ -19,13 +19,13 @@ const DashboardLayout = () => {
   const menuRef = useRef(null);
   const { user, token } = useContext(AuthContext);
   console.log(token);
-  // const navigateTo = useNavigate();
+  const navigateTo = useNavigate();
 
-  // useEffect(() => {
-  //   if (!token || token == undefined) {
-  //     navigateTo("/sub-ambassador/login");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!token || token == undefined) {
+      navigateTo("/sub-ambassador/login");
+    }
+  }, []);
 
   // Closes Side menu on outside click
   const handlOutsideClick = (e) => {
