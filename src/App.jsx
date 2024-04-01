@@ -14,6 +14,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import Profile from "./screens/Profile/Profile";
 import { Toaster } from "sonner";
 import AmbForm from "./screens/Auth/AmbForm"; 
+import Onboarding from "./screens/Auth/Onboarding";
 
 function App() {
   const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ function App() {
           <Toaster />
           <Router>
             <Routes>
+              <Route path='/onboarding' element={<Onboarding/>} />
               <Route path="/admin/login" element={<Login role={"Admin"} />} />
               <Route
                 path="/lead-ambassador/login"
