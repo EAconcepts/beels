@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
-import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import "./App.css";
 import Login from "./screens/Auth/Login";
 import Chat from "./screens/Dashboard/Chat";
 // import PersonalTasks from "./screens/Profile/PersonalTasks";
-import AuthContextProvider, { AuthContext } from "./context/AuthContext";
+import AuthContextProvider from "./context/AuthContext";
 import Dashboard from "./screens/Dashboard/Dashboard";
 import Ambassadors from "./screens/Dashboard/Ambassadors";
 import DashboardLayout from "./screens/Dashboard/components/DashboardLayout";
@@ -13,7 +13,7 @@ import AllTasks from "./screens/Dashboard/AllTasks";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import Profile from "./screens/Profile/Profile";
 import { Toaster } from "sonner";
-import AmbForm from "./screens/Auth/AmbForm"; 
+import AmbForm from "./screens/Auth/AmbForm";
 import Onboarding from "./screens/Auth/Onboarding";
 
 function App() {
@@ -25,16 +25,16 @@ function App() {
           <Toaster />
           <Router>
             <Routes>
-              <Route path='/onboarding' element={<Onboarding/>} />
+              <Route
+                path="/onboarding/:email/:token"
+                element={<Onboarding />}
+              />
               <Route path="/admin/login" element={<Login role={"Admin"} />} />
               <Route
                 path="/lead-ambassador/login"
                 element={<Login role={"Lead"} />}
               />
-              <Route
-                path="/sub-ambassador/login"
-                element={<Login role={"Sub"} />}
-              />
+              <Route path="" element={<Login role={"Sub"} />} />
               <Route
                 path="/sub-ambassador/onboarding"
                 element={<AmbForm role={"Sub"} />}

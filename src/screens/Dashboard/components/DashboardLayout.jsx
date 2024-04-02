@@ -54,11 +54,11 @@ const DashboardLayout = () => {
         {/* Show Add new Leads Modal */}
         {showAddLeads && <AddLeads setShowAddLeads={setShowAddLeads} />}
         {/*Header  */}
-        <div className="w-full max-lg:mt-[48px] flex justify-start  items-center max-lg:px-[32px] lg:h-[138px] ">
+        <div className="w-full max-lg:mt-[48px] flex justify-start items-center max-lg:px-[32px] lg:h-[138px] menu-toggle">
           {/* Toggle SideMenu Hambuger */}
           <div
             // ref={menuRef}
-            className="lg:hidden z-20"
+            className="xlg:hidden z-20 lg:"
             onClick={() => {
               console.log("toggle nav bar");
               setShowSidebar(true);
@@ -71,7 +71,7 @@ const DashboardLayout = () => {
             {" "}
             {user?.type ? user?.type : "Admin" + " Dashboard"}
           </p>
-          <div className="w-full hidden pl-[54px] pr-[44px] pt-[53px] pb-[35px] lg:flex bg-[#F5F5F5] items-center justify-between ">
+          <div className="w-full hidden xlg:pl-[54px] lg:pl-[16px] pr-[44px] xlg:pt-[53px] xlg:pb-[35px] lg:flex bg-[#F5F5F5] items-center justify-between ">
             {/* Title & Search */}
             <div className="flex gap-x-[24px] ">
               <h2 className="font-poppins font-[600] leading-[40.46px] text-[32px] text-black">

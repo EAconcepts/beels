@@ -7,7 +7,7 @@ import OverviewData from "../OverviewData";
 import { useQuery } from "@tanstack/react-query";
 import AmbassadorsIcon from "../../../../assets/images/ambassadorsIcon.png";
 import taskIcon from "../../../../assets/images/tasks.svg";
-import award from '../../../../assets/images/Award.png'
+import award from "../../../../assets/images/Award.png";
 
 import axios from "axios";
 
@@ -26,21 +26,21 @@ const LeadTasks = ({ tasks }) => {
   if (user.type === "Sub") {
     let data = ambassadorQuery.data?.data?.data;
     let obj1 = {
-      title: "Total Users",
+      title: "Total Tasks",
       iconImg: AmbassadorsIcon,
       value: data?.users?.length,
     };
     props.push(obj1);
     const totalLead = data?.tasks?.length;
     let obj2 = {
-      title: "Tasks",
+      title: "Ongoing Tasks",
       iconImg: taskIcon,
       value: totalLead,
     };
     props.push(obj2);
     const totalSub = data?.users?.length;
     let obj3 = {
-      title: "Onboarded User",
+      title: "Completed Tasks",
       iconImg: AmbassadorsIcon,
       value: totalSub,
     };
@@ -96,7 +96,9 @@ const LeadTasks = ({ tasks }) => {
             My tasks
           </h2>
           <div className="flex gap-x-[8px]">
-            <span className="font-poppins font-[700] text-[20px] leading-[29px] text-[#3AB54A]">200points</span>
+            <span className="font-poppins font-[700] text-[20px] leading-[29px] text-[#3AB54A]">
+              200points
+            </span>
             <img src={award} className="size-[32px] object-cover" />
           </div>
         </div>

@@ -107,7 +107,7 @@ const Login = ({ role }) => {
       <div className="lgh-[calc(100%-43px)] h-full flex max-lg:flex-col  items-center max-lg:justify-center w-full max-lg:mt24 max-md:mt20 maxsm:mt-[52.7px] lg:justify-end ">
         {/* Login Form */}
         <div
-          className={`bg-[#082C25] lg:pl-[104px] pr-[97px] w-full lg:w-[65%] rounded-[16px] max-lg:py-[50px] lg:py-[90px] max-md:px-8 px-0 `}
+          className={`bg-[#082C25] lg:pl-[104px] pr-[97px] w-full lg:w-[65%] rounded-[16px] max-lg:py-[70px] lg:py-[90px] max-md:px-8 px-0 `}
         >
           <p className="text-2xl leading-[28.18px] max-lg:text-xl max-md:text-lg max-sm:text-base font-[700] text-white font-[Rockwell] max-lg:text-center lg:text-[32px]">
             Login to{" "}

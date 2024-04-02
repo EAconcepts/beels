@@ -53,7 +53,7 @@ const SideMenu = ({
       path: "#",
       iconImg: circleIcon,
     },
-    // Tasks
+    // Tasks Toggle
     user?.type === "Admin" && {
       name: "Tasks",
       path: "#",
@@ -61,6 +61,7 @@ const SideMenu = ({
       iconImg: ambassadorIcon,
       dropdownIcon: !showTasksMenu ? MdKeyboardArrowRight : MdKeyboardArrowDown,
     },
+    // Tasks link
     user?.type === "Admin" &&
       showTasksMenu && {
         name: "View all tasks",
@@ -80,7 +81,7 @@ const SideMenu = ({
   return (
     <aside
       ref={menuRef}
-      className={`lg:translate-x-0 lg:relative lg:w-[316px] lg:shrink-0 lg:h-screen lg:overflow-x-hidden lg:flex lg:flex-col lg:items-center lg:bg-[#F5F5F5] ${
+      className={`xlg:translate-x-0 xlg:relative xlg:w-[316px] xlg:shrink-0 xlg:h-screen xlg:overflow-x-hidden xlg:flex lg:flex-col xlg:items-center lg:bg-[#F5F5F5] ${
         showSidebar
           ? "translate-x-0 transition-all duration-300 w-[256px] h-screen z-[99] overflow-hidden bg-primaryGreen fixed top-0 bottom-0 pt-[44px]"
           : "translate-x-[-100%] duration-300 transition-all w-[256px] h-screen z-[99] overflow-hidden bg-primaryGreen fixed top-0 bottom-0 pt-[44px]"
@@ -93,8 +94,11 @@ const SideMenu = ({
       >
         {/* Logo */}
         <div className="">
-          <img src={beelsLogo}  className="hidden lg:block"/>
-          <Logo logoImg={logo} className={"lg:hidden text-white lg:text-[#082C25]"} />
+          <img src={beelsLogo} className="hidden lg:block" />
+          <Logo
+            logoImg={logo}
+            className={"lg:hidden text-white lg:text-[#082C25]"}
+          />
         </div>
         {/* Profile details */}
         <div className="flex flex-col lg:hidden">
@@ -157,7 +161,7 @@ const SideMenu = ({
               key={index}
               className={` 
               pl-[16px] pr-[36px] lg:text-[#667185] text-white flex gap-x-[18px] justify-between lg:items-center ${
-                menu.path === "tasks" && "lg:hidden"
+                menu.path === "tasks" && menu.name === "Tasks" && "lg:hidden"
               } ${menu.name == "Tasks" && menu.path == "#" && "lg:hidden"} ${
                 activePath.pathname == menu.pathname &&
                 "pl-[16px] pr-[36px] lg:text-white flex justify-between lg:bg-[#3AB54A] lg:rounded-[8px]"

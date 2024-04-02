@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { AuthContext } from "../../../context/AuthContext";
 import Invite from "../../../components/modal/Invite";
+import { toast } from "sonner";
 
 const AddLeads = ({ setShowAddLeads }) => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -42,8 +43,11 @@ const AddLeads = ({ setShowAddLeads }) => {
       axios.post(`${apiUrl}/ambassador/invite/send`, leadInfo, { headers }),
     onSuccess: (data) => {
       console.log(data);
-      setShowSuccessModal(true);
-      setLeadInfo(null);
+      if (data.data.status == "Success") {
+        setShowSuccessModal(true);
+      }
+      // setLeadInfo(null);
+      else toast.error(data.data.message);
     },
     onError: (error) => {
       console.log(error);
@@ -100,13 +104,10 @@ const AddLeads = ({ setShowAddLeads }) => {
                   type="email"
                   required
                   onChange={handleInputChange}
-                  value={leadInfo.email}
+                  value={leadInfo?.email}
                   name="email"
                   className=" w-full lg:w-[392px] py-[8px] px-[16px] email-input text-black border-b-[1px] border-[#E2E4E5] "
                 />
-                {/* {emailError && <p className="text-red-500">
-                    {emailError}
-                    </p>} */}
               </div>
               {/* First Name */}
               <div className="flex flex-col gap-y-[8px]">

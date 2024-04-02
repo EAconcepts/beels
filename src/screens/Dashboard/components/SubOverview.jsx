@@ -16,7 +16,7 @@ const SubOverview = () => {
         <p className="w-[60%] text-wrap font-[400] font-montserrat leading-[13.72px] text-[11.26px] text-black break-words border">
           tuhejhfskbsjbguthgnnshfbaoietusghfbxbvnsyrgtoaj
         </p>
-        <button className="bg-[#082C25] w-fu  shrink- py-[12px] px-[20px] rounded-[8px]  font-[400] text-white leading-[20.3px] text-[14px]">
+        <button className="bg-[#082C25] w-fu  shrink- py-[12px] px-[20px] rounded-[8px] xsm:text-[12px] font-[400] text-white leading-[20.3px] text-[14px]">
           Copy Link
         </button>
       </div>
