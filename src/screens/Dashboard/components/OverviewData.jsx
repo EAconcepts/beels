@@ -4,7 +4,7 @@ const OverviewData = ({ props, IconClass }) => {
   // console.log(props);
   return (
     <div className="w-full">
-      <div className="w-full flex max-lg:flex-col lg:gap-x-[19px] justify-between max-lg:justify-center items-center max-lg:items-start pl-[32px] pr-[76px] gap-y-[40px]">
+      <div className="w-full flex max-lg:flex-col lg:gap-x-[19px] justify-between max-lg:justify-center items-center max-lg:items-start max-lg:pl-[32px] pr-[76px] gap-y-[40px]">
         {/* Category Data */}
         {props?.map((item, index) => (
           <div
@@ -14,7 +14,7 @@ const OverviewData = ({ props, IconClass }) => {
             {/* Icon image */}
             <div
               className={twMerge(
-                " w-fit p-[20px] rounded-full lg:bg-[#B9FFC2] bg-[#B9FFC2] flex justify-center items-center",
+                " w-fit p-[20px] rounded-full lg:bg-[#B9FFC2] bg-[#B6F485] flex justify-center items-center",
                 IconClass
               )}
             >

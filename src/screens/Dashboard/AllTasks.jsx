@@ -1,7 +1,8 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import TaskCard from "./components/TaskCard";
 import { AuthContext } from "../../context/AuthContext";
 import LeadTasks from "./components/tasks/LeadTasks";
+import { useOutletContext } from "react-router-dom";
 
 const AllTasks = () => {
   const tasks = [
@@ -46,6 +47,12 @@ const AllTasks = () => {
       dateAdded: "03/01/2024",
     },
   ];
+  
+  // eslint-disable-next-line no-unused-vars
+  const [showAddLeads, setHeaderTitle] = useOutletContext();
+  useEffect(() => {
+    setHeaderTitle(`View all tasks`);
+  }, []);
   const { user } = useContext(AuthContext);
   const leadTasks = [
     { title: "Onboard 20 Ambassadors", max: 20, value: 10 },
@@ -55,7 +62,7 @@ const AllTasks = () => {
   ];
   return (
     <div className="flex flex-col w-full lg:pt-[57px] px-[32px] mt-[14px] pb-[100px  ]">
-      <h2 className="lg:hidden font-poppins font-[600] text-[24px] leading-[34.8px] text-black">
+      <h2 className="hidden font-poppins font-[600] text-[24px] leading-[34.8px] text-black">
         View all Tasks
       </h2>
       {user.type === "Admin" ? (

@@ -1,10 +1,11 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import AmbassadorCard from "./components/ambassadorTabs/AmbassadorCard";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 import ViewAmb from "./components/ViewAmb";
+import { BsPlus } from "react-icons/bs";
 
 export const allAmbassadors = [
   {
@@ -53,11 +54,16 @@ export const allAmbassadors = [
 const Ambassadors = () => {
   const navigateTo = useNavigate();
   const baseUrl = import.meta.env.VITE_BASE_URL;
-  const { token } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
+
+  // eslint-disable-next-line no-unused-vars
+  const [showAddLeads, setHeaderTitle] = useOutletContext();
   const headers = {
     Authorization: `Bearer ${token}`,
   };
-
+  useEffect(() => {
+    setHeaderTitle(`View all Sub Ambassadors`);
+  }, []);
   // ambassadorQuery
   const ambassadorQuery = useQuery({
     queryKey: ["ambassador"],
@@ -69,18 +75,31 @@ const Ambassadors = () => {
     // console.log(ambassadorQuery.data);
   }
   return (
-    <div className="flex flex-col px-[32px] gap-y-[16px] pt-[24px]">
-      {ambassadorQuery.data?.data?.data?.all?.map((ambassador, index) => (
-        <div
-          onClick={() => navigateTo(`${ambassador.email}`)}
-          key={index}
-          className="lg:hidden flex flex-col gap-y-[8px]"
-        >
-          {/* Card */}
-          <AmbassadorCard ambassador={ambassador} />
-        </div>
-      ))}
+    <div className="flex flex-col xsm:px-[32px] px-[16px] gap-y-[16px]max-lg:pt-[24px] ">
+      <div className="lg:hidden mt-[18px] flex flex-col gap-y-[16px]">
+        {ambassadorQuery.data?.data?.data?.all?.map((ambassador, index) => (
+          <div
+            onClick={() => navigateTo(`${ambassador.email}`)}
+            key={index}
+            className="lg:hidden flex flex-col gap-y-[8px] "
+          >
+            {/* Card */}
+            <AmbassadorCard ambassador={ambassador} />
+          </div>
+        ))}
+      </div>
+      {/* Desktop view */}
       <div className="hidden overflow-y-scroll lg:block">
+        <div className="mt-[57px] mb-[19px] flex justify-between w-full">
+          <h2 className="font-poppins text-[32px] leading-[46.6px] font-[600] text-black hidden lg:block ">
+            View all {user.type === "Admin" && "Lead"} Ambassadors
+          </h2>
+          <button className="flex items-center gap-x-[10px] bg-[#082C25] text-white py-[12px] px-[20px] rounded-[8px]">
+            <BsPlus className="text-[24px]" />
+            <span className="text-[14px] leading-[20.3px] font-[400]">Add</span>
+          </button>
+        </div>
+
         {ambassadorQuery?.data?.data && (
           <ViewAmb
             ambassadorQuery={

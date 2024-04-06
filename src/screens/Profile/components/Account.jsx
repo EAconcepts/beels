@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import cameraICon from "../../../assets/images/camera.svg";
 import { AuthContext } from "../../../context/AuthContext";
 import { useMutation } from "@tanstack/react-query";
@@ -16,6 +16,9 @@ const Account = () => {
     department: "",
     image: "",
   });
+  const [avatar, setAvatar] = useState(null);
+  const imgRef = useRef(null);
+
   const { token } = useContext(AuthContext);
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const headers = {
@@ -56,32 +59,67 @@ const Account = () => {
       toast.error(error?.response?.data?.message || error?.message);
     },
   });
+
+  const onFileChange = (e) => {
+    console.log(e.target.files[0]);
+    const file = e.target.files[0];
+    // const formData = new FormData()
+    // formData.append('image')
+
+    if (file) {
+      setAvatar(file);
+    }
+    // console.log(avatar);
+  };
+  const handleAvatarChange = () => {
+    imgRef.current.click();
+  };
   return (
-    <div className="mt-[50px] pb-[100px]">
-      <div className="">
+    <div className="mt-[50px] pb-[100px] lg:W-full lg:flex flex-col lg:items-center">
+      <div className="lg:self-start">
         <h2 className="font-poppins font-[600] text-[24px] leading-[34.8px] text-[#667185]">
           Personalize
         </h2>
         {/* Image Upload */}
-        <div className="flex mt-[40px] gap-x-[20px] items-center">
+        <div className=" flex mt-[40px] gap-x-[20px] items-center">
           {/*image Upload  */}
-          <div className="rounded-full size-[92px] bg-[#EFEFEF] flex justify-center items-center">
-            <img src={cameraICon} className="size-[32px] " />
+          <div
+            onClick={handleAvatarChange}
+            className="rounded-full size-[92px] bg-[#EFEFEF] flex justify-center items-center"
+          >
+            <input
+              type="file"
+              accept="image/*"
+              hidden
+              ref={imgRef}
+              onChange={onFileChange}
+            />
+            <img
+              src={(avatar && URL.createObjectURL(avatar)) || cameraICon}
+              className={`size-[32px] ${
+                avatar && "size-full rounded-full object-cover"
+              }`}
+            />
           </div>
           <p className="font-[600] text-[20px] font-poppins leading-[29px]  ">
             {" "}
-            {user.first_name} {user.last_name}
+            {user?.first_name} {user?.last_name}
           </p>
         </div>
       </div>
       {/* Form  inputs*/}
-      <div className="flex flex-col w-full mt-[33px] gap-y-[24px]">
+      <div className="flex flex-col w-full lg:w-[70%] mt-[33px] gap-y-[24px]">
         {/* Email */}
         <div className="flex w-full flex-col gap-y-[8px]">
           <label className="font-poppins text-[14px] leading-[20px] font-[700] text-[#242426]">
             Email Address
           </label>
-          <input className=" h-[44px] w-full border-b-[1px] border-[#E2E4E5]" />
+          <input
+            type="email"
+            value={user?.email}
+            readOnly
+            className=" h-[44px] text-black/50 w-full border-b-[1px] border-[#E2E4E5]"
+          />
         </div>
         {/* First Name */}
         <div className="flex w-full flex-col gap-y-[8px]">
@@ -147,7 +185,7 @@ const Account = () => {
       {/* submit */}
       <button
         onClick={handleUpdate}
-        className="bg-[#082C25] w-full text-center font-inter text-[20px] font-[400] rounded-[8px] leading-[29px] p-[10px] text-white"
+        className="bg-[#082C25] w-full text-center font-inter text-[20px] font-[400] rounded-[8px] leading-[29px] p-[10px] text-white lg:w-max lg:px-[32px] lg:mt-[24px]"
       >
         {updateMutation.isPending ? "Saving Changes..." : " Save Changes"}
       </button>

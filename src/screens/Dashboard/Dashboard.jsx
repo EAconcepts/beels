@@ -20,8 +20,12 @@ const Dashboard = () => {
     { title: "Refer 50 uses", max: 50, value: 45 },
     { title: "60 Users to collect loans", max: 60, value: 54 },
   ];
-  
 
+  // eslint-disable-next-line no-unused-vars
+  const [showAddLeads, setHeaderTitle] = useOutletContext();
+  useEffect(() => {
+    setHeaderTitle(null);
+  }, []);
   const { user, token } = useContext(AuthContext);
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const headers = {
@@ -34,7 +38,7 @@ const Dashboard = () => {
   if (ambassadorQuery.error) {
     console.log(ambassadorQuery.error);
   } else {
-    console.log(ambassadorQuery.data);
+    // console.log(ambassadorQuery.data);
     // setAmbassadors(ambassadorQuery.data?.data?.data.all);
   }
   let props = [];
@@ -47,7 +51,7 @@ const Dashboard = () => {
       value: data?.all_amb,
     };
     props.push(obj1);
-    const totalLead =data?.lead_amb;
+    const totalLead = data?.lead_amb;
     let obj2 = {
       title: "Lead Ambassadors",
       iconImg: AmbassadorsIcon,
@@ -115,13 +119,16 @@ const Dashboard = () => {
     <div>
       <div className=" bg-white lg:flex-col-reverse flex flex-col relative pb-[100px]">
         {/* Hero */}
-        <div className="lg:mt-[69px] lg:px-[65px] mt-[44px] px-[32px]">
+        <div className="lg:mt-[69px] lg:px-[65px] mt[44px] px-[32px]">
           {user.type !== "Sub" ? (
             <DashboardHero setShowAddLeads={setShowAddLeads} />
           ) : (
             // Sub Amb
-            <div className="flex w-full">
-              <div className="hidden lg:flex w-full flex-col mt-[40px] pl-[32px] pr-[27px] gap-y-[19px]">
+            <div className="flex w-full mt-[40px]">
+              <div className="hidden lg:flex w-full flex-col  max-lg:pl-[32px] pr-[27px] gap-y-[19px]">
+                <h4 className="text-[32px] leading-[46.4px] font-[600] font-poppins text-black">
+                  My Tasks
+                </h4>
                 {subAmbTasks?.map((tasks, index) => (
                   <TaskProgress key={index} task={tasks} />
                 ))}
@@ -131,13 +138,33 @@ const Dashboard = () => {
           )}
         </div>
         {/* Overview Data */}
-        <div className="mt-[48px]">
+        <div
+          className={`mt-[48px] ${
+            user.type == "Sub" && "mt-[57px] "
+          } lg:pl-[54px]`}
+        >
+          <div
+            className={`${
+              user.type !== "Sub" && "hidden"
+            } hidden lg:flex flex-col `}
+          >
+            {/* Header */}
+            <h3 className="font-poppins font-[600] text-[32px] leading-[46.6px] text-black pb-[26px] ">
+              <span className="hidden lg:inline-block">
+                {user?.type === "Lead" && "Lead"}
+              </span>{" "}
+              <span className="">
+                {user?.type !== "Admin" ? "Ambassador" : "Admin"}{" "}
+              </span>
+              Dashboard Overview
+            </h3>
+          </div>
           <OverviewData
             props={props}
             IconClass={user.type === "Sub" && "bg-[#B6F485]"}
           />
         </div>
-        {/* Tasks Progress and Leaderboard */}
+        {/* Sub Amb Tasks Progress and Leaderboard */}
         {user.type === "Sub" && (
           <>
             {/* Tasks */}

@@ -10,8 +10,11 @@ import { TbLogout } from "react-icons/tb";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { FaUser } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import beelsLogo from "../../../assets/images/Beels-logo.png";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { toast } from "sonner";
 
 const SideMenu = ({
   setShowSidebar,
@@ -23,7 +26,7 @@ const SideMenu = ({
   const [showTasksMenu, setShowTasksMenu] = useState(false);
   const { user } = useContext(AuthContext);
   const activePath = useLocation();
-  console.log(activePath.pathname, activePath.pathname.endsWith("dashboard"));
+  // console.log(activePath.pathname, activePath.pathname.endsWith("dashboard"));
   // console.log(user)
   const dashboardMenu = [
     {
@@ -61,6 +64,15 @@ const SideMenu = ({
       iconImg: ambassadorIcon,
       dropdownIcon: !showTasksMenu ? MdKeyboardArrowRight : MdKeyboardArrowDown,
     },
+    // Create tasks
+    user?.type === "Admin" &&
+      showTasksMenu && {
+        name: "Create Tasks",
+        path: "tasks/create",
+        pathname: "/tasks/create",
+        iconImg: circleIcon,
+        MdKeyboardArrowDown,
+      },
     // Tasks link
     user?.type === "Admin" &&
       showTasksMenu && {
@@ -77,6 +89,28 @@ const SideMenu = ({
       iconImg: ambassadorIcon,
     },
   ];
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const { token } = useContext(AuthContext);
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const navigateTo = useNavigate();
+
+  const logOutMutation = useMutation({
+    mutationFn: () => axios.get(`${baseUrl}/ambassador/logout`, { headers }),
+    onSuccess: (data) => {
+      console.log(data);
+      localStorage.removeItem("logged_in");
+      if (data?.data?.status == "Success") {
+        toast.success("Logout successful");
+        navigateTo("/");
+      }
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("Something happened!");
+    },
+  });
 
   return (
     <aside
@@ -132,7 +166,7 @@ const SideMenu = ({
               {/* <MdKeyboardArrowDown /> */}
             </div>
             <p className="font-[400] leading-[14.52px] text-[12px] uppercase">
-              {user.type}
+              {user?.type}
             </p>
           </Link>
         </div>
@@ -162,8 +196,17 @@ const SideMenu = ({
               className={` 
               pl-[16px] pr-[36px] lg:text-[#667185] text-white flex gap-x-[18px] justify-between lg:items-center ${
                 menu.path === "tasks" && menu.name === "Tasks" && "lg:hidden"
+              }  ${
+                menu.path === "tasks" &&
+                menu.name === "My tasks" &&
+                user?.type !== "Sub" &&
+                "lg:hidden"
               } ${menu.name == "Tasks" && menu.path == "#" && "lg:hidden"} ${
                 activePath.pathname == menu.pathname &&
+                "pl-[16px] pr-[36px] lg:text-white flex justify-between lg:bg-[#3AB54A] lg:rounded-[8px]"
+              } ${
+                menu.name == "Ambassador" &&
+                activePath.pathname.includes("ambassadors") &&
                 "pl-[16px] pr-[36px] lg:text-white flex justify-between lg:bg-[#3AB54A] lg:rounded-[8px]"
               }`}
             >
@@ -176,10 +219,18 @@ const SideMenu = ({
           ))}
       </nav>
       {/* Logout */}
-      <button className="absolute bottom-[37px] left-[16px] flex gap-x-[9px] text-white items-end">
+      <button
+        disabled={logOutMutation.isPending}
+        onClick={() => logOutMutation.mutate()}
+        className="absolute bottom-[37px] left-[16px] flex gap-x-[9px] text-white items-end"
+      >
         <TbLogout className="text-[24px]" />
         <span className="text-[14px] font-inter leading-[16.94px] font-[600] underline underline-offset-4">
-          Logout
+          {logOutMutation.isPending ? (
+            <div className="loader ml-[24px]"></div>
+          ) : (
+            "Logout"
+          )}
         </span>
       </button>
     </aside>

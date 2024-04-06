@@ -12,11 +12,11 @@ const SubOverview = () => {
         Send Them Your Link
       </h6>
       {/* Share link */}
-      <div className="w-full bg-[#E9E9E9] mt-[11px] flex ustify-between px-[9px] gap-x-[32px] justify-between items-center ">
+      <div className="w-full bg-[#E9E9E9] mt-[11px] flex ustify-between px-[9px] gap-x-[32px] max-xsm:gap-x-[16px] justify-between items-center ">
         <p className="w-[60%] text-wrap font-[400] font-montserrat leading-[13.72px] text-[11.26px] text-black break-words border">
           tuhejhfskbsjbguthgnnshfbaoietusghfbxbvnsyrgtoaj
         </p>
-        <button className="bg-[#082C25] w-fu  shrink- py-[12px] px-[20px] rounded-[8px] xsm:text-[12px] font-[400] text-white leading-[20.3px] text-[14px]">
+        <button className="bg-[#082C25] w-fu max-xsm:px-[14px] max-xsm:text-[10px] shrink- py-[12px] px-[20px] rounded-[8px] xsm:text-[12px] font-[400] text-white leading-[20.3px] text-[14px]">
           Copy Link
         </button>
       </div>
@@ -37,7 +37,7 @@ const SubOverview = () => {
       </div>
       {/*Invite by Email Form */}
       <form className="mt-[33px] flex flex-col">
-        <h3 className="font-poppins font-[700] text-[16px] leading-[23.2px] text-black">
+        <h3 className="font-poppins font-[700] max-lg:pl-[4px] text-[16px] leading-[23.2px] text-black">
           Invite by Email
         </h3>
         {/* Emails */}
@@ -49,7 +49,7 @@ const SubOverview = () => {
         {/*Mail Content */}
         <div className="pl-[5px] pt-[12px] pb-[7px]">
           <textarea
-            className="w-full mt-[22px] h-[175px] font-montserrat text-[14px] leading-[17.07px] text py-[12px] pl-[7.51px] pr-[42.49px] placeholder:text-[#7D7D7D] bg-[#E9E9E9] focus-within:outline-none"
+            className="w-full mt-[22px] max-xsm:text-[12px] h-[175px] font-montserrat text-[14px] leading-[17.07px] text py-[12px] pl-[7.51px] pr-[42.49px] placeholder:text-[#7D7D7D] bg-[#E9E9E9] focus-within:outline-none"
             placeholder="Hi, 
 
 I wanted to send you a note about my experience with beelsfinance. I've been really impressed with them and think you will be too.

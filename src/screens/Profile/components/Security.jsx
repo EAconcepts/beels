@@ -84,18 +84,7 @@ const Security = () => {
             className=" h-[44px] w-full border-b-[1px] border-[#E2E4E5]"
           />
         </div>
-        {/* First Name */}
-        <div className="flex w-full flex-col gap-y-[8px]">
-          <label className="font-poppins text-[14px] leading-[20px] font-[700] text-[#242426]">
-            First Name
-          </label>
-          <input
-            name="first_name"
-            value={verifiedInfo.first_name}
-            onChange={handleInputChange}
-            className=" h-[44px] w-full border-b-[1px] border-[#E2E4E5]"
-          />
-        </div>
+
         {/* Bank verification Number*/}
         <div className="flex w-full flex-col gap-y-[8px]">
           <label className="font-poppins text-[14px] leading-[20px] font-[700] text-[#242426]">

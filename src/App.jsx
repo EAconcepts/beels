@@ -15,6 +15,7 @@ import Profile from "./screens/Profile/Profile";
 import { Toaster } from "sonner";
 import AmbForm from "./screens/Auth/AmbForm";
 import Onboarding from "./screens/Auth/Onboarding";
+import SubAmb from "./screens/Dashboard/SubAmb";
 
 function App() {
   const queryClient = new QueryClient();
@@ -47,6 +48,10 @@ function App() {
                 <Route
                   path="ambassadors/:email"
                   element={<AmbassadorDetails />}
+                />
+                 <Route
+                  path="ambassadors/:email/:email"
+                  element={<SubAmb />}
                 />
                 <Route path="profile" element={<Profile />} />
               </Route>

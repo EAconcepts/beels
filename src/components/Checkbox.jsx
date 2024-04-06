@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im";
 import { twMerge } from "tailwind-merge";
 
-const Checkbox = ({ onChange, className }) => {
-  const [checked, setChecked] = useState(false);
+const Checkbox = ({ onChange, className, seChecked, checked }) => {
+  // const [checked, setChecked] = useState(false);
   const toggle = (Onchange) => {
     setChecked((prev) => !prev);
     onChange();

@@ -1,5 +1,6 @@
-import { TiArrowUp } from "react-icons/ti";
+// /* eslint-disable react/prop-types */
 
+import { TiArrowUp } from "react-icons/ti";
 import PersonIcon from "../../../../assets/images/icon.png";
 import CopyIcon from "../../../../assets/images/copy.png";
 import MailIcon from "../../../../assets/images/mail.png";
@@ -13,7 +14,6 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { formatDate } from "../../../../utils/formatDate";
 import { handleCopy } from "../../../../utils/copyText";
 import TaskProgress from "../tasks/TaskProgress";
-import LeadTasks from "../tasks/LeadTasks";
 import ViewAmb from "../ViewAmb";
 
 const leadTasks = [
@@ -101,11 +101,11 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
         </div>
       )}
       {/* Statistics */}
-      <div className="w-full flex flex-wrap justify-between max-lg:mt-[28px] gapx-[20px] gap-y-[37px] lg:gap-x-[16px]">
+      <div className="xsm:w-full flex flex-wrap justify-between max-lg:mt-[28px] xs:gap-x-[10px] xsm:gapx-[20px] gap-y-[37px] lg:gap-x-[16px]">
         {statistics?.map((item, index) => (
           <div
             key={index}
-            className="bg-[#FAF9F6] p-[12px] h-[175px] w-[173px] rounded-[10px] border-[1px] border-[#E4E7EC] flex flex-col justify-between "
+            className="bg-[#FAF9F6] p-[12px] h-[175px] w-[140px] xsm:w-[173px] rounded-[10px] border-[1px] border-[#E4E7EC] flex flex-col justify-between "
           >
             <h5>{item.name}</h5>
             <div className="flex gap-x-[12px]">
@@ -272,7 +272,7 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
       <div className="flex-shrink-0">
         {Statistics}
         {/* Tasks & Leaderboard */}
-        {user.type !== "Admin" && (
+        {user?.type !== "Admin" && (
           <>
             {/*  Tasks*/}
             <div className={``}>
@@ -285,7 +285,7 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
                 ))}
               </div>
             </div>
-            {/* Leaderboard */}
+            {/* Leaderboard & Promote Button */}
             <div className="w-full flex flex-col">
               <div className="lg flex flex-col mt-[64px] gap-y-[21px]">
                 <div className="flex justify-between">
@@ -305,16 +305,16 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
                   </h2>
                 </div>
               </div>
-              <button className="lg:hidden self-center bg-[#082C25] px-[97px] mt-[144px] text-center text-[20px] leading-[29px] font-[400] font-inter text-white py-[15px]">
+              <button className="lg:hidden self-center rounded-[8px] bg-[#082C25] px-[97px] mt-[144px] text-center text-[20px] leading-[29px] font-[400] font-inter text-white py-[15px]">
                 Promote
               </button>
             </div>
           </>
         )}
         <>
-          {subAmb && subAmb.length > 0 && (
+          {/* {subAmb && subAmb.length > 0 && (
             <ViewAmb ambassadorQuery={subAmb && subAmb} />
-          )}
+          )} */}
         </>
       </div>
     </div>
@@ -365,13 +365,13 @@ export const Ambassadors = ({ subAmbassador, userStats, user }) => {
   console.log(subAmbassador);
   return (
     <div
-      className={`py-[33px] px-[10px] bg-white flex flex-col border-[1px] border-[#EDEDF2] ${
-        user.type == "Admin" && "lg:flex-row-reverse lg:border-none lg:w-full"
-      }`}
+      className={`py-[33px] px-[10px] bg-white flex flex-col border-[1px] border-[#EDEDF2]
+      ${user.type == "Admin" && "lg:flex-col-reverse lg:border-none lg:w-full"}
+      `}
     >
       {/* Sub Ambassadors */}
       <div className={` ${user.type == "Admin" && "shrink0 lg:w-ful"}`}>
-        <h1 className="text-[20px] font-poppins font-[600] leading-[29px] text-black">
+        <h1 className="text-[20px] lg:hidden font-poppins font-[600] leading-[29px] text-black">
           {" "}
           Sub Ambassadors
         </h1>
@@ -387,8 +387,12 @@ export const Ambassadors = ({ subAmbassador, userStats, user }) => {
         </div>
         {/* Desktop Sub Ambassadors */}
         <div
-          className={`hidden lg:bloc lg:transform lg:scale-75 lg:w-ful translate-x-[-45px lgtranslate-y-[-45px] `}
+          className={`hidden lg:block lg:w-ful mt-[32px]  bg-[#FAF9F6] rounded-[8px] pl-[12.79px] lg:pt-[30.39px]`}
         >
+          <h1 className="text-[20px] pl-[24px] mb-[12px] font-poppins font-[600] leading-[29px] text-black">
+            {" "}
+            Sub Ambassadors
+          </h1>
           {subAmbassador && subAmbassador.length > 0 && (
             <ViewAmb ambassadorQuery={subAmbassador} />
           )}

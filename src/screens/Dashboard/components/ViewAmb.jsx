@@ -1,14 +1,37 @@
 import { PiCaretUpDown } from "react-icons/pi";
 import Checkbox from "../../../components/Checkbox";
 import LeadIcon from "../../../assets/images/lead.png";
-import { HiOutlinePencil } from "react-icons/hi";
+// import { HiOutlinePencil } from "react-icons/hi";
 import { TfiTrash } from "react-icons/tfi";
 import { formatDate } from "../../../utils/formatDate";
 import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../context/AuthContext";
+import DeleteModal from "../../../components/modal/DeleteModal";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 const ViewAmb = ({ ambassadorQuery }) => {
-  //   console.log(ambassadorQuery);
+  // console.log(ambassadorQuery);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const navigateTo = useNavigate();
+  const {  token } = useContext(AuthContext);
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const deleteMutation = useMutation({
+    mutationFn: (email) =>
+      axios.get(`${baseUrl}/ambassador/delete-amb/${email}`, {
+        headers,
+      }),
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
   return (
     <div className="">
       <table className="w-full">
@@ -86,12 +109,26 @@ const ViewAmb = ({ ambassadorQuery }) => {
                       {ambassador?.status === "1" ? "Active" : "Inactive"}
                     </span>
                     {/* Edit & Delete */}
-                    <div className="  flex gap-x-[8.97px] pl-[17.93px]">
-                      <HiOutlinePencil />
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowDeleteModal(true);
+                      }}
+                      className="  flex gap-x-[8.97px] pl-[17.93px]"
+                    >
+                      {/* <HiOutlinePencil /> */}
                       <TfiTrash />
                     </div>
                   </div>
                 </td>
+                {showDeleteModal && (
+                  <DeleteModal
+                    deleteFn={() => deleteMutation.mutate(ambassador.email)}
+                    name={`${ambassador.first_name} ${ambassador.last_name}`}
+                    setShowDeleteModal={setShowDeleteModal}
+                    isPending={deleteMutation.isPending}
+                  />
+                )}
               </tr>
             ))}
         </tbody>

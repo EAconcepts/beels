@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Account from "./components/Account";
 import Security from "./components/Security";
+import { useOutletContext } from "react-router-dom";
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("account");
+  const [showAddLeads, setHeaderTitle] = useOutletContext();
+  useEffect(() => {
+    setHeaderTitle(`Profile`);
+  }, []);
   return (
     <div className="flex flex-col px-[32px] lg: ">
       {/* Profile Tabs */}
-      <div className="w-full flex lg:mt-[24px] lg:w-[50%] lg:mx-auto lg:justify-center bg-[#EDEDED] px-[32px] rounded-[50px] py-[8px]">
+      <div className="w-full flex mt-[24px] lg:w-[50%] lg:mx-auto lg:justify-center bg-[#EDEDED] px-[32px] rounded-[50px] py-[8px]">
         <div className="w-full flex justify-between lg:justify-around  ">
           <button
             onClick={() => setActiveTab("account")}

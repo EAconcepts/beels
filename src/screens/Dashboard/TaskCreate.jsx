@@ -1,9 +1,41 @@
 import { IoMdClose } from "react-icons/io";
 import Checkbox from "../../components/Checkbox";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const TaskCreate = () => {
-  const handleChange = () => {
-    console.log("Hi there!");
+  const [task, setTask] = useState({
+    name: "",
+    description: "",
+    type: "",
+    points: "",
+  });
+  const { token } = useContext(AuthContext);
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const checkboxChange = () => {
+    setTask((prev)=>({...prev, type: 'lead'}))
+  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setTask((prevVals) => ({ ...prevVals, [name]: value }));
+  };
+  const taskMutation = useMutation({
+    mutationFn: axios.post(`${baseUrl}/ambassador/task/add`, task, { headers }),
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+  const handleCreateTask = (e) => {
+    e.preventDefault();
+    console.log(task)
   };
   return (
     <div className="w-full">
@@ -19,13 +51,14 @@ const TaskCreate = () => {
       {/* Form */}
       <div className="w-full px-[28px] mt-[37px] py-[32px]">
         <form
+          onSubmit={handleCreateTask}
           className="w-full flex flex-col px-[24px] "
           // onSubmit={handleSubmit}
         >
           <div className=" ">
             {/* Task Information */}
             <div className="flex flex-col gap-y-[2px]">
-              <p className="text-[16px] font-[600] text-[#242731] font-poppins leading-[28px] ">
+              <p className="text-[20px] font-[600] text-[#242731] font-poppins leading-[28px] ">
                 {" "}
                 Task Information{" "}
               </p>
@@ -42,6 +75,10 @@ const TaskCreate = () => {
               </p>
               <input
                 type="text"
+                name="name"
+                value={task.name}
+                onChange={handleChange}
+                required
                 className=" w-full text-black border-b-[1px] border-[#E2E4E5]"
                 //   value={name}
                 //   onChange={(e) => setName(e.target.value)}
@@ -53,11 +90,13 @@ const TaskCreate = () => {
                 {" "}
                 Task Description
               </p>
-              <input
-                type="text"
-                className=" w-full text-black border-b-[1px] border-[#E2E4E5]"
-                //   value={name}
-                //   onChange={(e) => setName(e.target.value)}
+              <textarea
+                required
+                // type="text"
+                name="description"
+                onChange={handleChange}
+                value={task.description}
+                className=" w-full focus-within:outline-none text-black border-b-[1px] border-[#E2E4E5]"
               />
             </div>
             {/* Point Allocation */}
@@ -68,6 +107,9 @@ const TaskCreate = () => {
               </p>
               <input
                 type="text"
+                name="points"
+                onChange={handleChange}
+                value={task.points}
                 className=" w-full text-black border-b-[1px] border-[#E2E4E5]"
                 //   value={name}
                 //   onChange={(e) => setName(e.target.value)}
@@ -82,7 +124,7 @@ const TaskCreate = () => {
               <div className="flex flex-col gap-y-[16px]">
                 {/* Lead Ambassador */}
                 <div className="flex justify-start items-center gap-x-[13px]">
-                  <Checkbox onChange={handleChange} />
+                  <Checkbox onChange={checkboxChange} />
                   <p className="text-[14px] font-[400] text-[#242426] font-poppins leading-[20px] ">
                     {" "}
                     Lead Ambassador{" "}
@@ -91,7 +133,7 @@ const TaskCreate = () => {
                 {/* Sub Ambassador */}
                 <div className="flex justify-start items-center gap-x-[13px]">
                   <Checkbox
-                    onChange={handleChange}
+                    onChange={checkboxChange}
                     className={"text-[#082C25]"}
                   />
                   <p className="text-[14px] font-[400] text-[#242426] font-poppins leading-[20px] ">

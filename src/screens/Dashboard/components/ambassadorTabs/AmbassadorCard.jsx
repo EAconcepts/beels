@@ -1,16 +1,43 @@
-import React from "react";
+import { useContext, useState } from "react";
 import ThreeDotIcon from "../../../../assets/images/three-dot.png";
-import LeadIcon from "../../../../assets/images/lead.png";
+// import LeadIcon from "../../../../assets/images/lead.png";
 // import EditIcon from "../../assets/images/edit.png";
 import { twMerge } from "tailwind-merge";
 import { formatDate } from "../../../../utils/formatDate";
+import { FaUser } from "react-icons/fa6";
+import { AuthContext } from "../../../../context/AuthContext";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import DeleteModal from "../../../../components/modal/DeleteModal";
 
 const AmbassadorCard = ({ ambassador, roleColor }) => {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const { user, token } = useContext(AuthContext);
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const deleteMutation = useMutation({
+    mutationFn: () =>
+      axios.get(`${baseUrl}/ambassador/delete-amb/${ambassador.email}`, {
+        headers,
+      }),
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    setShowDeleteModal(true);
+  };
   return (
-    <div className="px-[7px]">
+    <div className="max-lg:w-full px-[7px]">
       {/* Email Header */}
       <div className="w-full flex justify-between items-center ">
-        <p className="text-[#101928] text-[12x] leading-[17.4px] font-[500] font-inter ">
+        <p className="text-[#101928] text-[12x] leading-[17.4px] font-[500] font-inter max-w-[230px] text-ellipsis  overflow-hidden ">
           {ambassador.email}
         </p>
         <img src={ThreeDotIcon} className="size-[24px]" />
@@ -20,8 +47,7 @@ const AmbassadorCard = ({ ambassador, roleColor }) => {
         <div className="flex justify-between items-center ">
           {/* Avatar, Name & Role */}
           <div className="flex gap-x-[12.51px] justify-start items-center ">
-            <img src={LeadIcon} className=" roundedfull size-[41.7px]" />
-            {/* </div>/ */}
+            <FaUser className="text-[24px]" />
             <div className="flex flex-col font-inter text-[14.6px] leading-[21.17px] ">
               <p className="text-[#101928]   font-[500]  ">{`${ambassador.first_name}   ${ambassador.last_name}  `}</p>
               <p className="text-[#475367] font-[400]  ">
@@ -51,8 +77,11 @@ const AmbassadorCard = ({ ambassador, roleColor }) => {
             <p className="text-[#475367] text-[14.6px] font-[700] font-Inter leading-[12.17px] ">
               {ambassador?.created_at && formatDate(ambassador?.created_at)}
             </p>
-            {ambassador && (
-              <div className="flex justify-center items-center gap-1">
+            {ambassador && user?.type == "Admin" && (
+              <div
+                onClick={handleDelete}
+                className="flex justify-center items-center gap-1"
+              >
                 {/* <img src={EditIcon} /> */}
                 <svg
                   width="16"
@@ -71,6 +100,14 @@ const AmbassadorCard = ({ ambassador, roleColor }) => {
           </div>
         </div>
       </div>
+      {showDeleteModal && (
+        <DeleteModal
+          name={`${ambassador.first_name} ${ambassador.last_name}`}
+          setShowDeleteModal={setShowDeleteModal}
+          deleteFn={() => deleteMutation.mutate()}
+          isPending={deleteMutation.isPending}
+        />
+      )}
     </div>
   );
 };

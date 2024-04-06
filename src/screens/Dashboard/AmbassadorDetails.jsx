@@ -1,5 +1,7 @@
-import { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+/* eslint-disable react/prop-types */
+
+import { useContext, useEffect, useState } from "react";
+import { useParams, useOutletContext } from "react-router-dom";
 import LeadIcon from "../../assets/images/lead.png";
 import {
   UserStats,
@@ -11,9 +13,10 @@ import { allAmbassadors } from "./Ambassadors";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
-import { data } from "autoprefixer";
-import { FaUser } from "react-icons/fa";
 import { CiUser } from "react-icons/ci";
+import { BsCheckCircleFill } from "react-icons/bs";
+import ViewAmb from "./components/ViewAmb";
+import { useQueryClient } from "@tanstack/react-query";
 
 const AmbassadorDetails = () => {
   const [activeTab, setActiveTab] = useState("Overview");
@@ -24,6 +27,11 @@ const AmbassadorDetails = () => {
   const headers = {
     Authorization: `Bearer ${token}`,
   };
+  // eslint-disable-next-line no-unused-vars
+  const [showAddLeads, setHeaderTitle] = useOutletContext();
+  useEffect(() => {
+    setHeaderTitle(`View all Sub Ambassadors`);
+  }, []);
 
   // Ambassador Details query
   const ambDetailsQuery = useQuery({
@@ -31,7 +39,12 @@ const AmbassadorDetails = () => {
     queryFn: () =>
       axios.get(`${baseUrl}/ambassador/details/${email}`, { headers }),
   });
+  // To Test Sub AMB
+  const queryClient = useQueryClient();
+  const amb = queryClient.getQueryData(["ambassador"]);
+  // console.log(amb);
 
+  // console.log(ambDetailsQuery.data.data)
   const statistics = [
     { name: "Users", value: "5,000", percent: "2%" },
     { name: "Referrals", value: "1,000", percent: "2%" },
@@ -130,14 +143,29 @@ const AmbassadorDetails = () => {
     // console.log(ambDetailsQuery?.data);
   }
   return (
-    <div className="w-full flex flex-col px-[32px] pt-[22.6px]">
+    <div className="w-full flex flex-col px-[32px] lg:pr-[63px] lg:pt-[57px] pt-[22.6px]">
+      <div className="w-full mb-[27px] lg:flex justify-between hidden">
+        <h3 className="font-poppins font-[600] text-[32px] leading-[46.4px] text-black">
+          Viewing {user?.type == "Admin" ? "Lead" : "Sub"} Ambassador
+        </h3>
+        {user?.type !== "Admin" && (
+          <button
+            className={`bg-[#082C25] rounded-[8px] py-[12px] px-[20px] font-[400] text-white text-[12px] leading-[20.3px] ${
+              activeTab !== "Overview" && "hidden"
+            }`}
+          >
+            Promote
+          </button>
+        )}
+      </div>
       {/* Header */}
       <div className="w-full flex gap-x-[16.33px] items-center ">
         {!ambDetailsQuery.data?.data?.data?.user?.image ? (
           <img src={LeadIcon} className="size-[54.42px] rounded-full" />
         ) : (
-          <div className="flex items-center justify-center rounded-full border-[1px] size-[45px] p-[5px]">
+          <div className="flex items-center justify-center rounded-full border-[1px] size-[45px] p-[5px] relative">
             <CiUser className="size-[40px]" />
+            <BsCheckCircleFill className="absolute bottom-0 text-[#1671D9] right-0" />
           </div>
         )}
         <div className="flex flex-col font-inter leading-[27.62px] text-[19.05px]">
@@ -157,7 +185,7 @@ const AmbassadorDetails = () => {
             <button
               onClick={() => setActiveTab(item.tab)}
               key={index}
-              className={`py-[16px] px-[8px]  text-[14px] font-[500] leading-[20.3px] font-inter text-[#344054] border-  ${
+              className={`py-[16px] px-[8px] text-[14px] font-[500] leading-[20.3px] font-inter text-[#344054] border-  ${
                 activeTab === item.tab && user.type === "Admin"
                   ? "border-b border-b-[#082C25]"
                   : activeTab === item.tab && user.type !== "Admin"
@@ -166,7 +194,7 @@ const AmbassadorDetails = () => {
               } ${
                 user.type !== "Admin" &&
                 item.tab === "Ambassadors" &&
-                "invisible max-xsm:hidden lg:hidden"
+                "hidden max-xsm:hidden lg:hidden"
               }`}
             >
               {item.tab}
@@ -176,6 +204,15 @@ const AmbassadorDetails = () => {
         {/* Active Tab */}
         <div className="my-[16px] w-full">{content}</div>
       </div>
+      {/* Sub Ambassadors for Admin view */}
+      {user?.type === "Admin" && activeTab === "Overview" && (
+        <div className="hidden lg:flex flex-col bg-[#FAF9F6] border-[#E4E7EC] rounded-[10px] border-[1px] mt-[16px]">
+          <h3 className="font-inter mb-[9px] pl-[16px] mt-[38px] font-[500] text-[14px] leading-[20.3px] text-[#667185]">
+            Sub Ambassador
+          </h3>
+          <ViewAmb ambassadorQuery={amb?.data && amb?.data?.data?.all} />
+        </div>
+      )}
     </div>
   );
 };

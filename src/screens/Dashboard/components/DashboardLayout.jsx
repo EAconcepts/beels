@@ -13,22 +13,23 @@ import { useNavigate } from "react-router-dom";
 const DashboardLayout = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showAddLeads, setShowAddLeads] = useState(false);
+  const [headerTitle, setHeaderTitle] = useState(null);
 
   const menuRef = useRef(null);
   const { user, token } = useContext(AuthContext);
-  console.log(token);
+  // console.log(token);
   const navigateTo = useNavigate();
 
   useEffect(() => {
-    if (!token || token == undefined) {
-      navigateTo("/sub-ambassador/login");
+    if (!token || token == undefined || token === "") {
+      navigateTo("/");
     }
   }, []);
 
   // Closes Side menu on outside click
   const handlOutsideClick = (e) => {
     if (menuRef.current && !menuRef.current.contains(e.target)) {
-      console.log("Outside click");
+      // console.log("Outside click");
       setShowSidebar(false);
     }
   };
@@ -54,22 +55,24 @@ const DashboardLayout = () => {
         {/* Show Add new Leads Modal */}
         {showAddLeads && <AddLeads setShowAddLeads={setShowAddLeads} />}
         {/*Header  */}
-        <div className="w-full max-lg:mt-[48px] flex justify-start items-center max-lg:px-[32px] lg:h-[138px] menu-toggle">
+        <div className="w-full max-lg:mt-[48px] flex justify-start items-center max-lg:px-[32px] max-xsm:gap-x-[18px] max-lg:gap-x-[65px] lg:h-[138px] menu-toggle">
           {/* Toggle SideMenu Hambuger */}
           <div
             // ref={menuRef}
             className="xlg:hidden z-20 lg:"
             onClick={() => {
-              console.log("toggle nav bar");
               setShowSidebar(true);
             }}
           >
             <img src={hambuger} />
           </div>
           {/* Header title */}
-          <p className="lg:hidden text-[32px] mx-10 max-lg:text-2xl max-md:text-xl max-sm:text-lg max-xsm:text-sm font-[600] text-[#000000] font-[Poppins]  ">
-            {" "}
-            {user?.type ? user?.type : "Admin" + " Dashboard"}
+          <p className="lg:hidden text-[24px]  font-[600] text-[#000000] font-[Poppins]  ">
+            {headerTitle
+              ? headerTitle
+              : user?.type !== "Admin"
+              ? user.type =="Lead" && "Lead"  + " Ambassador Dashboard"
+              : "Admin Dashboard"}
           </p>
           <div className="w-full hidden xlg:pl-[54px] lg:pl-[16px] pr-[44px] xlg:pt-[53px] xlg:pb-[35px] lg:flex bg-[#F5F5F5] items-center justify-between ">
             {/* Title & Search */}
@@ -130,8 +133,8 @@ const DashboardLayout = () => {
             </div>
           </div>
         </div>
-        <div className="lg:overflow-y-scroll lg:h-[calc(100vh-138px)]">
-          <Outlet context={[setShowAddLeads]} />
+        <div className="lg:overflow-y-scroll lg:h-[calc(100vh-138px)] ">
+          <Outlet context={[setShowAddLeads, setHeaderTitle]} />
         </div>
       </div>
     </div>

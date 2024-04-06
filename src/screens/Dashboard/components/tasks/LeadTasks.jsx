@@ -57,6 +57,7 @@ const LeadTasks = ({ tasks }) => {
           <TaskProgress key={index} task={task} />
         ))}
       </div>
+      {/* Todo Tasks */}
       <div className="lg:hidden mt-[40px] flex flex-col  ">
         <h2 className="text-[20px] font-[600] leading-[29px] font-poppins">
           To-Do-Tasks
@@ -67,7 +68,11 @@ const LeadTasks = ({ tasks }) => {
               key={index}
               className="h-[135px] w-full w[174px] rounded-[10px] border-[1px] px-[15px] py-[11px] bg-[#FAF9F6] border-[#E4E7EC]"
             >
-              <div className="w-full flex justify-end">
+              <div
+                className={`w-full flex justify-end ${
+                  user?.type == "Sub" && "max-lg:hidden"
+                }`}
+              >
                 <p
                   className={`bg-[#22612A] py-[1.49px] px-[8.97px] font-inter font-[500] text-[10.46px] leading-[15.17px] text-[#FAF9F6] rounded-[8.97px] ${
                     user.type === "sub" && "invisible"

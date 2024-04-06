@@ -102,12 +102,12 @@ const Login = ({ role }) => {
       />
       <img
         src={Image}
-        className="w-[480px] h-full items-end self-end object-cover lg:absolute left-0 bottom-0 max-lg:hidden"
+        className="w-[480px] h-full items-end self-end object-cover lg:absolute left-[64px] -bottom-[32px] max-lg:hidden"
       />
       <div className="lgh-[calc(100%-43px)] h-full flex max-lg:flex-col  items-center max-lg:justify-center w-full max-lg:mt24 max-md:mt20 maxsm:mt-[52.7px] lg:justify-end ">
         {/* Login Form */}
         <div
-          className={`bg-[#082C25] lg:pl-[104px] pr-[97px] w-full lg:w-[65%] rounded-[16px] max-lg:py-[70px] lg:py-[90px] max-md:px-8 px-0 `}
+          className={`bg-[#082C25]  lg:pl-[104px] pr-[97px] w-full lg:w-[55% lg:w-[821px] rounded-[16px] max-lg:py-[70px] lg:py-[90px] max-md:px-8 px-0 `}
         >
           <p className="text-2xl leading-[28.18px] max-lg:text-xl max-md:text-lg max-sm:text-base font-[700] text-white font-[Rockwell] max-lg:text-center lg:text-[32px]">
             Login to{" "}
@@ -148,6 +148,7 @@ const Login = ({ role }) => {
               </div>
             </div>
             <button
+            disabled={loginMutation.isPending}
               className={`flex w-full mt-[32px] ${
                 passwordError || (emailError && "my-2")
               } items-center justify-center gap-2 px-4 p-[18px] lg:bg-[#3AB54A] bg-[#B6F485] text-[#082C25] text-[14px] leading-[16.9px] font-[700] rounded-lg`}
@@ -161,12 +162,6 @@ const Login = ({ role }) => {
                 </p>
               )}
             </button>
-            {isErrorVisible && (
-              <>
-                <p className="text-red-500 text-center">{error} </p>
-                <p className="text-red-500 text-center"> Try again </p>
-              </>
-            )}
           </form>
           {/* Google Login */}
           <div className="hidden lg:flex flex-col">
