@@ -1,9 +1,9 @@
 import { IoMdClose } from "react-icons/io";
-import Checkbox from "../../components/Checkbox";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { toast } from "sonner";
 
 const TaskCreate = () => {
   const [task, setTask] = useState({
@@ -12,30 +12,49 @@ const TaskCreate = () => {
     type: "",
     points: "",
   });
+  const [role, setRole] = useState({
+    lead: false,
+    sub: false,
+  });
   const { token } = useContext(AuthContext);
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const headers = {
     Authorization: `Bearer ${token}`,
-  };
-  const checkboxChange = () => {
-    setTask((prev)=>({...prev, type: 'lead'}))
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTask((prevVals) => ({ ...prevVals, [name]: value }));
   };
   const taskMutation = useMutation({
-    mutationFn: axios.post(`${baseUrl}/ambassador/task/add`, task, { headers }),
+    mutationFn: () =>
+      axios.post(`${baseUrl}/ambassador/task/add`, task, { headers }),
     onSuccess: (data) => {
       console.log(data);
+      toast(data.data.message);
     },
     onError: (error) => {
       console.log(error);
+      toast.error(error.message);
     },
   });
   const handleCreateTask = (e) => {
     e.preventDefault();
-    console.log(task)
+    console.log(task);
+    taskMutation.mutate();
+  };
+  const onLeadChange = (e) => {
+    console.log(e.target.checked);
+    setRole((prev) => ({ ...prev, lead: e.target.checked }));
+    e.target.checked
+      ? setTask((prev) => ({ ...prev, type: "lead" }))
+      : setTask((prev) => ({ ...prev, type: "" }));
+  };
+  const onSubChange = (e) => {
+    console.log(e.target.checked);
+    setRole((prev) => ({ ...prev, sub: e.target.checked }));
+    e.target.checked
+      ? setTask((prev) => ({ ...prev, type: "Sub" }))
+      : setTask((prev) => ({ ...prev, type: "" }));
   };
   return (
     <div className="w-full">
@@ -80,8 +99,6 @@ const TaskCreate = () => {
                 onChange={handleChange}
                 required
                 className=" w-full text-black border-b-[1px] border-[#E2E4E5]"
-                //   value={name}
-                //   onChange={(e) => setName(e.target.value)}
               />
             </div>
             {/* Task Description */}
@@ -124,7 +141,15 @@ const TaskCreate = () => {
               <div className="flex flex-col gap-y-[16px]">
                 {/* Lead Ambassador */}
                 <div className="flex justify-start items-center gap-x-[13px]">
-                  <Checkbox onChange={checkboxChange} />
+                  <input
+                    className="size-[16px] "
+                    type="checkbox"
+                    name="type"
+                    onChange={onLeadChange}
+                    value={role.lead}
+                    disabled={role.sub}
+                  />
+                  {/* <Checkbox onChange={checkboxChange} /> */}
                   <p className="text-[14px] font-[400] text-[#242426] font-poppins leading-[20px] ">
                     {" "}
                     Lead Ambassador{" "}
@@ -132,10 +157,18 @@ const TaskCreate = () => {
                 </div>
                 {/* Sub Ambassador */}
                 <div className="flex justify-start items-center gap-x-[13px]">
-                  <Checkbox
+                  <input
+                    type="checkbox"
+                    className="size-[16px]"
+                    name="type"
+                    onChange={onSubChange}
+                    value={role.sub}
+                    disabled={role.lead}
+                  />
+                  {/* <Checkbox
                     onChange={checkboxChange}
                     className={"text-[#082C25]"}
-                  />
+                  /> */}
                   <p className="text-[14px] font-[400] text-[#242426] font-poppins leading-[20px] ">
                     {" "}
                     Sub Ambassador{" "}
