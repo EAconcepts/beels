@@ -24,7 +24,13 @@ const Dashboard = () => {
   // eslint-disable-next-line no-unused-vars
   const [showAddLeads, setHeaderTitle] = useOutletContext();
   useEffect(() => {
-    setHeaderTitle(user?.type=="Sub" ? "Ambassador" : user?.type =="Lead" ? "Lead Ambassador" : "Admin" + " Dasboard" )
+    setHeaderTitle(
+      user?.type == "Sub"
+        ? "Ambassador"
+        : user?.type == "Lead"
+        ? "Lead Ambassador"
+        : "Admin" + " Dasboard"
+    );
   }, []);
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const headers = {
