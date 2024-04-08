@@ -20,13 +20,12 @@ const Dashboard = () => {
     { title: "Refer 50 uses", max: 50, value: 45 },
     { title: "60 Users to collect loans", max: 60, value: 54 },
   ];
-
+  const { user, token } = useContext(AuthContext);
   // eslint-disable-next-line no-unused-vars
   const [showAddLeads, setHeaderTitle] = useOutletContext();
   useEffect(() => {
-    setHeaderTitle(null);
+    setHeaderTitle(user?.type=="Sub" ? "Ambassador" : user?.type =="Lead" ? "Lead Ambassador" : "Admin" + " Dasboard" )
   }, []);
-  const { user, token } = useContext(AuthContext);
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -38,7 +37,7 @@ const Dashboard = () => {
   if (ambassadorQuery.error) {
     console.log(ambassadorQuery.error);
   } else {
-    // console.log(ambassadorQuery.data);
+    console.log(ambassadorQuery.data);
     // setAmbassadors(ambassadorQuery.data?.data?.data.all);
   }
   let props = [];

@@ -1,9 +1,10 @@
 import { IoMdClose } from "react-icons/io";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "sonner";
+import { Link, useOutletContext } from "react-router-dom";
 
 const TaskCreate = () => {
   const [task, setTask] = useState({
@@ -17,6 +18,11 @@ const TaskCreate = () => {
     sub: false,
   });
   const { token } = useContext(AuthContext);
+  // eslint-disable-next-line no-unused-vars
+  const [setShowAddLeads, setHeaderTitle] = useOutletContext();
+  useEffect(() => {
+    setHeaderTitle(" ");
+  }, []);
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -58,9 +64,11 @@ const TaskCreate = () => {
   };
   return (
     <div className="w-full">
-      <IoMdClose className="fixed top-[37px] right-[32px] text-[36px] text-[#E2E4E5] " />
+      <Link to="/dashboard">
+        <IoMdClose className="fixed top-[37px] right-[32px] text-[36px] text-[#E2E4E5] " />
+      </Link>
       <div className="w-full flex flex-col px-[32px]">
-        <h1 className="text-[24px] font-[700] leading-[34.8px] font-poppins text-black">
+        <h1 className="text-[24px] max-lg:mt-[14px] font-[700] leading-[34.8px] font-poppins text-black">
           Create Task
         </h1>
         <p className="font-[400] text-[16px] leading-[23.2px] font-poppins text-black mt-[14px]">

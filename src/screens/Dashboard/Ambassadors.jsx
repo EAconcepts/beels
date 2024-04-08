@@ -89,7 +89,7 @@ const Ambassadors = () => {
         ))}
       </div>
       {/* Desktop view */}
-      <div className="hidden overflow-y-scroll lg:block">
+      <div className="hidden lg:block">
         <div className="mt-[57px] mb-[19px] flex justify-between w-full">
           <h2 className="font-poppins text-[32px] leading-[46.6px] font-[600] text-black hidden lg:block ">
             View all {user.type === "Admin" && "Lead"} Ambassadors

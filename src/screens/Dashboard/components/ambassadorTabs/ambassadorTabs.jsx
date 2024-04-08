@@ -165,7 +165,7 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
                 </p>
               </div>
             </div>
-            <img src={CopyIcon} className="" />
+            <img onClick={()=>handleCopy(ambDetails?.email)} src={CopyIcon} className="" />
           </div>
           {/* First name */}
           <div className="flex justify-between items-center px-5 py-2 border-b border-[#E4E7EC]">
@@ -182,7 +182,7 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
               </div>
             </div>
 
-            <img src={CopyIcon} />
+            <img onClick={()=>handleCopy(ambDetails?.first_name)} src={CopyIcon} />
           </div>
           {/* Last Name */}
           <div className="flex justify-between items-center px-5 py-2 border-b border-[#E4E7EC]">
@@ -199,7 +199,7 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
               </div>
             </div>
 
-            <img src={CopyIcon} />
+            <img onClick={()=>handleCopy(ambDetails?.last_name)} src={CopyIcon} />
           </div>
           {/* Phone Number */}
           <div className="flex justify-between items-center px-5 py-2 border-b border-[#E4E7EC]">
@@ -215,7 +215,7 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
                 </p>
               </div>
             </div>
-            <img src={CopyIcon} />
+            <img onClick={()=>handleCopy(ambDetails?.phone)} src={CopyIcon} />
           </div>
           {/* School */}
           <div className="flex justify-between items-center px-5 py-2 border-b border-[#E4E7EC]">
@@ -231,7 +231,7 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
                 </p>
               </div>
             </div>
-            <img src={CopyIcon} />
+            <img onClick={()=>handleCopy(ambDetails?.school)} src={CopyIcon} />
           </div>
           {/* Ambassador ref link */}
           <div className="flex justify-between items-center px-5 py-2 border-b border-[#E4E7EC]">

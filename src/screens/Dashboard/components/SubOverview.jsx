@@ -1,8 +1,22 @@
 import { TiSocialFacebook } from "react-icons/ti";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaWhatsapp } from "react-icons/fa";
+import { handleCopy } from "../../../utils/copyText";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/AuthContext";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const SubOverview = () => {
+  const {  token } = useContext(AuthContext);
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const ambassadorQuery = useQuery({
+    queryKey: ["ambassador"],
+    queryFn: () => axios.get(`${baseUrl}/ambassador/dashboard`, { headers }),
+  });
   return (
     <div className="w-full flex flex-col lg:bg-[#FAFAFA] bg-[#F1F1F1] pt-[37px]">
       <h1 className="px-[12px] text-black text-[24px] font-[600] leading-[36px] font-poppins">
@@ -14,9 +28,9 @@ const SubOverview = () => {
       {/* Share link */}
       <div className="w-full bg-[#E9E9E9] mt-[11px] flex ustify-between px-[9px] gap-x-[32px] max-xsm:gap-x-[16px] justify-between items-center ">
         <p className="w-[60%] text-wrap font-[400] font-montserrat leading-[13.72px] text-[11.26px] text-black break-words border">
-          tuhejhfskbsjbguthgnnshfbaoietusghfbxbvnsyrgtoaj
+          {ambassadorQuery.data?.data?.data?.user?.ref_code }
         </p>
-        <button className="bg-[#082C25] w-fu max-xsm:px-[14px] max-xsm:text-[10px] shrink- py-[12px] px-[20px] rounded-[8px] xsm:text-[12px] font-[400] text-white leading-[20.3px] text-[14px]">
+        <button onClick={()=>handleCopy(ambassadorQuery.data?.data?.data?.user?.ref_code )} className="bg-[#082C25] w-fu max-xsm:px-[14px] max-xsm:text-[10px] shrink- py-[12px] px-[20px] rounded-[8px] xsm:text-[12px] font-[400] text-white leading-[20.3px] text-[14px]">
           Copy Link
         </button>
       </div>
