@@ -10,12 +10,8 @@ const TaskCreate = () => {
   const [task, setTask] = useState({
     name: "",
     description: "",
-    type: "",
+    type: [],
     points: "",
-  });
-  const [role, setRole] = useState({
-    lead: false,
-    sub: false,
   });
   const { token } = useContext(AuthContext);
   // eslint-disable-next-line no-unused-vars
@@ -49,18 +45,35 @@ const TaskCreate = () => {
     taskMutation.mutate();
   };
   const onLeadChange = (e) => {
-    console.log(e.target.checked);
-    setRole((prev) => ({ ...prev, lead: e.target.checked }));
-    e.target.checked
-      ? setTask((prev) => ({ ...prev, type: "lead" }))
-      : setTask((prev) => ({ ...prev, type: "" }));
+    // console.log(e.target.checked);
+    if (e.target.checked) {
+      const newType = task.type;
+      newType.push("Lead");
+      setTask((prev) => ({ ...prev, type: newType }));
+      console.log(newType);
+      // console.log('true')
+    } else {
+      const newType = task.type.filter((item) => item !== "Lead");
+      console.log(newType);
+      setTask((prev) => ({ ...prev, type: newType }));
+    }
+
+    // setRole((prev) => ({ ...prev, lead: e.target.checked }));
+    // e.target.checked
+    //   ? setTask((prev) => ({ ...prev, type: "lead" }))
+    //   : setTask((prev) => ({ ...prev, type: "" }));
   };
   const onSubChange = (e) => {
-    console.log(e.target.checked);
-    setRole((prev) => ({ ...prev, sub: e.target.checked }));
-    e.target.checked
-      ? setTask((prev) => ({ ...prev, type: "Sub" }))
-      : setTask((prev) => ({ ...prev, type: "" }));
+    if (e.target.checked) {
+      const newType = task.type;
+      newType.push("Sub");
+      setTask((prev) => ({ ...prev, type: newType }));
+      // console.log(newType)
+    } else {
+      const newType = task.type.filter((item) => item !== "Sub");
+      // console.log(newType)
+      setTask((prev) => ({ ...prev, type: newType }));
+    }
   };
   return (
     <div className="w-full">
@@ -154,10 +167,8 @@ const TaskCreate = () => {
                     type="checkbox"
                     name="type"
                     onChange={onLeadChange}
-                    value={role.lead}
-                    disabled={role.sub}
+                    // value={role.lead}
                   />
-                  {/* <Checkbox onChange={checkboxChange} /> */}
                   <p className="text-[14px] font-[400] text-[#242426] font-poppins leading-[20px] ">
                     {" "}
                     Lead Ambassador{" "}
@@ -170,13 +181,8 @@ const TaskCreate = () => {
                     className="size-[16px]"
                     name="type"
                     onChange={onSubChange}
-                    value={role.sub}
-                    disabled={role.lead}
+                    // value={role.sub}
                   />
-                  {/* <Checkbox
-                    onChange={checkboxChange}
-                    className={"text-[#082C25]"}
-                  /> */}
                   <p className="text-[14px] font-[400] text-[#242426] font-poppins leading-[20px] ">
                     {" "}
                     Sub Ambassador{" "}
