@@ -15,6 +15,7 @@ import { formatDate } from "../../../../utils/formatDate";
 import { handleCopy } from "../../../../utils/copyText";
 import TaskProgress from "../tasks/TaskProgress";
 import ViewAmb from "../ViewAmb";
+import { useNavigate } from "react-router-dom";
 
 const leadTasks = [
   { title: "Onboard 20 Ambassadors", max: 20, value: 10 },
@@ -363,6 +364,7 @@ export const UserStats = ({ userStats }) => {
 
 export const Ambassadors = ({ subAmbassador, userStats, user }) => {
   console.log(subAmbassador);
+  const navigateTo = useNavigate()
   return (
     <div
       className={`py-[33px] px-[10px] bg-white flex flex-col border-[1px] border-[#EDEDF2]
@@ -378,11 +380,15 @@ export const Ambassadors = ({ subAmbassador, userStats, user }) => {
         {/* Sub Ambassadors */}
         <div className="lg:hidden flex flex-col gap-y-[16px] mt-[13px]">
           {subAmbassador?.map((sub, index) => (
-            <AmbassadorCard
-              key={index}
+            <div 
+            onClick={()=>navigateTo(`${sub.email}`)}
+            key={index}
+            >
+            <AmbassadorCard 
               ambassador={sub}
               roleColor={"bg-[#082C25] text-[#FAF9F6]"}
             />
+            </div>
           ))}
         </div>
         {/* Desktop Sub Ambassadors */}

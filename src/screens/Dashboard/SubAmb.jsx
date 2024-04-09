@@ -117,7 +117,7 @@ const SubAmb = () => {
           </div>
           {/* Active Tab */}
           <main className="my-[16px] w-full ">
-            <div className="flex gap-x-[16px]">
+            <div className="flex max-lg:flex-col gap-x-[16px]">
               <div className="w-full ">
                 {/* Ambassador Details */}
                 <div className=" border border-[#E4E7EC] rounded-md pb-3">
@@ -263,11 +263,11 @@ const SubAmb = () => {
               </div>
               <div className="w-full">
                 {/* Statistics */}
-                <div className="w-full flex flex-row justify-between max-lg:mt-[28px] gapx-[20px] gap-y-[37px] lg:gap-x-[16px]">
+                <div className="w-full flex flex-row max-lg:flex-wrap justify-between max-lg:mt-[28px] gapx-[20px] gap-y-[37px] lg:gap-x-[16px]">
                   {statistics?.map((item, index) => (
                     <div
                       key={index}
-                      className="bg-[#FAF9F6] p-[12px] h-[175px] w-[173px] rounded-[10px] border-[1px] border-[#E4E7EC] flex flex-col justify-between "
+                      className="bg-[#FAF9F6] p-[12px] h-[175px] max-xsm:w-[150px] w-[173px] rounded-[10px] border-[1px] border-[#E4E7EC] flex flex-col justify-between "
                     >
                       <h5>{item.name}</h5>
                       <div className="flex gap-x-[12px]">
