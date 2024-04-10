@@ -16,7 +16,6 @@ import { AuthContext } from "../../context/AuthContext";
 import { CiUser } from "react-icons/ci";
 import { BsCheckCircleFill } from "react-icons/bs";
 import ViewAmb from "./components/ViewAmb";
-import { useQueryClient } from "@tanstack/react-query";
 
 const AmbassadorDetails = () => {
   const [activeTab, setActiveTab] = useState("Overview");
@@ -30,7 +29,7 @@ const AmbassadorDetails = () => {
   // eslint-disable-next-line no-unused-vars
   const [showAddLeads, setHeaderTitle] = useOutletContext();
   useEffect(() => {
-    setHeaderTitle(`View all Sub Ambassadors`);
+    setHeaderTitle(`View Sub Ambassadors`);
   }, []);
 
   // Ambassador Details query
@@ -39,12 +38,7 @@ const AmbassadorDetails = () => {
     queryFn: () =>
       axios.get(`${baseUrl}/ambassador/details/${email}`, { headers }),
   });
-  // To Test Sub AMB
-  const queryClient = useQueryClient();
-  const amb = queryClient.getQueryData(["ambassador"]);
-  // console.log(amb);
-
-  // console.log(ambDetailsQuery.data.data)
+ 
   const statistics = [
     { name: "Users", value: "5,000", percent: "2%" },
     { name: "Referrals", value: "1,000", percent: "2%" },
@@ -115,6 +109,7 @@ const AmbassadorDetails = () => {
           }
           statistics={statistics}
           user={user}
+          tasks={ ambDetailsQuery?.data && ambDetailsQuery?.data?.data?.data?.tasks}
         />
       );
       break;
@@ -136,10 +131,12 @@ const AmbassadorDetails = () => {
     default:
       content = "";
   }
-
+let data
   if (ambDetailsQuery.error) {
     console.log(ambDetailsQuery?.error);
   } else {
+    data = ambDetailsQuery.data?.data?.data
+    
     // console.log(ambDetailsQuery?.data);
   }
   return (
@@ -204,13 +201,13 @@ const AmbassadorDetails = () => {
         {/* Active Tab */}
         <div className="my-[16px] w-full">{content}</div>
       </div>
-      {/* Sub Ambassadors for Admin view */}
-      {user?.type === "Admin" && activeTab === "Overview" && (
-        <div className="hidden lg:flex flex-col bg-[#FAF9F6] border-[#E4E7EC] rounded-[10px] border-[1px] mt-[16px]">
+      {/* Sub Ambassadors for Admin Desktop view */}
+      {user?.type === "Admin" && activeTab === "Overview"  && data?.sub?.length > 0 && (
+        <div className="hidden lg:flex flex-col lg:mb-[64px] bg-[#FAF9F6] border-[#E4E7EC] rounded-[10px] border-[1px] mt-[16px]">
           <h3 className="font-inter mb-[9px] pl-[16px] mt-[38px] font-[500] text-[14px] leading-[20.3px] text-[#667185]">
             Sub Ambassador
           </h3>
-          <ViewAmb ambassadorQuery={amb?.data && amb?.data?.data?.all} />
+          <ViewAmb ambassadorQuery={data?.sub} />
         </div>
       )}
     </div>

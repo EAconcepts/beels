@@ -22,12 +22,7 @@ import { formatDate } from "../../utils/formatDate";
 import { handleCopy } from "../../utils/copyText";
 import { TiArrowUp } from "react-icons/ti";
 
-const leadTasks = [
-  { title: "Onboard 20 Ambassadors", max: 20, value: 10 },
-  { title: "Users with Virtual Cards   ", max: 20, value: 20 },
-  { title: "Refer 50 uses", max: 50, value: 45 },
-  { title: "60 Users to collect loans", max: 60, value: 54 },
-];
+
 
 const SubAmb = () => {
   const [activeTab, setActiveTab] = useState("Overview");
@@ -41,7 +36,7 @@ const SubAmb = () => {
   // eslint-disable-next-line no-unused-vars
   const [showAddLeads, setHeaderTitle] = useOutletContext();
   useEffect(() => {
-    setHeaderTitle(`View all Sub Ambassadors`);
+    setHeaderTitle(`View Sub Ambassadors`);
   }, []);
 
   // Ambassador Details query
@@ -60,7 +55,7 @@ const SubAmb = () => {
   if (ambDetailsQuery.error) {
     console.log(ambDetailsQuery?.error);
   } else {
-    // console.log(ambDetailsQuery?.data);
+    console.log(ambDetailsQuery?.data);
   }
 
   return (
@@ -290,7 +285,7 @@ const SubAmb = () => {
                     Tasks
                   </h3>
                   <div className="max-lg:mt-[11px] lg:mt-[5px] flex flex-col gap-y-[19px]">
-                    {leadTasks?.map((task, index) => (
+                    {ambDetailsQuery.data?.data?.data?.tasks?.map((task, index) => (
                       <TaskProgress key={index} task={task} />
                     ))}
                   </div>

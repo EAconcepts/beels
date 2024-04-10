@@ -79,7 +79,6 @@ const AllTasks = () => {
             ))}
         </div>
       ) : (
-        // <></>
         <Tasks
           tasks={
             ambassadorQuery.data && ambassadorQuery.data?.data?.data?.tasks

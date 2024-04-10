@@ -15,14 +15,9 @@ import { formatDate } from "../../../../utils/formatDate";
 import { handleCopy } from "../../../../utils/copyText";
 import TaskProgress from "../tasks/TaskProgress";
 import ViewAmb from "../ViewAmb";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const leadTasks = [
-  { title: "Onboard 20 Ambassadors", max: 20, value: 10 },
-  { title: "Users with Virtual Cards   ", max: 20, value: 20 },
-  { title: "Refer 50 uses", max: 50, value: 45 },
-  { title: "60 Users to collect loans", max: 60, value: 54 },
-];
+
 export const Transactions = (
   <div className="w-full flex max-xsm:flex-wrap max-sm:gap-y-[8px] sm:justify-between max-xsm:gap-x-[12px] gap-x-[6px] ">
     {/* Transactions */}
@@ -79,7 +74,7 @@ export const Transactions = (
   </div>
 );
 
-export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
+export const Overview = ({ ambDetails, subAmb, tasks, statistics, user }) => {
   // console.log(subAmb)
   // Sub Ambassador & Statistics jSX
   const Statistics = (
@@ -92,11 +87,14 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
           </h1>
           <div className="flex flex-col mt-[13px] gap-y-[16px]">
             {subAmb?.map((ambassador, index) => (
+              <Link  to={`${ambassador.email}`}
+              key={index}
+              >
               <AmbassadorCard
-                key={index}
                 ambassador={ambassador}
                 roleColor={"bg-[#22612A] text-white"}
               />
+              </Link>
             ))}
           </div>
         </div>
@@ -125,7 +123,7 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
       </div>
     </>
   );
-
+// Overview
   return (
     <div className="w-full lg:flex max-lg:flex-col lg:gap-x-[16px]">
       <div className="w-full ">
@@ -269,7 +267,7 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
         {/* Transactions Earning & Clicks */}
         <div className="mt-[22px]">{Transactions}</div>
       </div>
-      {/* Statistics, Tasks & Leaderboard */}
+      {/*Sub Amb, Statistics, Tasks & Leaderboard */}
       <div className="flex-shrink-0">
         {Statistics}
         {/* Tasks & Leaderboard */}
@@ -281,8 +279,8 @@ export const Overview = ({ ambDetails, subAmb, statistics, user }) => {
                 Tasks
               </h3>
               <div className="max-lg:mt-[11px] lg:mt-[5px] flex flex-col gap-y-[19px]">
-                {leadTasks?.map((task, index) => (
-                  <TaskProgress key={index} task={task} />
+                {tasks?.map((task) => (
+                  <TaskProgress key={task.id} task={task} />
                 ))}
               </div>
             </div>

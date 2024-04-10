@@ -65,23 +65,27 @@ const Ambassadors = () => {
     setHeaderTitle(`View all ${user.type !=="Admin" ? "Sub" :''} Ambassadors`);
   }, []);
   // ambassadorQuery
-  // const ambassadorQuery = useQuery({
-  //   queryKey: ["ambassador"],
-  //   queryFn: () => axios.get(`${baseUrl}/ambassador/all`, { headers }),
-  // });
   const ambassadorQuery = useQuery({
     queryKey: ["ambassador"],
-    queryFn: () => axios.get(`${baseUrl}/ambassador/dashboard`, { headers }),
+    queryFn: () =>  axios.get(`${baseUrl}/ambassador/${user.type ==='Admin' ? 'all' : 'dashboard'}`, { headers }),
   });
+  // const ambassadorQuery = useQuery({
+  //   queryKey: ["ambassador"],
+  //   queryFn: () => axios.get(`${baseUrl}/ambassador/dashboard`, { headers }),
+  // });
+  let data
   if (ambassadorQuery.error) {
     console.log(ambassadorQuery.error);
   } else {
-    // console.log(ambassadorQuery.data);
+    console.log(ambassadorQuery.data);
+    data = user?.type=="Admin" ? ambassadorQuery.data?.data?.data?.all : ambassadorQuery.data?.data?.data?.sub
   }
   return (
     <div className="flex flex-col xsm:px-[32px] px-[16px] gap-y-[16px]max-lg:pt-[24px] ">
       <div className="lg:hidden mt-[18px] flex flex-col gap-y-[16px]">
-        {ambassadorQuery.data?.data?.data?.sub?.map((ambassador, index) => (
+        { 
+        // ambassadorQuery.data?.data?.data?.sub?
+        data?.map((ambassador, index) => (
           <div
             onClick={() => navigateTo(`${ambassador.email}`)}
             key={index}
@@ -107,8 +111,8 @@ const Ambassadors = () => {
         {ambassadorQuery?.data?.data && (
           <ViewAmb
             ambassadorQuery={
-              ambassadorQuery?.data?.data &&
-              ambassadorQuery?.data?.data?.data?.sub
+              data&&
+              data
             }
           />
         )}
