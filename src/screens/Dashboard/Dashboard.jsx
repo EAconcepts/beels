@@ -13,13 +13,7 @@ import { useOutletContext } from "react-router-dom";
 
 const Dashboard = () => {
   const [setShowAddLeads] = useOutletContext();
-  // const [ambassadors, setAmbassadors] = useState(null);
-  const subAmbTasks = [
-    { title: "Onboard 20 Ambassadors", max: 20, value: 20 },
-    { title: "Users with Virtual Cards   ", max: 20, value: 20 },
-    { title: "Refer 50 uses", max: 50, value: 45 },
-    { title: "60 Users to collect loans", max: 60, value: 54 },
-  ];
+
   const { user, token } = useContext(AuthContext);
   // eslint-disable-next-line no-unused-vars
   const [showAddLeads, setHeaderTitle] = useOutletContext();
@@ -43,8 +37,7 @@ const Dashboard = () => {
   if (ambassadorQuery.error) {
     console.log(ambassadorQuery.error);
   } else {
-    console.log(ambassadorQuery.data);
-    // setAmbassadors(ambassadorQuery.data?.data?.data.all);
+    // console.log(ambassadorQuery.data);
   }
   let props = [];
   // If user is Admin
@@ -128,21 +121,24 @@ const Dashboard = () => {
           {user.type !== "Sub" ? (
             <DashboardHero setShowAddLeads={setShowAddLeads} />
           ) : (
-            // Sub Amb
+            // Sub Amb Desktop
             <div className="flex w-full mt-[40px]">
               <div className="hidden lg:flex w-full flex-col  max-lg:pl-[32px] pr-[27px] gap-y-[19px]">
                 <h4 className="text-[32px] leading-[46.4px] font-[600] font-poppins text-black">
                   My Tasks
                 </h4>
-                {subAmbTasks?.map((tasks, index) => (
-                  <TaskProgress key={index} task={tasks} />
-                ))}
+                {ambassadorQuery.data?.data?.data?.tasks?.map(
+                  (tasks, index) => (
+                    <TaskProgress key={index} task={tasks} />
+                  )
+                )}
               </div>
               <SubOverview />
             </div>
           )}
         </div>
-        {/* Overview Data */}
+        {/* Desktop */}
+        {/*  Sub Overview Data */}
         <div
           className={`mt-[48px] ${
             user.type == "Sub" && "mt-[57px] "
@@ -169,12 +165,13 @@ const Dashboard = () => {
             IconClass={user.type === "Sub" && "bg-[#B6F485]"}
           />
         </div>
+        {/* Mobile View */}
         {/* Sub Amb Tasks Progress and Leaderboard */}
         {user.type === "Sub" && (
           <>
             {/* Tasks */}
             <div className="lg:hidden flex flex-col mt-[40px] pl-[32px] pr-[27px] gap-y-[19px]">
-              {subAmbTasks?.map((tasks, index) => (
+              {ambassadorQuery.data?.data?.data?.tasks?.map((tasks, index) => (
                 <TaskProgress key={index} task={tasks} />
               ))}
             </div>

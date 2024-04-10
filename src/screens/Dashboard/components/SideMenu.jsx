@@ -1,6 +1,6 @@
 import { Logo } from "../../../components/logo";
 import logo from "../../../assets/images/logo-white.png";
-import avatar from "../../../assets/images/avatarImg.png";
+// import avatar from "../../../assets/images/avatarImg.png";
 import { MdKeyboardArrowDown, MdKeyboardArrowRight } from "react-icons/md";
 import dashboardIcon from "../../../assets/images/dashboardIcon.png";
 import circleIcon from "../../../assets/images/Circle.svg";
@@ -142,14 +142,14 @@ const SideMenu = ({
             onClick={() => setShowSidebar(false)}
             className=" relative rounded-full items-center flex justify-center border-[2.34px] border-white size-[50px]"
           >
-            {user?.image ? (
+            {/* {user?.image ? (
               <img
                 src={avatar}
                 className="object-cover object-center size-full rounded-full"
-              />
-            ) : (
+              /> */}
+            {/* ) : ( */}
               <FaUser className="size-[30px] text-white" />
-            )}
+            {/* )} */}
             {/* Online dot */}
             <div className="absolute bottom-0 right-0 rounded-full size-[12.5px] border-white border-[1.56px] bg-lightgreen "></div>
           </Link>

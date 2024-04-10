@@ -62,7 +62,7 @@ const Ambassadors = () => {
     Authorization: `Bearer ${token}`,
   };
   useEffect(() => {
-    setHeaderTitle(`View all Sub Ambassadors`);
+    setHeaderTitle(`View all ${user.type !=="Admin" ? "Sub" :''} Ambassadors`);
   }, []);
   // ambassadorQuery
   const ambassadorQuery = useQuery({

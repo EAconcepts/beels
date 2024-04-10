@@ -1,13 +1,14 @@
 import { twMerge } from "tailwind-merge";
 
 const TaskCard = ({ tasks, roleColor }) => {
+  console.log(tasks)
   return (
     <div className="">
       <div className="flex flex-col gap-y-[9px] justify-between mt[8px] pl-[13px] pt-[15px] pb-[21px] pr-[30px] border-[0.4px] rounded-[12px] border-black ">
         {/* Tasks & role*/}
         <div className="flex justify-between items-center ">
           <h3 className="max-w-[187px] text-wrap font-inter text-[20px] font-[700] leading-[29px] text-[#101928]">
-            {tasks.title}
+            {tasks.name}
           </h3>
           {/* role */}
           <div
@@ -18,7 +19,7 @@ const TaskCard = ({ tasks, roleColor }) => {
           >
             <p className=" text-[10.46px] font-[500] font-inter leading-[15.17px] text-center">
               {" "}
-              {tasks.role}{" "}
+              {tasks?.type}{" "}
             </p>
           </div>
         </div>
@@ -29,7 +30,7 @@ const TaskCard = ({ tasks, roleColor }) => {
           </p>
           <div className="flex justify-between items-center gap-x-[8px]">
             <p className="text-[#475367] text-[14.6px] font-[700] font-Inter leading-[12.17px] ">
-              {tasks?.dateAdded}
+              {tasks?.createdAt}
             </p>
             {tasks && (
               <div className="flex justify-center items-center gap-1">

@@ -11,7 +11,8 @@ import award from "../../../../assets/images/Award.png";
 
 import axios from "axios";
 
-const LeadTasks = ({ tasks }) => {
+const Tasks = ({ tasks }) => {
+  // console.log(tasks)
   const { user, token } = useContext(AuthContext);
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const headers = {
@@ -63,7 +64,7 @@ const LeadTasks = ({ tasks }) => {
           To-Do-Tasks
         </h2>
         <div className=" mt-[8px] grid grid-cols-2 gap-y-[16.5px] gap-x-[16px]">
-          {tasks.map((task, index) => (
+          {tasks && tasks.map((task, index) => (
             <div
               key={index}
               className="h-[135px] w-full w[174px] rounded-[10px] border-[1px] px-[15px] py-[11px] bg-[#FAF9F6] border-[#E4E7EC]"
@@ -75,7 +76,7 @@ const LeadTasks = ({ tasks }) => {
               >
                 <p
                   className={`bg-[#22612A] py-[1.49px] px-[8.97px] font-inter font-[500] text-[10.46px] leading-[15.17px] text-[#FAF9F6] rounded-[8.97px] ${
-                    user.type === "sub" && "invisible"
+                    user?.type === "sub" && "invisible"
                   }`}
                 >
                   20 Points
@@ -86,7 +87,7 @@ const LeadTasks = ({ tasks }) => {
                   Todo
                 </p>
                 <h5 className="text-black text-[14px] font-[700] leading-[20.3px] font-inter">
-                  {task.title}
+                  {task?.name}
                 </h5>
               </div>
             </div>
@@ -96,6 +97,7 @@ const LeadTasks = ({ tasks }) => {
 
       {/* Deskktop View */}
       <div className="lg:flex-col lg:flex hidden">
+        {/* Header */}
         <div className="flex justify-between mb-[35px]">
           <h2 className="font-poppins font-[600] text-[32px] leading-[46.4px] text-black">
             My tasks
@@ -113,4 +115,4 @@ const LeadTasks = ({ tasks }) => {
   );
 };
 
-export default LeadTasks;
+export default Tasks;
