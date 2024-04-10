@@ -65,9 +65,13 @@ const Ambassadors = () => {
     setHeaderTitle(`View all ${user.type !=="Admin" ? "Sub" :''} Ambassadors`);
   }, []);
   // ambassadorQuery
+  // const ambassadorQuery = useQuery({
+  //   queryKey: ["ambassador"],
+  //   queryFn: () => axios.get(`${baseUrl}/ambassador/all`, { headers }),
+  // });
   const ambassadorQuery = useQuery({
     queryKey: ["ambassador"],
-    queryFn: () => axios.get(`${baseUrl}/ambassador/all`, { headers }),
+    queryFn: () => axios.get(`${baseUrl}/ambassador/dashboard`, { headers }),
   });
   if (ambassadorQuery.error) {
     console.log(ambassadorQuery.error);
@@ -77,7 +81,7 @@ const Ambassadors = () => {
   return (
     <div className="flex flex-col xsm:px-[32px] px-[16px] gap-y-[16px]max-lg:pt-[24px] ">
       <div className="lg:hidden mt-[18px] flex flex-col gap-y-[16px]">
-        {ambassadorQuery.data?.data?.data?.all?.map((ambassador, index) => (
+        {ambassadorQuery.data?.data?.data?.sub?.map((ambassador, index) => (
           <div
             onClick={() => navigateTo(`${ambassador.email}`)}
             key={index}
@@ -104,7 +108,7 @@ const Ambassadors = () => {
           <ViewAmb
             ambassadorQuery={
               ambassadorQuery?.data?.data &&
-              ambassadorQuery?.data?.data?.data?.all
+              ambassadorQuery?.data?.data?.data?.sub
             }
           />
         )}
