@@ -1,6 +1,6 @@
 import { PiCaretUpDown } from "react-icons/pi";
 import Checkbox from "../../../components/Checkbox";
-import LeadIcon from "../../../assets/images/lead.png";
+// import LeadIcon from "../../../assets/images/lead.png";
 // import { HiOutlinePencil } from "react-icons/hi";
 import { TfiTrash } from "react-icons/tfi";
 import { formatDate } from "../../../utils/formatDate";
@@ -10,12 +10,13 @@ import { AuthContext } from "../../../context/AuthContext";
 import DeleteModal from "../../../components/modal/DeleteModal";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { CiUser } from "react-icons/ci";
 
 const ViewAmb = ({ ambassadorQuery }) => {
   // console.log(ambassadorQuery);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const navigateTo = useNavigate();
-  const {  token } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -69,10 +70,12 @@ const ViewAmb = ({ ambassadorQuery }) => {
                   <div className="flex gap-x-[8.9px] items-center">
                     <Checkbox className="" />
                     <div className="flex gap-x-[12.51px] justify-start items-center ">
-                      <img
+                      {/* <img
                         src={LeadIcon}
                         className=" roundedfull size-[41.7px]"
-                      />
+                      /> */}
+                      <CiUser className="size-[32px]" />
+
                       {/* </div>/ */}
                       <div className="flex flex-col font-inter text-[10.46px] leading-[21.17px] ">
                         <p className="text-[#101928]   font-[500]  ">{`${ambassador?.first_name}   ${ambassador?.last_name}  `}</p>

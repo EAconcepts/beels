@@ -5,10 +5,11 @@ import { AuthContext } from "../../../context/AuthContext";
 import SideMenu from "./SideMenu";
 import AddLeads from "./AddLeads";
 import { IoSearchOutline } from "react-icons/io5";
-import { CiBellOn } from "react-icons/ci";
-import { FaUser } from "react-icons/fa";
-import avatar from "../../../assets/images/avatarImg.png";
+import { CiBellOn, CiUser } from "react-icons/ci";
+// import { FaUser } from "react-icons/fa";
+// import avatar from "../../../assets/images/avatarImg.png";
 import { useNavigate } from "react-router-dom";
+import { BsCheckCircleFill } from "react-icons/bs";
 
 const DashboardLayout = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -74,6 +75,7 @@ const DashboardLayout = () => {
               ? user.type =="Lead" && "Lead"  + " Ambassador Dashboard"
               : "Admin Dashboard"}
           </p>
+          {/* Top Nav */}
           <div className="w-full hidden xlg:pl-[54px] lg:pl-[16px] pr-[44px] xlg:pt-[53px] xlg:pb-[35px] lg:flex bg-[#F5F5F5] items-center justify-between ">
             {/* Title & Search */}
             <div className="flex gap-x-[24px] ">
@@ -93,25 +95,26 @@ const DashboardLayout = () => {
               {/* Notification */}
               <div className="relative p-[8px]">
                 <CiBellOn className="text-[24px]" />
-                <div className="absolute top-[-2px] right-[-2px] size-[14px] text-center rounded-full bg-[#FF4D4D] text-white font-[700] font-inter text-[10px] leading-[12.1px]">
+                {/* <div className="absolute top-[-2px] right-[-2px] size-[14px] text-center rounded-full bg-[#FF4D4D] text-white font-[700] font-inter text-[10px] leading-[12.1px]">
                   4
-                </div>
+                </div> */}
               </div>
               {/* Profile details */}
               <div className="flex gap-x-[8px] items-center px-[8px]">
                 {/* Avatar Image */}
                 <Link
                   to="profile"
-                  className=" relative rounded-full items-center flex justify- border-[2.34px] border-white size-[50px]"
+                  className=" relative rounded-full items-center flex justify-center border-[2.34px] border-white size-[50px]"
                 >
-                  {user?.image ? (
+                  {/* {user?.image ? (
                     <img
                       src={avatar}
                       className="object-cover object-center size-full rounded-full"
                     />
-                  ) : (
-                    <FaUser className="size-[30px] text-black" />
-                  )}
+                  ) : ( */}
+                   <CiUser className="size-[40px]" />
+            <BsCheckCircleFill className="absolute bottom-0 right-0 text-[#1671D9] "/>
+                  {/* )} */}
                 </Link>
                 {/* Profile Name */}
                 <Link

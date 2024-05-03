@@ -1,6 +1,6 @@
 // /* eslint-disable react/prop-types */
 
-import { TiArrowUp } from "react-icons/ti";
+// import { TiArrowUp } from "react-icons/ti";
 import PersonIcon from "../../../../assets/images/icon.png";
 import CopyIcon from "../../../../assets/images/copy.png";
 import MailIcon from "../../../../assets/images/mail.png";
@@ -17,64 +17,80 @@ import TaskProgress from "../tasks/TaskProgress";
 import ViewAmb from "../ViewAmb";
 import { Link, useNavigate } from "react-router-dom";
 
+// transactions Earnings and clicks
+export const Transactions = ({ details }) => {
+  return (
+    <div className="w-full flex max-xsm:flex-wrap max-sm:gap-y-[8px] sm:justify-between max-xsm:gap-x-[12px] gap-x-[6px] ">
+      {/* Transactions */}
+      <div className="sm:w-full max-xsm:w-[121px] bg-[#FAF9F6] rounded-[10px] flex flex-col p-[12px]  border-[1px] border-[#E4E7EC]  ">
+        <p className="text-[14px] font-[500] font-inter leading-[20.3px] text-[#667185]">
+          Transaction
+        </p>
+        <div className="flex gap-x-[8px]">
+          <h1 className="font-inter text-[20px] font-[600] leading-[24px] tracking-[-2%]">
+            {details?.user?.business?.balance
+              ? details?.user?.business.balance
+              : 0}
+          </h1>
+          {/* Percent */}
+          {/* <div className="flex gap-x-[2px] items-center ">
+          <TiArrowUp className="size-[12px] text-[#036B26]" />
+          <small className="text-[#036B26] text-[12px] leading-[17.4px] tracking-[-0.5%] font-[500] font-inter">
+            2%
+          </small>
+        </div> */}
+        </div>
+      </div>
+      {/* Earnings */}
+      <div className="sm:w-full max-xsm:w-[121px] bg-[#FAF9F6] flex flex-col p-[12px] border-[1px] border-[#E4E7EC] rounded-[10px]">
+        <p className="text-[14px] font-[500] font-inter leading-[20.3px] text-[#667185]">
+          Earnings
+        </p>
+        <div className="flex gap-x-[8px]">
+          <h1 className="font-inter text-[20px] font-[600] leading-[24px] tracking-[-2%]">
+            {details?.user?.business?.balance
+              ? details?.user?.business.balance
+              : 0}
+          </h1>
+          {/* Percent */}
+          {/* <div className="flex gap-x-[2px] items-center ">
+          <TiArrowUp className="size-[12px] text-[#036B26]" />
+          <small className="text-[#036B26] text-[12px] leading-[17.4px] tracking-[-0.5%] font-[500] font-inter">
+            2%
+          </small>
+        </div> */}
+        </div>
+      </div>
+      {/* Clicks */}
+      <div className="sm:w-full max-xsm:w-[121px] bg-[#FAF9F6] rounded-[10px] flex flex-col p-[12px] border-[1px] border-[#E4E7EC] ">
+        <p className="text-[14px] font-[500] font-inter leading-[20.3px] text-[#667185]">
+          Clicks
+        </p>
+        <div className=" flex gap-x-[8px]">
+          <h1 className="font-inter text-[20px] font-[600] leading-[24px] tracking-[-2%]">
+            0
+          </h1>
+          {/* Percent */}
+          {/* <div className=" flex gap-x-[2px]  items-center ">
+          <TiArrowUp className="size-[12px] text-[#036B26]" />
+          <small className="text-[#036B26] text-[12px] leading-[17.4px] tracking-[-0.5%] font-[500] font-inter">
+            2%
+          </small>
+        </div> */}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export const Transactions = (
-  <div className="w-full flex max-xsm:flex-wrap max-sm:gap-y-[8px] sm:justify-between max-xsm:gap-x-[12px] gap-x-[6px] ">
-    {/* Transactions */}
-    <div className="sm:w-full max-xsm:w-[121px] bg-[#FAF9F6] rounded-[10px] flex flex-col p-[12px]  border-[1px] border-[#E4E7EC]  ">
-      <p className="text-[14px] font-[500] font-inter leading-[20.3px] text-[#667185]">
-        Transaction
-      </p>
-      <div className="flex gap-x-[8px]">
-        <h1 className="font-inter text-[20px] font-[600] leading-[24px] tracking-[-2%]">
-          4,647
-        </h1>
-        <div className="flex gap-x-[2px] items-center ">
-          <TiArrowUp className="size-[12px] text-[#036B26]" />
-          <small className="text-[#036B26] text-[12px] leading-[17.4px] tracking-[-0.5%] font-[500] font-inter">
-            2%
-          </small>
-        </div>
-      </div>
-    </div>
-    {/* Earnings */}
-    <div className="sm:w-full max-xsm:w-[121px] bg-[#FAF9F6] flex flex-col p-[12px] border-[1px] border-[#E4E7EC] rounded-[10px]">
-      <p className="text-[14px] font-[500] font-inter leading-[20.3px] text-[#667185]">
-        Earnings
-      </p>
-      <div className="flex gap-x-[8px]">
-        <h1 className="font-inter text-[20px] font-[600] leading-[24px] tracking-[-2%]">
-          4,647
-        </h1>
-        <div className="flex gap-x-[2px] items-center ">
-          <TiArrowUp className="size-[12px] text-[#036B26]" />
-          <small className="text-[#036B26] text-[12px] leading-[17.4px] tracking-[-0.5%] font-[500] font-inter">
-            2%
-          </small>
-        </div>
-      </div>
-    </div>
-    {/* Clicks */}
-    <div className="sm:w-full max-xsm:w-[121px] bg-[#FAF9F6] rounded-[10px] flex flex-col p-[12px] border-[1px] border-[#E4E7EC] ">
-      <p className="text-[14px] font-[500] font-inter leading-[20.3px] text-[#667185]">
-        Clicks
-      </p>
-      <div className=" flex gap-x-[8px]">
-        <h1 className="font-inter text-[20px] font-[600] leading-[24px] tracking-[-2%]">
-          4,647
-        </h1>
-        <div className=" flex gap-x-[2px]  items-center ">
-          <TiArrowUp className="size-[12px] text-[#036B26]" />
-          <small className="text-[#036B26] text-[12px] leading-[17.4px] tracking-[-0.5%] font-[500] font-inter">
-            2%
-          </small>
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
-export const Overview = ({ ambDetails, subAmb, tasks, statistics, user }) => {
+export const Overview = ({
+  ambDetails,
+  subAmb,
+  tasks,
+  statistics,
+  user,
+  details,
+}) => {
   // console.log(subAmb)
   // Sub Ambassador & Statistics jSX
   const Statistics = (
@@ -87,19 +103,17 @@ export const Overview = ({ ambDetails, subAmb, tasks, statistics, user }) => {
           </h1>
           <div className="flex flex-col mt-[13px] gap-y-[16px]">
             {subAmb?.map((ambassador, index) => (
-              <Link  to={`${ambassador.email}`}
-              key={index}
-              >
-              <AmbassadorCard
-                ambassador={ambassador}
-                roleColor={"bg-[#22612A] text-white"}
-              />
+              <Link to={`${ambassador.email}`} key={index}>
+                <AmbassadorCard
+                  ambassador={ambassador}
+                  roleColor={"bg-[#22612A] text-white"}
+                />
               </Link>
             ))}
           </div>
         </div>
       )}
-      {/* Statistics */}
+      {/* Statistics => USERS | REFERRALS | AMBASSADORS */}
       <div className="xsm:w-full flex flex-wrap justify-between max-lg:mt-[28px] xs:gap-x-[10px] xsm:gapx-[20px] gap-y-[37px] lg:gap-x-[16px]">
         {statistics?.map((item, index) => (
           <div
@@ -111,19 +125,20 @@ export const Overview = ({ ambDetails, subAmb, tasks, statistics, user }) => {
               <h2 className="text-[20px] font-inter font-[600] leading-[24px] tracking-[-2%] text-[#101928]">
                 {item.value}
               </h2>
-              <div className=" flex gap-x-[2px]  items-center ">
+              {/* Percent */}
+              {/* <div className=" flex gap-x-[2px]  items-center ">
                 <TiArrowUp className="size-[12px] text-[#036B26]" />
                 <small className="text-[#036B26] text-[12px] leading-[17.4px] tracking-[-0.5%] font-[500] font-inter">
                   {item.percent}
                 </small>
-              </div>
+              </div> */}
             </div>
           </div>
         ))}
       </div>
     </>
   );
-// Overview
+  // Overview
   return (
     <div className="w-full lg:flex max-lg:flex-col lg:gap-x-[16px]">
       <div className="w-full ">
@@ -140,7 +155,9 @@ export const Overview = ({ ambDetails, subAmb, tasks, statistics, user }) => {
                 </p>
                 <p className="text-[#101928] text-[14px] leading-[20.3px] font-[500] font-inter ">
                   {" "}
-                  {ambDetails?.acct_no ? ambDetails.acct_no : "0"}
+                  {ambDetails?.business.acc_number
+                    ? ambDetails?.business.acc_number
+                    : "0"}
                 </p>
               </div>
             </div>
@@ -164,7 +181,11 @@ export const Overview = ({ ambDetails, subAmb, tasks, statistics, user }) => {
                 </p>
               </div>
             </div>
-            <img onClick={()=>handleCopy(ambDetails?.email)} src={CopyIcon} className="" />
+            <img
+              onClick={() => handleCopy(ambDetails?.email)}
+              src={CopyIcon}
+              className=""
+            />
           </div>
           {/* First name */}
           <div className="flex justify-between items-center px-5 py-2 border-b border-[#E4E7EC]">
@@ -181,7 +202,10 @@ export const Overview = ({ ambDetails, subAmb, tasks, statistics, user }) => {
               </div>
             </div>
 
-            <img onClick={()=>handleCopy(ambDetails?.first_name)} src={CopyIcon} />
+            <img
+              onClick={() => handleCopy(ambDetails?.first_name)}
+              src={CopyIcon}
+            />
           </div>
           {/* Last Name */}
           <div className="flex justify-between items-center px-5 py-2 border-b border-[#E4E7EC]">
@@ -198,7 +222,10 @@ export const Overview = ({ ambDetails, subAmb, tasks, statistics, user }) => {
               </div>
             </div>
 
-            <img onClick={()=>handleCopy(ambDetails?.last_name)} src={CopyIcon} />
+            <img
+              onClick={() => handleCopy(ambDetails?.last_name)}
+              src={CopyIcon}
+            />
           </div>
           {/* Phone Number */}
           <div className="flex justify-between items-center px-5 py-2 border-b border-[#E4E7EC]">
@@ -214,7 +241,7 @@ export const Overview = ({ ambDetails, subAmb, tasks, statistics, user }) => {
                 </p>
               </div>
             </div>
-            <img onClick={()=>handleCopy(ambDetails?.phone)} src={CopyIcon} />
+            <img onClick={() => handleCopy(ambDetails?.phone)} src={CopyIcon} />
           </div>
           {/* School */}
           <div className="flex justify-between items-center px-5 py-2 border-b border-[#E4E7EC]">
@@ -230,7 +257,10 @@ export const Overview = ({ ambDetails, subAmb, tasks, statistics, user }) => {
                 </p>
               </div>
             </div>
-            <img onClick={()=>handleCopy(ambDetails?.school)} src={CopyIcon} />
+            <img
+              onClick={() => handleCopy(ambDetails?.school)}
+              src={CopyIcon}
+            />
           </div>
           {/* Ambassador ref link */}
           <div className="flex justify-between items-center px-5 py-2 border-b border-[#E4E7EC]">
@@ -242,7 +272,7 @@ export const Overview = ({ ambDetails, subAmb, tasks, statistics, user }) => {
                   Ambassador ref link{" "}
                 </p>
                 <p className="text-[#101928] text-[14px] leading-[20.3px] font-[500] font-inter ">
-                  Beels/Sandy-38ndl{" "}
+                  {ambDetails?.personal?.ref_code}
                 </p>
               </div>
             </div>
@@ -265,7 +295,7 @@ export const Overview = ({ ambDetails, subAmb, tasks, statistics, user }) => {
           </div>
         </div>
         {/* Transactions Earning & Clicks */}
-        <div className="mt-[22px]">{Transactions}</div>
+        <div className="mt-[22px]">{<Transactions details={details} />}</div>
       </div>
       {/*Sub Amb, Statistics, Tasks & Leaderboard */}
       <div className="flex-shrink-0">
@@ -346,12 +376,13 @@ export const UserStats = ({ userStats }) => {
               <h1 className="text-[18px] font-[600] font-inter leading-[26.1px] text-[#101928]">
                 {item.value}
               </h1>
-              <div className=" flex gap-x-[2px]  items-center ">
+              {/* Percent */}
+              {/* <div className=" flex gap-x-[2px]  items-center ">
                 <TiArrowUp className="size-[12px] text-[#036B26]" />
                 <small className="text-[#036B26] text-[12px] leading-[17.4px] tracking-[-0.5%] font-[500] font-inter">
                   {item.percent}
                 </small>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -362,7 +393,7 @@ export const UserStats = ({ userStats }) => {
 
 export const Ambassadors = ({ subAmbassador, userStats, user }) => {
   console.log(subAmbassador);
-  const navigateTo = useNavigate()
+  const navigateTo = useNavigate();
   return (
     <div
       className={`py-[33px] px-[10px] bg-white flex flex-col border-[1px] border-[#EDEDF2]
@@ -370,38 +401,39 @@ export const Ambassadors = ({ subAmbassador, userStats, user }) => {
       `}
     >
       {/* Sub Ambassadors */}
-      <div className={` ${user.type == "Admin" && "shrink0 lg:w-ful"}`}>
-        <h1 className="text-[20px] lg:hidden font-poppins font-[600] leading-[29px] text-black">
-          {" "}
-          Sub Ambassadors
-        </h1>
-        {/* Sub Ambassadors */}
-        <div className="lg:hidden flex flex-col gap-y-[16px] mt-[13px]">
-          {subAmbassador?.map((sub, index) => (
-            <div 
-            onClick={()=>navigateTo(`${sub.email}`)}
-            key={index}
-            >
-            <AmbassadorCard 
-              ambassador={sub}
-              roleColor={"bg-[#082C25] text-[#FAF9F6]"}
-            />
-            </div>
-          ))}
-        </div>
-        {/* Desktop Sub Ambassadors */}
-        <div
-          className={`hidden lg:block lg:w-ful mt-[32px]  bg-[#FAF9F6] rounded-[8px] pl-[12.79px] lg:pt-[30.39px]`}
-        >
-          <h1 className="text-[20px] pl-[24px] mb-[12px] font-poppins font-[600] leading-[29px] text-black">
+      {subAmbassador && subAmbassador.length > 0 && (
+        <div className={` ${user.type == "Admin" && "shrink0 lg:w-ful"}`}>
+          {/* <> */}
+          <h1 className="text-[20px] lg:hidden font-poppins font-[600] leading-[29px] text-black">
             {" "}
             Sub Ambassadors
           </h1>
-          {subAmbassador && subAmbassador.length > 0 && (
-            <ViewAmb ambassadorQuery={subAmbassador} />
-          )}
+          {/* Sub Ambassadors */}
+          <div className="lg:hidden flex flex-col gap-y-[16px] mt-[13px]">
+            {subAmbassador?.map((sub, index) => (
+              <div onClick={() => navigateTo(`${sub.email}`)} key={index}>
+                <AmbassadorCard
+                  ambassador={sub}
+                  roleColor={"bg-[#082C25] text-[#FAF9F6]"}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Sub Ambassadors */}
+          <div
+            className={`hidden lg:block lg:w-ful mt-[32px]  bg-[#FAF9F6] rounded-[8px] pl-[12.79px] lg:pt-[30.39px]`}
+          >
+            <h1 className="text-[20px] pl-[24px] mb-[12px] font-poppins font-[600] leading-[29px] text-black">
+              {" "}
+              Sub Ambassadors
+            </h1>
+            {subAmbassador && subAmbassador.length > 0 && (
+              <ViewAmb ambassadorQuery={subAmbassador} />
+            )}
+          </div>
         </div>
-      </div>
+      )}
       {/* Stats */}
       <div
         className={`w-full grid-cols-2 mt-[44px] ${
@@ -416,4 +448,4 @@ export const Ambassadors = ({ subAmbassador, userStats, user }) => {
   );
 };
 
-export const SendMessage = <div>SendMessage</div>;
+export const SendMessage = <div></div>;

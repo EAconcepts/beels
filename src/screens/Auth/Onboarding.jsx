@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
-import MailIcon from "../../assets/images/mail.png";
-import LockIcon from "../../assets/images/lock.png";
+import  { useState } from "react";
+// import { FcGoogle } from "react-icons/fc";
+// import MailIcon from "../../assets/images/mail.png";
+// import LockIcon from "../../assets/images/lock.png";
 import Image from "../../assets/images/speaker.png";
 import "./auth.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/Beels-logo.png";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
