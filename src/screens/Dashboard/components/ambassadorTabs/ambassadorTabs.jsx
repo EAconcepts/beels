@@ -22,25 +22,25 @@ export const Transactions = ({ details }) => {
   return (
     <div className="w-full flex max-xsm:flex-wrap max-sm:gap-y-[8px] sm:justify-between max-xsm:gap-x-[12px] gap-x-[6px] ">
       {/* Transactions */}
-      <div className="sm:w-full max-xsm:w-[121px] bg-[#FAF9F6] rounded-[10px] flex flex-col p-[12px]  border-[1px] border-[#E4E7EC]  ">
+      {/* <div className="sm:w-full max-xsm:w-[121px] bg-[#FAF9F6] rounded-[10px] flex flex-col p-[12px]  border-[1px] border-[#E4E7EC]  ">
         <p className="text-[14px] font-[500] font-inter leading-[20.3px] text-[#667185]">
           Transaction
-        </p>
-        <div className="flex gap-x-[8px]">
-          <h1 className="font-inter text-[20px] font-[600] leading-[24px] tracking-[-2%]">
+        </p> */}
+      {/* <div className="flex gap-x-[8px]"> */}
+      {/* <h1 className="font-inter text-[20px] font-[600] leading-[24px] tracking-[-2%]">
             {details?.user?.business?.balance
               ? details?.user?.business.balance
               : 0}
-          </h1>
-          {/* Percent */}
-          {/* <div className="flex gap-x-[2px] items-center ">
+          </h1> */}
+      {/* Percent */}
+      {/* <div className="flex gap-x-[2px] items-center ">
           <TiArrowUp className="size-[12px] text-[#036B26]" />
           <small className="text-[#036B26] text-[12px] leading-[17.4px] tracking-[-0.5%] font-[500] font-inter">
             2%
           </small>
         </div> */}
-        </div>
-      </div>
+      {/* </div> */}
+      {/* </div> */}
       {/* Earnings */}
       <div className="sm:w-full max-xsm:w-[121px] bg-[#FAF9F6] flex flex-col p-[12px] border-[1px] border-[#E4E7EC] rounded-[10px]">
         <p className="text-[14px] font-[500] font-inter leading-[20.3px] text-[#667185]">
@@ -48,9 +48,7 @@ export const Transactions = ({ details }) => {
         </p>
         <div className="flex gap-x-[8px]">
           <h1 className="font-inter text-[20px] font-[600] leading-[24px] tracking-[-2%]">
-            {details?.user?.business?.balance
-              ? details?.user?.business.balance
-              : 0}
+            {details?.earnings ? details?.earnings : 0}
           </h1>
           {/* Percent */}
           {/* <div className="flex gap-x-[2px] items-center ">
@@ -155,9 +153,7 @@ export const Overview = ({
                 </p>
                 <p className="text-[#101928] text-[14px] leading-[20.3px] font-[500] font-inter ">
                   {" "}
-                  {ambDetails?.business.acc_number
-                    ? ambDetails?.business.acc_number
-                    : "0"}
+                  {ambDetails?.business ? ambDetails?.business.acc_number : "0"}
                 </p>
               </div>
             </div>

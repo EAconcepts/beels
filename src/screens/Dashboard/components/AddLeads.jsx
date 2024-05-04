@@ -10,10 +10,12 @@ import { toast } from "sonner";
 
 const AddLeads = ({ setShowAddLeads }) => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const { token, user } = useContext(AuthContext);
+
   const [leadInfo, setLeadInfo] = useState({
     email: "",
     first_name: "",
-    type: "Lead",
+    type: user?.type === "Admin" ? "Lead": "Sub",
     last_name: "",
     phone: "",
     school: "",
@@ -25,7 +27,6 @@ const AddLeads = ({ setShowAddLeads }) => {
     setLeadInfo((prevVals) => ({ ...prevVals, [name]: value }));
   };
   const apiUrl = import.meta.env.VITE_BASE_URL;
-  const { token } = useContext(AuthContext);
 
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -46,7 +47,6 @@ const AddLeads = ({ setShowAddLeads }) => {
       if (data.data.status == "Success") {
         setShowSuccessModal(true);
       }
-      // setLeadInfo(null);
       else toast.error(data.data.message);
     },
     onError: (error) => {
@@ -72,7 +72,7 @@ const AddLeads = ({ setShowAddLeads }) => {
           <div className="flex flex-col gap-y-[12px] lg:pt-[131px]">
             <h3 className="text-[24px] lg:text-[32px] lg:leading-[36px] lg:text-[#242731] pt-[9px] font-[700] leading-[34.8px] text-black font-Poppins">
               {" "}
-              Lead Ambassador Info{" "}
+             {user?.type ==='Admin' ?  "Lead" : "Sub"} Ambassador Info{" "}
             </h3>
             <p className="text-[16px] font-[400] text-black lg:font-[300] leading-[22px] font-poppins">
               Fill in the data for the lead ambassador. A email will be sent to

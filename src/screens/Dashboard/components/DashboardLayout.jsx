@@ -71,7 +71,7 @@ const DashboardLayout = () => {
           <p className="lg:hidden text-[24px]  font-[600] text-[#000000] font-[Poppins]  ">
             {headerTitle
               ? headerTitle
-              : user?.type !== "Admin"
+              : user && user?.type !== "Admin"
               ? user.type =="Lead" && "Lead"  + " Ambassador Dashboard"
               : "Admin Dashboard"}
           </p>

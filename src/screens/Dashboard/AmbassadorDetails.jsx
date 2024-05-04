@@ -89,7 +89,7 @@ const AmbassadorDetails = () => {
     },
     {
       title: "Retained Users",
-      value: "0",
+      value: activeUsers ? activeUsers : 0,
       percent: "15%",
     },
     {
@@ -217,13 +217,13 @@ const AmbassadorDetails = () => {
               onClick={() => setActiveTab(item.tab)}
               key={index}
               className={`py-[16px] px-[8px] text-[14px] font-[500] leading-[20.3px] font-inter text-[#344054] border-  ${
-                activeTab === item.tab && user.type === "Admin"
+                activeTab === item.tab && user && user.type === "Admin"
                   ? "border-b border-b-[#082C25]"
-                  : activeTab === item.tab && user.type !== "Admin"
+                  : activeTab === item.tab && user && user.type !== "Admin"
                   ? "border-b border-b-[#F56630] text-[#F56630]"
                   : "border-b-[#E4E7EC"
               } ${
-                user.type !== "Admin" &&
+                user && user.type !== "Admin" &&
                 item.tab === "Ambassadors" &&
                 "hidden max-xsm:hidden lg:hidden"
               }`}
@@ -236,7 +236,7 @@ const AmbassadorDetails = () => {
         <div className="my-[16px] w-full">{content}</div>
       </div>
       {/* Sub Ambassadors for Admin Desktop view */}
-      {user?.type === "Admin" &&
+      {user && user?.type === "Admin" &&
         activeTab === "Overview" &&
         data?.sub?.length > 0 && (
           <div className="hidden lg:flex flex-col lg:mb-[64px] bg-[#FAF9F6] border-[#E4E7EC] rounded-[10px] border-[1px] mt-[16px]">
