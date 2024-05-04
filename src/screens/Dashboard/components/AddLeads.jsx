@@ -89,7 +89,7 @@ const AddLeads = ({ setShowAddLeads }) => {
               <div className="flex flex-col gap-y-[2px] ">
                 <h2 className="text-[20px] font-[600] text-[#242731] ">
                   {" "}
-                  Lead Ambassador Info{" "}
+                  {user?.type ==='Admin' ?  "Lead" : "Sub"} Ambassador Info{" "}
                 </h2>
                 <p className="text-[12px] leading-[16px] font-[300] text-[#575F6E] ">
                   Please fill in the required details{" "}
@@ -98,7 +98,7 @@ const AddLeads = ({ setShowAddLeads }) => {
               {/* Email Address */}
               <div className="lg:w-full flex flex-col gap-y-[8px]">
                 <p className="text-[14px] font-[400] leading-[20px] text-[#242426]">
-                  Lead Ambassador Email Address{" "}
+                {user?.type ==='Admin' ?  "Lead" : "Sub"} Ambassador Email Address{" "}
                 </p>
                 <input
                   type="email"
@@ -112,7 +112,7 @@ const AddLeads = ({ setShowAddLeads }) => {
               {/* First Name */}
               <div className="flex flex-col gap-y-[8px]">
                 <p className="text-[14px] font-[400] leading-[20px] text-[#242426]">
-                  Lead’s First Name
+                {user?.type ==='Admin' ?  "Lead's" : "Sub's"} First Name
                 </p>
                 <input
                   type="text"
@@ -129,7 +129,7 @@ const AddLeads = ({ setShowAddLeads }) => {
               {/* Last Name */}
               <div className="flex flex-col gap-y-[8px]">
                 <p className="text-[14px] font-[400] leading-[20px] text-[#242426]">
-                  Lead’s Last Name
+                {user?.type ==='Admin' ?  "Lead's" : "Sub's"} Last Name
                 </p>
                 <input
                   required
@@ -146,7 +146,7 @@ const AddLeads = ({ setShowAddLeads }) => {
               {/* Phone Number */}
               <div className="flex flex-col gap-y-[8px]">
                 <p className="text-[14px] font-[400] leading-[20px] text-[#242426]">
-                  Lead’s Phone Number
+                {user?.type ==='Admin' ?  "Lead's" : "Sub's"} Phone Number
                 </p>
                 <input
                   required
@@ -163,7 +163,7 @@ const AddLeads = ({ setShowAddLeads }) => {
               {/* School */}
               <div className="flex flex-col gap-y-[8px]">
                 <p className="text-[14px] font-[400] leading-[20px] text-[#242426]">
-                  Lead’s School
+                {user?.type ==='Admin' ?  "Lead's" : "Sub's"} School
                 </p>
                 <input
                   type="text"
@@ -180,7 +180,7 @@ const AddLeads = ({ setShowAddLeads }) => {
               {/* Department */}
               <div className="flex flex-col gap-y-[8px]">
                 <p className="text-[14px] font-[400] leading-[20px] text-[#242426]">
-                  Lead’s Department
+                {user?.type ==='Admin' ?  "Lead's" : "Sub's"} Department
                 </p>
                 <input
                   type="text"

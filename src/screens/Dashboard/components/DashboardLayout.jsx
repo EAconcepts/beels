@@ -23,7 +23,7 @@ const DashboardLayout = () => {
 
   useEffect(() => {
     if (!token || token == undefined || token === "") {
-      navigateTo("/");
+      navigateTo(`/`);
     }
   }, []);
 
@@ -72,7 +72,7 @@ const DashboardLayout = () => {
             {headerTitle
               ? headerTitle
               : user && user?.type !== "Admin"
-              ? user.type =="Lead" && "Lead"  + " Ambassador Dashboard"
+              ? user.type == "Lead" && "Lead" + " Ambassador Dashboard"
               : "Admin Dashboard"}
           </p>
           {/* Top Nav */}
@@ -112,8 +112,8 @@ const DashboardLayout = () => {
                       className="object-cover object-center size-full rounded-full"
                     />
                   ) : ( */}
-                   <CiUser className="size-[40px]" />
-            <BsCheckCircleFill className="absolute bottom-0 right-0 text-[#1671D9] "/>
+                  <CiUser className="size-[40px]" />
+                  <BsCheckCircleFill className="absolute bottom-0 right-0 text-[#1671D9] " />
                   {/* )} */}
                 </Link>
                 {/* Profile Name */}
