@@ -24,7 +24,7 @@ const Onboarding = () => {
     email: email || "",
   });
 
-  const navigateTo = useNavigate()
+  const navigateTo = useNavigate();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues((prevVals) => ({ ...prevVals, [name]: value }));
@@ -42,19 +42,24 @@ const Onboarding = () => {
     mutationFn: () =>
       axios.post(`${apiUrl}/ambassador/onboard`, formValues, { headers }),
     onSuccess: (data) => {
-      // //console.log(data);
+      // console.log(data);
       if (data.data.status == "Success") {
         const userDetails = data.data.data;
-        navigateTo(`/${userDetails.type}-ambassador/login`)
+        if (userDetails.type == "Sub") {
+          navigateTo("/");
+        } else {
+          navigateTo(`/lead-ambassador/login`);
+        }
         // localStorage.setItem("logged_in", JSON.stringify(userDetails));
-      toast.success(data.data.message);
-
+        toast.success(data.data.message);
       }
       // toast.success(data.data.message);
     },
     onError: (error) => {
       // console.log(error);
-      toast.error(error.response.data.message || error.data.message || error.message);
+      toast.error(
+        error.response.data.message || error.data.message || error.message
+      );
     },
   });
   const handlePhoneVerification = (e) => {
@@ -72,7 +77,7 @@ const Onboarding = () => {
       // //console.log(data);
       if (data.data.status == "Success") {
         setConfirmOtp(true);
-        toast.success('OTP Sent Successfully!')
+        toast.success("OTP Sent Successfully!");
       }
     },
     onError: (error) => {
