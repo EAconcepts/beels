@@ -9,7 +9,7 @@ import logo from "../../assets/images/Beels-logo.png";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // import { FcGoogle } from "react-icons/fc";
 
 const Onboarding = () => {
@@ -23,6 +23,8 @@ const Onboarding = () => {
     pin: "",
     email: email || "",
   });
+
+  const navigateTo = useNavigate()
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues((prevVals) => ({ ...prevVals, [name]: value }));
@@ -43,12 +45,15 @@ const Onboarding = () => {
       // //console.log(data);
       if (data.data.status == "Success") {
         const userDetails = data.data.data;
-        localStorage.setItem("logged_in", JSON.stringify(userDetails));
-      }
+        navigateTo(`/${userDetails.type}-ambassador/login`)
+        // localStorage.setItem("logged_in", JSON.stringify(userDetails));
       toast.success(data.data.message);
+
+      }
+      // toast.success(data.data.message);
     },
     onError: (error) => {
-      console.log(error);
+      // console.log(error);
       toast.error(error.response.data.message || error.data.message || error.message);
     },
   });
