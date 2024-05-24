@@ -65,7 +65,7 @@ const Onboarding = () => {
       ),
     onSuccess: (data) => {
       // //console.log(data);
-      if (data.status == 200) {
+      if (data.data.status == "Success") {
         setConfirmOtp(true);
       }
     },
