@@ -30,7 +30,7 @@ const Onboarding = () => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     // //console.log(formValues);
-    // onboardMutation.mutate();
+    onboardMutation.mutate();
   };
   const headers = {
     Authorization: `Bearer ${token && token}`,
@@ -67,6 +67,7 @@ const Onboarding = () => {
       // //console.log(data);
       if (data.data.status == "Success") {
         setConfirmOtp(true);
+        toast.success('OTP Sent Successfully!')
       }
     },
     onError: (error) => {
@@ -111,21 +112,6 @@ const Onboarding = () => {
               className="mt-[20px] lg:mt-[32px]"
             >
               <div className="flex flex-col gap-y-[16px] lg:gap-y-[24px]">
-                {/* Address */}
-                {/* <div className="w-full flex flex-col font-poppins font-[400] items-start justify-start gap-y-[8px] max-sm:px-2 py-[15px] rounded-lg">
-                <label className="text-[14px] text-white font-poppins leading-[20px]">
-                  Ambassador Address
-                </label>
-                <input
-                  type="text"
-                  name="address"
-                  required
-                  className="lg:w-full h-[44px] py-[8px] px-[16px] max-lg:w-[100%] bg-transparent text-[14px] leading-[16.96px] flex-1 border-b-[1px] border-b-white font-inter font-[500]  "
-                  value={formValues.email}
-                  onChange={handleInputChange}
-                />
-              </div> */}
-
                 {/* NIN & BVN */}
                 <div className="flex flex-col text-white lg:flex-row gap-x-[19px]">
                   <div
