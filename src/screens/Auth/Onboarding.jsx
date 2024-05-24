@@ -48,8 +48,8 @@ const Onboarding = () => {
       toast.success(data.data.message);
     },
     onError: (error) => {
-      // //console.log(error);
-      toast.error(error.data.message || error.message);
+      console.log(error);
+      toast.error(error.response.data.message || error.data.message || error.message);
     },
   });
   const handlePhoneVerification = (e) => {
