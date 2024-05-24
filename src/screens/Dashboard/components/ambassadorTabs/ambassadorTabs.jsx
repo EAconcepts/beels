@@ -89,7 +89,7 @@ export const Overview = ({
   user,
   details,
 }) => {
-  // console.log(subAmb)
+  // //console.log(subAmb)
   // Sub Ambassador & Statistics jSX
   const Statistics = (
     <>
@@ -388,7 +388,7 @@ export const UserStats = ({ userStats }) => {
 };
 
 export const Ambassadors = ({ subAmbassador, userStats, user }) => {
-  console.log(subAmbassador);
+  //console.log(subAmbassador);
   const navigateTo = useNavigate();
   return (
     <div

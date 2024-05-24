@@ -13,7 +13,7 @@ import axios from "axios";
 import { CiUser } from "react-icons/ci";
 
 const ViewAmb = ({ ambassadorQuery }) => {
-  // console.log(ambassadorQuery);
+  // //console.log(ambassadorQuery);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const navigateTo = useNavigate();
   const { token } = useContext(AuthContext);
@@ -27,10 +27,10 @@ const ViewAmb = ({ ambassadorQuery }) => {
         headers,
       }),
     onSuccess: (data) => {
-      console.log(data);
+      //console.log(data);
     },
     onError: (error) => {
-      console.log(error);
+      //console.log(error);
     },
   });
   return (

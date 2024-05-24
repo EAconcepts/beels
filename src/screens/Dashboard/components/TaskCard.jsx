@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 
 const TaskCard = ({ tasks, roleColor }) => {
-  console.log(tasks)
+  //console.log(tasks)
   return (
     <div className="">
       <div className="flex flex-col gap-y-[9px] justify-between mt[8px] pl-[13px] pt-[15px] pb-[21px] pr-[30px] border-[0.4px] rounded-[12px] border-black ">

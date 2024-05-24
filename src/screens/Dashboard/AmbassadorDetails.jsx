@@ -22,7 +22,7 @@ const AmbassadorDetails = () => {
   const { user, token } = useContext(AuthContext);
 
   const { email } = useParams();
-  // console.log(email);
+  // //console.log(email);
 
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const headers = {
@@ -42,7 +42,7 @@ const AmbassadorDetails = () => {
   });
 
   // if (ambDetailsQuery.data)
-  //   console.log(ambDetailsQuery?.data?.data?.data?.active_users);
+  //   //console.log(ambDetailsQuery?.data?.data?.data?.active_users);
   const totalUsers =
     ambDetailsQuery?.data?.data &&
     ambDetailsQuery.data.data.data.active_users +
@@ -108,7 +108,7 @@ const AmbassadorDetails = () => {
       percent: "9%",
     },
   ];
-  // console.log(email);
+  // //console.log(email);
   const tabs = [
     {
       tab: "Overview",
@@ -164,12 +164,12 @@ const AmbassadorDetails = () => {
   }
   let data;
   if (ambDetailsQuery.error) {
-    console.log(ambDetailsQuery?.error);
+    //console.log(ambDetailsQuery?.error);
   } else {
     data = ambDetailsQuery.data?.data?.data;
-    console.log(data);
+    //console.log(data);
 
-    // console.log(ambDetailsQuery?.data);
+    // //console.log(ambDetailsQuery?.data);
   }
   return (
     <div className="w-full flex flex-col px-[32px] lg:pr-[63px] lg:pt-[57px] pt-[22.6px]">
@@ -223,7 +223,8 @@ const AmbassadorDetails = () => {
                   ? "border-b border-b-[#F56630] text-[#F56630]"
                   : "border-b-[#E4E7EC"
               } ${
-                user && user.type !== "Admin" &&
+                user &&
+                user.type !== "Admin" &&
                 item.tab === "Ambassadors" &&
                 "hidden max-xsm:hidden lg:hidden"
               }`}
@@ -236,7 +237,8 @@ const AmbassadorDetails = () => {
         <div className="my-[16px] w-full">{content}</div>
       </div>
       {/* Sub Ambassadors for Admin Desktop view */}
-      {user && user?.type === "Admin" &&
+      {user &&
+        user?.type === "Admin" &&
         activeTab === "Overview" &&
         data?.sub?.length > 0 && (
           <div className="hidden lg:flex flex-col lg:mb-[64px] bg-[#FAF9F6] border-[#E4E7EC] rounded-[10px] border-[1px] mt-[16px]">

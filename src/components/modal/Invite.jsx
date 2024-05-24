@@ -4,7 +4,7 @@ const Invite = ({ setShowSuccessModal }) => {
   // if (!modal) {
   //   return null;
   // }
-  console.log("Hi");
+  //console.log("Hi");
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"

@@ -25,7 +25,7 @@ const AmbForm = () => {
   const formMutation = useMutation({
     mutationFn: () => axios.post(`${apiUrl}/ambassador/login`, formValues),
     onSuccess: (data) => {
-      console.log(data);
+      //console.log(data);
       if (data.data.status == "Success") {
         const userDetails = data.data.data;
         localStorage.setItem("logged_in", JSON.stringify(userDetails));
@@ -33,7 +33,7 @@ const AmbForm = () => {
       toast.success(data.data.message);
     },
     onError: (error) => {
-      console.log(error);
+      //console.log(error);
       toast.error(error.data.message || error.message);
     },
   });

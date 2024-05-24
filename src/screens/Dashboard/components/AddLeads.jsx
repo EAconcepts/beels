@@ -21,7 +21,7 @@ const AddLeads = ({ setShowAddLeads }) => {
     school: "",
     department: "",
   });
-  
+
   // Form onchange
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -36,7 +36,7 @@ const AddLeads = ({ setShowAddLeads }) => {
   // Submit lead invite
   const handleSendInvite = (e) => {
     e.preventDefault();
-    console.log(leadInfo);
+    // //console.log(leadInfo);
     inviteMutation.mutate();
   };
 
@@ -45,13 +45,13 @@ const AddLeads = ({ setShowAddLeads }) => {
     mutationFn: () =>
       axios.post(`${apiUrl}/ambassador/invite/send`, leadInfo, { headers }),
     onSuccess: (data) => {
-      console.log(data);
+      // //console.log(data);
       if (data.data.status == "Success") {
         setShowSuccessModal(true);
       } else toast.error(data.data.message);
     },
     onError: (error) => {
-      console.log(error);
+      // //console.log(error);
     },
   });
 

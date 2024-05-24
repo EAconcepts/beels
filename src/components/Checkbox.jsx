@@ -7,7 +7,7 @@ const Checkbox = ({ onChange, className, seChecked, checked }) => {
   const toggle = (Onchange) => {
     setChecked((prev) => !prev);
     onChange();
-    console.log("toggled");
+    //console.log("toggled");
   };
   return (
     <div>

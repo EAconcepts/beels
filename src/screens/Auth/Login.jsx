@@ -42,10 +42,10 @@ const Login = ({ role }) => {
   const loginMutation = useMutation({
     mutationFn: () => axios.post(`${apiUrl}/ambassador/login`, loginValues),
     onSuccess: (data) => {
-      console.log(data);
+      //console.log(data);
       if (data.data.status == "Success") {
         const userDetails = data.data.data;
-        console.log(userDetails);
+        //console.log(userDetails);
         setToken(userDetails.token);
         setUser(userDetails.user);
         localStorage.setItem("logged_in", JSON.stringify(userDetails));
@@ -54,7 +54,7 @@ const Login = ({ role }) => {
       toast.success(data.data.message);
     },
     onError: (error) => {
-      console.log(error);
+      //console.log(error);
       toast.error(error.data.message || error.message);
     },
   });
@@ -71,7 +71,7 @@ const Login = ({ role }) => {
   // }, [error]);
 
   if (success !== null) {
-    console.log(success.user);
+    //console.log(success.user);
     localStorage.setItem("logged_in", JSON.stringify(success));
   }
 
@@ -148,7 +148,7 @@ const Login = ({ role }) => {
               </div>
             </div>
             <button
-            disabled={loginMutation.isPending}
+              disabled={loginMutation.isPending}
               className={`flex w-full mt-[32px] ${
                 passwordError || (emailError && "my-2")
               } items-center justify-center gap-2 px-4 p-[18px] lg:bg-[#3AB54A] bg-[#B6F485] text-[#082C25] text-[14px] leading-[16.9px] font-[700] rounded-lg`}

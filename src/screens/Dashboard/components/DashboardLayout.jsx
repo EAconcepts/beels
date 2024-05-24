@@ -18,7 +18,7 @@ const DashboardLayout = () => {
 
   const menuRef = useRef(null);
   const { user, token } = useContext(AuthContext);
-  // console.log(token);
+  // //console.log(token);
   const navigateTo = useNavigate();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const DashboardLayout = () => {
   // Closes Side menu on outside click
   const handlOutsideClick = (e) => {
     if (menuRef.current && !menuRef.current.contains(e.target)) {
-      // console.log("Outside click");
+      // //console.log("Outside click");
       setShowSidebar(false);
     }
   };

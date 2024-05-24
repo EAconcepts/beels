@@ -29,7 +29,7 @@ const Onboarding = () => {
   };
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    console.log(formValues);
+    // //console.log(formValues);
     // onboardMutation.mutate();
   };
   const headers = {
@@ -40,7 +40,7 @@ const Onboarding = () => {
     mutationFn: () =>
       axios.post(`${apiUrl}/ambassador/onboard`, formValues, { headers }),
     onSuccess: (data) => {
-      console.log(data);
+      // //console.log(data);
       if (data.data.status == "Success") {
         const userDetails = data.data.data;
         localStorage.setItem("logged_in", JSON.stringify(userDetails));
@@ -48,7 +48,7 @@ const Onboarding = () => {
       toast.success(data.data.message);
     },
     onError: (error) => {
-      console.log(error);
+      // //console.log(error);
       toast.error(error.data.message || error.message);
     },
   });
@@ -64,14 +64,14 @@ const Onboarding = () => {
         { headers }
       ),
     onSuccess: (data) => {
-      console.log(data);
-      if (data.statusCode == 200) {
+      // //console.log(data);
+      if (data.status == 200) {
         setConfirmOtp(true);
       }
     },
     onError: (error) => {
-      console.log(error);
-      toast.error(error.response.data.message);
+      // //console.log(error);
+      toast.error(error.response.data.message || error.message);
     },
     onSettled: () => {},
   });

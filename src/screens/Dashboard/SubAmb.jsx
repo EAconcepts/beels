@@ -22,8 +22,6 @@ import { formatDate } from "../../utils/formatDate";
 import { handleCopy } from "../../utils/copyText";
 import { TiArrowUp } from "react-icons/ti";
 
-
-
 const SubAmb = () => {
   const [activeTab, setActiveTab] = useState("Overview");
   const { user, token } = useContext(AuthContext);
@@ -53,9 +51,9 @@ const SubAmb = () => {
   ];
 
   if (ambDetailsQuery.error) {
-    console.log(ambDetailsQuery?.error);
+    //console.log(ambDetailsQuery?.error);
   } else {
-    console.log(ambDetailsQuery?.data);
+    //console.log(ambDetailsQuery?.data);
   }
 
   return (
@@ -285,9 +283,11 @@ const SubAmb = () => {
                     Tasks
                   </h3>
                   <div className="max-lg:mt-[11px] lg:mt-[5px] flex flex-col gap-y-[19px]">
-                    {ambDetailsQuery.data?.data?.data?.tasks?.map((task, index) => (
-                      <TaskProgress key={index} task={task} />
-                    ))}
+                    {ambDetailsQuery.data?.data?.data?.tasks?.map(
+                      (task, index) => (
+                        <TaskProgress key={index} task={task} />
+                      )
+                    )}
                   </div>
                 </div>
                 {/* Leaderboard */}

@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 
 const OverviewData = ({ props, IconClass }) => {
-  // console.log(props);
+  // //console.log(props);
   return (
     <div className="w-full">
       <div className="w-full flex max-lg:flex-col lg:gap-x-[19px] justify-between max-lg:justify-center items-center max-lg:items-start max-lg:pl-[32px] pr-[76px] gap-y-[40px]">

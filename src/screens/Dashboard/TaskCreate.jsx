@@ -31,30 +31,30 @@ const TaskCreate = () => {
     mutationFn: () =>
       axios.post(`${baseUrl}/ambassador/task/add`, task, { headers }),
     onSuccess: (data) => {
-      console.log(data);
+      //console.log(data);
       toast(data.data.message);
     },
     onError: (error) => {
-      console.log(error);
+      //console.log(error);
       toast.error(error.message);
     },
   });
   const handleCreateTask = (e) => {
     e.preventDefault();
-    console.log(task);
+    //console.log(task);
     taskMutation.mutate();
   };
   const onLeadChange = (e) => {
-    // console.log(e.target.checked);
+    // //console.log(e.target.checked);
     if (e.target.checked) {
       const newType = task.type;
       newType.push("Lead");
       setTask((prev) => ({ ...prev, type: newType }));
-      console.log(newType);
-      // console.log('true')
+      //console.log(newType);
+      // //console.log('true')
     } else {
       const newType = task.type.filter((item) => item !== "Lead");
-      console.log(newType);
+      //console.log(newType);
       setTask((prev) => ({ ...prev, type: newType }));
     }
 
@@ -68,10 +68,10 @@ const TaskCreate = () => {
       const newType = task.type;
       newType.push("Sub");
       setTask((prev) => ({ ...prev, type: newType }));
-      // console.log(newType)
+      // //console.log(newType)
     } else {
       const newType = task.type.filter((item) => item !== "Sub");
-      // console.log(newType)
+      // //console.log(newType)
       setTask((prev) => ({ ...prev, type: newType }));
     }
   };

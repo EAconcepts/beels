@@ -37,18 +37,18 @@ const Security = () => {
     mutationFn: (values) =>
       axios.post(`${baseUrl}/ambassador/profile/update`, values, { headers }),
     onSuccess: (data) => {
-      console.log(data);
+      //console.log(data);
       toast.success(data?.data?.message);
     },
     onError: (error) => {
-      console.log(error);
+      //console.log(error);
       toast.error(error?.response?.data?.message || error?.message);
     },
   });
   const handleUpdate = () => {
-    // console.log(updateForm);
+    // //console.log(updateForm);
     const extracted = extractFilledValues(verifiedInfo);
-    console.log(extracted);
+    //console.log(extracted);
     if (Object.keys(extracted).length > 0) {
       updateMutation.mutate();
     }

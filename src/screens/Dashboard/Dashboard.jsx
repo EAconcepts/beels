@@ -35,9 +35,9 @@ const Dashboard = () => {
     queryFn: () => axios.get(`${baseUrl}/ambassador/dashboard`, { headers }),
   });
   if (ambassadorQuery.error) {
-    console.log(ambassadorQuery.error);
+    //console.log(ambassadorQuery.error);
   } else {
-    // console.log(ambassadorQuery.data);
+    // //console.log(ambassadorQuery.data);
   }
   let props = [];
   // If user is Admin

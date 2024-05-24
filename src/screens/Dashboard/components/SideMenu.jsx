@@ -26,8 +26,8 @@ const SideMenu = ({
   const [showTasksMenu, setShowTasksMenu] = useState(false);
   const { user } = useContext(AuthContext);
   const activePath = useLocation();
-  // console.log(activePath.pathname, activePath.pathname.endsWith("dashboard"));
-  // console.log(user)
+  // //console.log(activePath.pathname, activePath.pathname.endsWith("dashboard"));
+  // //console.log(user)
   const dashboardMenu = [
     {
       name: "Dashboard",
@@ -99,7 +99,7 @@ const SideMenu = ({
   const logOutMutation = useMutation({
     mutationFn: () => axios.get(`${baseUrl}/ambassador/logout`, { headers }),
     onSuccess: (data) => {
-      console.log(data);
+      //console.log(data);
       localStorage.removeItem("logged_in");
       if (data?.data?.status == "Success") {
         toast.success("Logout successful");
@@ -107,7 +107,7 @@ const SideMenu = ({
       }
     },
     onError: (error) => {
-      console.log(error);
+      //console.log(error);
       toast.error("Something happened!");
     },
   });
@@ -148,7 +148,7 @@ const SideMenu = ({
                 className="object-cover object-center size-full rounded-full"
               /> */}
             {/* ) : ( */}
-              <FaUser className="size-[30px] text-white" />
+            <FaUser className="size-[30px] text-white" />
             {/* )} */}
             {/* Online dot */}
             <div className="absolute bottom-0 right-0 rounded-full size-[12.5px] border-white border-[1.56px] bg-lightgreen "></div>

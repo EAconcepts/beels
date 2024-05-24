@@ -65,7 +65,7 @@ const AllTasks = () => {
     queryKey: ["ambassador"],
     queryFn: () => axios.get(`${baseUrl}/ambassador/dashboard`, { headers }),
   });
-  // console.log(ambassadorQuery?.data)
+  // //console.log(ambassadorQuery?.data)
   return (
     <div className="flex flex-col w-full lg:pt-[57px] px-[32px] mt-[14px] pb-[100px  ]">
       <h2 className="hidden font-poppins font-[600] text-[24px] leading-[34.8px] text-black">

@@ -12,7 +12,7 @@ import award from "../../../../assets/images/Award.png";
 import axios from "axios";
 
 const Tasks = ({ tasks }) => {
-  // console.log(tasks)
+  // //console.log(tasks)
   const { user, token } = useContext(AuthContext);
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const headers = {
@@ -64,34 +64,35 @@ const Tasks = ({ tasks }) => {
           To-Do-Tasks
         </h2>
         <div className=" mt-[8px] grid grid-cols-2 gap-y-[16.5px] gap-x-[16px]">
-          {tasks && tasks.map((task, index) => (
-            <div
-              key={index}
-              className="h-[135px] w-full w[174px] rounded-[10px] border-[1px] px-[15px] py-[11px] bg-[#FAF9F6] border-[#E4E7EC]"
-            >
+          {tasks &&
+            tasks.map((task, index) => (
               <div
-                className={`w-full flex justify-end ${
-                  user?.type == "Sub" && "max-lg:hidden"
-                }`}
+                key={index}
+                className="h-[135px] w-full w[174px] rounded-[10px] border-[1px] px-[15px] py-[11px] bg-[#FAF9F6] border-[#E4E7EC]"
               >
-                <p
-                  className={`bg-[#22612A] py-[1.49px] px-[8.97px] font-inter font-[500] text-[10.46px] leading-[15.17px] text-[#FAF9F6] rounded-[8.97px] ${
-                    user?.type === "sub" && "invisible"
+                <div
+                  className={`w-full flex justify-end ${
+                    user?.type == "Sub" && "max-lg:hidden"
                   }`}
                 >
-                  20 Points
-                </p>
+                  <p
+                    className={`bg-[#22612A] py-[1.49px] px-[8.97px] font-inter font-[500] text-[10.46px] leading-[15.17px] text-[#FAF9F6] rounded-[8.97px] ${
+                      user?.type === "sub" && "invisible"
+                    }`}
+                  >
+                    20 Points
+                  </p>
+                </div>
+                <div className="flex flex-col mt-[27.51px] gap-y-[10px]">
+                  <p className="text-[12px] font-[700] font-inter leading-[17.4px] text-[#FF2E3B]">
+                    Todo
+                  </p>
+                  <h5 className="text-black text-[14px] font-[700] leading-[20.3px] font-inter">
+                    {task?.name}
+                  </h5>
+                </div>
               </div>
-              <div className="flex flex-col mt-[27.51px] gap-y-[10px]">
-                <p className="text-[12px] font-[700] font-inter leading-[17.4px] text-[#FF2E3B]">
-                  Todo
-                </p>
-                <h5 className="text-black text-[14px] font-[700] leading-[20.3px] font-inter">
-                  {task?.name}
-                </h5>
-              </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
 

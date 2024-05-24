@@ -31,22 +31,22 @@ const SubOverview = () => {
 
   const handleSendEmail = (e) => {
     e.preventDefault();
-    console.log(emailInfo);
+    //console.log(emailInfo);
     emailMutation.mutate();
   };
   const emailMutation = useMutation({
     mutationFn: () =>
       axios.post(`${baseUrl}/ambassador/invite/email`, emailInfo, { headers }),
     onSuccess: (data) => {
-      console.log(data);
+      //console.log(data);
       if (data.data.status === "Success") {
-        console.log("yeah!");
+        //console.log("yeah!");
         setEmailInfo({ recipient: "", message: "" });
       }
       toast.success(data.data.message);
     },
     onError: (error) => {
-      console.log(error);
+      //console.log(error);
       toast.error(error.message);
     },
   });

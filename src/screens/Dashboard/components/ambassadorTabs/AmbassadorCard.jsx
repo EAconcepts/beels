@@ -23,10 +23,10 @@ const AmbassadorCard = ({ ambassador, roleColor }) => {
         headers,
       }),
     onSuccess: (data) => {
-      console.log(data);
+      //console.log(data);
     },
     onError: (error) => {
-      console.log(error);
+      //console.log(error);
     },
   });
   const handleDelete = (e) => {
